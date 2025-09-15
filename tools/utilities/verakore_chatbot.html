@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verakore Chatbot</title>
+    <style>
+        /* Chatbot Styles */
+        .chatbot-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .chatbot-toggle {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #2563eb, #059669);
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(37, 99, 235, 0.3);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+        }
+
+        .chatbot-toggle:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 25px rgba(37, 99, 235, 0.4);
+        }
+
+        .chatbot-window {
+            position: absolute;
+            bottom: 80px;
+            right: 0;
+            width: 350px;
+            height: 500px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .chatbot-header {
+            background: linear-gradient(135deg, #2563eb, #059669);
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .chatbot-title {
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        .chatbot-close {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            padding: 0;
+            width: 25px;
+            height: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .chatbot-messages {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            background: #f8fafc;
+        }
+
+        .message {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .message.bot {
+            justify-content: flex-start;
+        }
+
+        .message.user {
+            justify-content: flex-end;
+        }
+
+        .message-content {
+            max-width: 80%;
+            padding: 12px 16px;
+            border-radius: 18px;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+
+        .message.bot .message-content {
+            background: white;
+            border: 1px solid #e2e8f0;
+            color: #1e293b;
+        }
+
+        .message.user .message-content {
+            background: #2563eb;
+            color: white;
+        }
+
+        .chatbot-input {
+            padding: 15px 20px;
+            border-top: 1px solid #e2e8f0;
+            display: flex;
+            gap: 10px;
+        }
+
+        .chatbot-input input {
+            flex: 1;
+            border: 1px solid #e2e8f0;
+            border-radius: 25px;
+            padding: 10px 15px;
+            font-size: 14px;
+            outline: none;
+        }
+
+        .chatbot-input input:focus {
+            border-color: #2563eb;
+        }
+
+        .chatbot-send {
+            background: #2563eb;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+        }
+
+        .quick-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .quick-action {
+            background: #f1f5f9;
+            border: 1px solid #e2e8f0;
+            border-radius: 20px;
+            padding: 6px 12px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .quick-action:hover {
+            background: #2563eb;
+            color: white;
+        }
+
+        .typing-indicator {
+            display: none;
+            align-items: center;
+            gap: 5px;
+            padding: 12px 16px;
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 18px;
+            max-width: 80px;
+        }
+
+        .typing-dot {
+            width: 6px;
+            height: 6px;
+            background: #64748b;
+            border-radius: 50%;
+            animation: typing 1.4s infinite;
+        }
+
+        .typing-dot:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .typing-dot:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes typing {
+            0%, 60%, 100% {
+                transform: translateY(0);
+            }
+            30% {
+                transform: translateY(-10px);
+            }
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 480px) {
+            .chatbot-window {
+                width: 300px;
+                height: 450px;
+            }
+            
+            .chatbot-container {
+                bottom: 10px;
+                right: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Chatbot Container -->
+    <div class="chatbot-container">
+        <div class="chatbot-window" id="chatbotWindow">
+            <div class="chatbot-header">
+                <div class="chatbot-title">Verakore Assistant</div>
+                <button class="chatbot-close" onclick="toggleChatbot()">×</button>
+            </div>
+            
+            <div class="chatbot-messages" id="chatbotMessages">
+                <div class="message bot">
+                    <div class="message-content">
+                        👋 Hello! I'm your Verakore IT Assistant. How can I help you today?
+                        <div class="quick-actions">
+                            <div class="quick-action" onclick="sendQuickMessage('Staff Augmentation')">Staff Augmentation</div>
+                            <div class="quick-action" onclick="sendQuickMessage('Fractional IT Leadership')">IT Leadership</div>
+                            <div class="quick-action" onclick="sendQuickMessage('Compliance & GxP')">Compliance</div>
+                            <div class="quick-action" onclick="sendQuickMessage('Project Delivery')">Project Delivery</div>
+                            <div class="quick-action" onclick="sendQuickMessage('Contact Sales')">Contact Sales</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="chatbot-input">
+                <input type="text" id="chatbotInput" placeholder="Type your message..." onkeypress="handleKeyPress(event)">
+                <button class="chatbot-send" onclick="sendMessage()">→</button>
+            </div>
+        </div>
+        
+        <button class="chatbot-toggle" onclick="toggleChatbot()">
+            💬
+        </button>
+    </div>
+
+    <script>
+        // Chatbot functionality
+        let isOpen = false;
+        let conversationHistory = [];
+
+        function toggleChatbot() {
+            const window = document.getElementById('chatbotWindow');
+            isOpen = !isOpen;
+            window.style.display = isOpen ? 'flex' : 'none';
+            
+            if (isOpen) {
+                document.getElementById('chatbotInput').focus();
+            }
+        }
+
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        }
+
+        function sendQuickMessage(message) {
+            document.getElementById('chatbotInput').value = message;
+            sendMessage();
+        }
+
+        function sendMessage() {
+            const input = document.getElementById('chatbotInput');
+            const message = input.value.trim();
+            
+            if (!message) return;
+            
+            // Add user message
+            addMessage(message, 'user');
+            input.value = '';
+            
+            // Add typing indicator
+            showTypingIndicator();
+            
+            // Simulate bot response
+            setTimeout(() => {
+                hideTypingIndicator();
+                const response = getBotResponse(message);
+                addMessage(response, 'bot');
+            }, 1000 + Math.random() * 1000);
+        }
+
+        function addMessage(content, sender) {
+            const messagesContainer = document.getElementById('chatbotMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${sender}`;
+            
+            const contentDiv = document.createElement('div');
+            contentDiv.className = 'message-content';
+            contentDiv.textContent = content;
+            
+            messageDiv.appendChild(contentDiv);
+            messagesContainer.appendChild(messageDiv);
+            
+            // Scroll to bottom
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+            
+            // Store in conversation history
+            conversationHistory.push({ sender, content, timestamp: new Date() });
+        }
+
+        function showTypingIndicator() {
+            const messagesContainer = document.getElementById('chatbotMessages');
+            const typingDiv = document.createElement('div');
+            typingDiv.className = 'message bot';
+            typingDiv.id = 'typingIndicator';
+            
+            const typingContent = document.createElement('div');
+            typingContent.className = 'typing-indicator';
+            typingContent.style.display = 'flex';
+            
+            for (let i = 0; i < 3; i++) {
+                const dot = document.createElement('div');
+                dot.className = 'typing-dot';
+                typingContent.appendChild(dot);
+            }
+            
+            typingDiv.appendChild(typingContent);
+            messagesContainer.appendChild(typingDiv);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+
+        function hideTypingIndicator() {
+            const typingIndicator = document.getElementById('typingIndicator');
+            if (typingIndicator) {
+                typingIndicator.remove();
+            }
+        }
+
+        function getBotResponse(userMessage) {
+            const message = userMessage.toLowerCase();
+            
+            // Staff Augmentation responses
+            if (message.includes('staff') || message.includes('augmentation') || message.includes('networking')) {
+                return "Our Staff Augmentation service provides expert Networking Engineers, Systems Specialists, and Infrastructure Architects who integrate seamlessly into your team. We offer both interim project support and long-term staffing solutions. Would you like to discuss your specific needs?";
+            }
+            
+            // Fractional IT Leadership responses
+            if (message.includes('leadership') || message.includes('fractional') || message.includes('director')) {
+                return "Fractional IT Leadership gives you access to 25+ years of infrastructure and IT leadership experience without full-time overhead. We help design IT roadmaps, manage vendors, and lead major initiatives like network refreshes and cloud migrations. How can we support your IT strategy?";
+            }
+            
+            // Compliance responses
+            if (message.includes('compliance') || message.includes('gxp') || message.includes('audit')) {
+                return "Our Compliance & GxP Documentation service helps life sciences organizations build the documentation regulators expect without slowing operations. We provide SOPs, IQ/OQ/PQ protocols, and ensure SOX/21 CFR Part 11 alignment. Are you in a regulated industry?";
+            }
+            
+            // Project Delivery responses
+            if (message.includes('project') || message.includes('delivery') || message.includes('budget')) {
+                return "Our Project Delivery service uses a Plan → Build → Run framework to ensure projects are delivered on time and on budget. We provide clear communication, measurable outcomes, and a culture of accountability. What type of project are you planning?";
+            }
+            
+            // Contact responses
+            if (message.includes('contact') || message.includes('sales') || message.includes('reach')) {
+                return "I'd be happy to connect you with our team! You can reach us at info@verakore.com or use the contact form on this page. We typically respond within 24 hours. Would you like me to help you with any specific service questions?";
+            }
+            
+            // Pricing responses
+            if (message.includes('price') || message.includes('cost') || message.includes('quote')) {
+                return "Our pricing varies based on the specific services and scope of work. We offer competitive rates and can provide custom quotes for your needs. I'd recommend contacting our team at info@verakore.com for a detailed discussion about your requirements.";
+            }
+            
+            // General IT responses
+            if (message.includes('it') || message.includes('technology') || message.includes('infrastructure')) {
+                return "Verakore specializes in comprehensive IT solutions including networking, infrastructure, compliance, and project delivery. We serve businesses across various industries with 25+ years of experience. What specific IT challenge are you facing?";
+            }
+            
+            // Default responses
+            const defaultResponses = [
+                "That's a great question! I'd be happy to help you learn more about our IT services. Could you tell me more about what you're looking for?",
+                "I understand you're interested in our services. We offer Staff Augmentation, Fractional IT Leadership, Compliance & GxP Documentation, and Project Delivery. Which area interests you most?",
+                "Thanks for your interest! Our team at Verakore has extensive experience in IT solutions. Feel free to ask me about any of our services or contact us directly at info@verakore.com.",
+                "I'm here to help! We specialize in IT infrastructure, networking, compliance, and project delivery. What specific challenge can we help you solve?"
+            ];
+            
+            return defaultResponses[Math.floor(Math.random() * defaultResponses.length)];
+        }
+
+        // Auto-open chatbot after 30 seconds on page
+        setTimeout(() => {
+            if (!isOpen) {
+                // Show a subtle notification
+                const toggle = document.querySelector('.chatbot-toggle');
+                toggle.style.animation = 'pulse 2s infinite';
+            }
+        }, 30000);
+
+        // Add pulse animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes pulse {
+                0% { transform: scale(1); }
+                50% { transform: scale(1.1); }
+                100% { transform: scale(1); }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>

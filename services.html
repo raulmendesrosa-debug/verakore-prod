@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services - Verakore IT Solutions</title>
+    <meta name="description" content="Comprehensive IT services including staff augmentation, fractional IT leadership, compliance documentation, and project delivery for businesses.">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #059669;
+            --accent-color: #ea580c;
+            --dark-color: #1e293b;
+            --light-color: #f8fafc;
+            --text-color: #64748b;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+        }
+        
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--primary-color) !important;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo-img {
+            height: 154px !important;
+            width: auto !important;
+            max-height: none !important;
+            max-width: none !important;
+        }
+        
+        .nav-link {
+            font-weight: 500;
+            color: var(--dark-color) !important;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--primary-color) !important;
+        }
+        
+        .hero-section {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            padding: 120px 0 80px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><polygon fill="rgba(255,255,255,0.1)" points="0,1000 1000,0 1000,1000"/></svg>');
+            background-size: cover;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero-title {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+        
+        .section-padding {
+            padding: 80px 0;
+        }
+        
+        .service-detail-card {
+            background: white;
+            border-radius: 15px;
+            padding: 3rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin-bottom: 3rem;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .service-icon-large {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+        
+        .service-icon-large i {
+            font-size: 2.5rem;
+            color: white;
+        }
+        
+        .service-title-large {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--dark-color);
+            margin-bottom: 1.5rem;
+        }
+        
+        .service-subtitle {
+            font-size: 1.25rem;
+            color: var(--text-color);
+            margin-bottom: 2rem;
+            font-weight: 500;
+        }
+        
+        .feature-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .feature-list li {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+        }
+        
+        .feature-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .feature-list i {
+            color: var(--secondary-color);
+            margin-right: 1rem;
+            font-size: 1.2rem;
+        }
+        
+        .cta-section {
+            background: var(--dark-color);
+            color: white;
+            padding: 80px 0;
+        }
+        
+        .btn-primary-custom {
+            background: var(--accent-color);
+            border: none;
+            padding: 15px 30px;
+            font-weight: 600;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary-custom:hover {
+            background: #dc2626;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(234, 88, 12, 0.3);
+        }
+        
+        .badge-core {
+            background: var(--primary-color);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-weight: 600;
+        }
+        
+        .badge-phase2 {
+            background: var(--text-color);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-weight: 600;
+        }
+        
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .service-detail-card {
+                padding: 2rem;
+            }
+            
+            .service-title-large {
+                font-size: 2rem;
+            }
+            
+            .logo-img {
+                height: 120px !important;
+            }
+        }
+        
+        @media (min-width: 769px) {
+            .logo-img {
+                height: 154px !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <div class="logo-container">
+                    <img src="assets/images/logos/verakore 2.png" alt="Verakore" height="154" class="logo-img">
+                </div>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="services.html">Services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#about">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <div class="hero-content text-center">
+                <h1 class="hero-title">Our IT Services</h1>
+                <p class="hero-subtitle">Comprehensive technology solutions tailored to meet your business needs and drive growth</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Core Services Section -->
+    <section class="section-padding">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="display-4 fw-bold text-dark mb-3">Core Services</h2>
+                <p class="lead text-muted">Our primary offerings designed to address your most critical IT needs</p>
+            </div>
+
+            <!-- Staff Augmentation -->
+            <div class="service-detail-card">
+                <div class="row align-items-center">
+                    <div class="col-lg-8">
+                        <div class="service-icon-large">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h2 class="service-title-large">Staff Augmentation — Networking & Infrastructure</h2>
+                        <p class="service-subtitle">The right expertise, when you need it.</p>
+                        <p class="mb-4">Verakore provides Networking Engineers, Systems Specialists, and Infrastructure Architects who integrate seamlessly into your team. Whether you need interim staff for a project or long-term support, we ensure your IT foundation is reliable, scalable, and compliant.</p>
+                        
+                        <h4 class="mb-3">Roles we Provide:</h4>
+                        <ul class="feature-list">
+                            <li><i class="fas fa-check"></i>Network Engineers & Architects</li>
+                            <li><i class="fas fa-check"></i>Systems & Infrastructure Specialists</li>
+                            <li><i class="fas fa-check"></i>Cloud & Data Center Engineers</li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-4 text-center">
+                        <span class="badge-core">Core Service</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Fractional IT Leadership -->
+            <div class="service-detail-card">
+                <div class="row align-items-center">
+                    <div class="col-lg-8">
+                        <div class="service-icon-large">
+                            <i class="fas fa-user-tie"></i>
+                        </div>
+                        <h2 class="service-title-large">Fractional IT Leadership</h2>
+                        <p class="service-subtitle">Leadership on demand.</p>
+                        <p class="mb-4">With 25+ years of infrastructure and IT leadership experience, we act as your Fractional Director of IT/Infrastructure, guiding strategy without full-time overhead.</p>
+                        
+                        <h4 class="mb-3">We help you:</h4>
+                        <ul class="feature-list">
+                            <li><i class="fas fa-check"></i>Design IT roadmaps and manage vendors</li>
+                            <li><i class="fas fa-check"></i>Lead network refreshes, cloud migrations, and data center strategies</li>
+                            <li><i class="fas fa-check"></i>Support regulated R&D and manufacturing IT environments</li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-4 text-center">
+                        <span class="badge-core">Core Service</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Compliance & GxP Documentation -->
+            <div class="service-detail-card">
+                <div class="row align-items-center">
+                    <div class="col-lg-8">
+                        <div class="service-icon-large">
+                            <i class="fas fa-clipboard-check"></i>
+                        </div>
+                        <h2 class="service-title-large">Compliance & GxP Documentation</h2>
+                        <p class="service-subtitle">Stay audit-ready.</p>
+                        <p class="mb-4">We help life sciences organizations build the GxP documentation that regulators expect—without slowing operations.</p>
+                        
+                        <h4 class="mb-3">Services Include:</h4>
+                        <ul class="feature-list">
+                            <li><i class="fas fa-check"></i>GxP documentation (SOPs, IQ/OQ/PQ, validation protocols)</li>
+                            <li><i class="fas fa-check"></i>IT change management & audit trail readiness</li>
+                            <li><i class="fas fa-check"></i>Collaboration with QA and validation teams</li>
+                            <li><i class="fas fa-check"></i>SOX / 21 CFR Part 11 alignment</li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-4 text-center">
+                        <span class="badge-core">Core Service</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project Delivery -->
+            <div class="service-detail-card">
+                <div class="row align-items-center">
+                    <div class="col-lg-8">
+                        <div class="service-icon-large">
+                            <i class="fas fa-project-diagram"></i>
+                        </div>
+                        <h2 class="service-title-large">Project Delivery — On Time, On Budget</h2>
+                        <p class="service-subtitle">Clear communication. Simple methodology. Reliable results.</p>
+                        <p class="mb-4">Verakore manages technology projects with precision and transparency, ensuring they are delivered on time and on budget.</p>
+                        
+                        <h4 class="mb-3">We leverage a Plan → Build → Run framework:</h4>
+                        <ul class="feature-list">
+                            <li><i class="fas fa-check"></i><strong>Plan:</strong> Define scope, budget, and success metrics with full transparency</li>
+                            <li><i class="fas fa-check"></i><strong>Build:</strong> Execute with specialized staff, proven tools, and tight controls</li>
+                            <li><i class="fas fa-check"></i><strong>Run:</strong> Transition into steady-state operations with support and documentation</li>
+                        </ul>
+                        
+                        <h4 class="mb-3 mt-4">Our Promise:</h4>
+                        <ul class="feature-list">
+                            <li><i class="fas fa-check"></i>Clear, consistent communication with stakeholders</li>
+                            <li><i class="fas fa-check"></i>Measurable outcomes at every milestone</li>
+                            <li><i class="fas fa-check"></i>A culture of accountability and delivery excellence</li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-4 text-center">
+                        <span class="badge-core">Core Service</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cybersecurity Readiness & Compliance -->
+            <div class="service-detail-card">
+                <div class="row align-items-center">
+                    <div class="col-lg-8">
+                        <div class="service-icon-large">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h2 class="service-title-large">Cybersecurity Readiness & Compliance</h2>
+                        <p class="service-subtitle">Stay secure and compliant.</p>
+                        <p class="mb-4">Security assessments, endpoint protection, and incident playbooks to prepare for cybersecurity challenges ahead.</p>
+                        
+                        <h4 class="mb-3">Services Include:</h4>
+                        <ul class="feature-list">
+                            <li><i class="fas fa-check"></i>Security Assessments</li>
+                            <li><i class="fas fa-check"></i>Endpoint Protection</li>
+                            <li><i class="fas fa-check"></i>Incident Response Playbooks</li>
+                            <li><i class="fas fa-check"></i>Compliance Management</li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-4 text-center">
+                        <span class="badge-core">Core Service</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Partnership Section -->
+    <section class="section-padding">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="display-4 fw-bold text-dark mb-3">Partnership Opportunities</h2>
+                <p class="lead text-muted">Verakore partners with like-minded businesses to provide comprehensive staffing solutions</p>
+            </div>
+
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <div class="service-icon-large">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <h3 class="service-title-large">Strategic Partnerships</h3>
+                    <p class="mb-4">We believe in the power of collaboration. Verakore partners with other like-minded businesses to provide the ability to staff according to client needs, ensuring comprehensive coverage and expertise across all technology domains.</p>
+                    
+                    <h4 class="mb-3">Partnership Benefits:</h4>
+                    <ul class="feature-list">
+                        <li><i class="fas fa-check"></i>Expanded talent pool and expertise</li>
+                        <li><i class="fas fa-check"></i>Comprehensive service coverage</li>
+                        <li><i class="fas fa-check"></i>Shared resources and knowledge</li>
+                        <li><i class="fas fa-check"></i>Enhanced client value delivery</li>
+                    </ul>
+                </div>
+                <div class="col-lg-6 text-center">
+                    <i class="fas fa-network-wired" style="font-size: 15rem; color: var(--primary-color); opacity: 0.3;"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container text-center">
+            <h2 class="display-4 fw-bold text-white mb-4">Ready to Get Started?</h2>
+            <p class="lead text-white-50 mb-4">Let's discuss how Verakore can help enhance your IT infrastructure and operations.</p>
+            <div class="d-flex gap-3 justify-content-center">
+                <a href="index.html#contact" class="btn btn-primary-custom btn-lg">Contact Us Today</a>
+                <a href="index.html" class="btn btn-outline-light btn-lg">Learn More</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-4">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <p class="mb-1">&copy; 2025 Verakore. All rights reserved.</p>
+                    <p class="mb-0"><a href="tel:+16178659705" class="text-white text-decoration-none"><i class="fas fa-phone me-2"></i>(617) 865-9705</a> | <a href="mailto:info@verakore.com" class="text-white text-decoration-none">info@verakore.com</a></p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p class="mb-0">Powered by innovation and expertise</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JavaScript -->
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Navbar background change on scroll
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.style.background = 'rgba(255, 255, 255, 0.98)';
+            } else {
+                navbar.style.background = 'rgba(255, 255, 255, 0.95)';
+            }
+        });
+    </script>
+</body>
+</html>

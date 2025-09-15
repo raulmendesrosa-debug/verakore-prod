@@ -1,0 +1,47 @@
+<!-- Contact Form Component -->
+<div class="contact-form">
+    <form name="contact-form" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+        <input type="hidden" name="form-name" value="contact-form" />
+        <p style="display: none;">
+            <label>Don't fill this out if you're human: <input name="bot-field" /></label>
+        </p>
+        
+        <div class="row g-3">
+            <div class="col-md-6">
+                <label for="name" class="form-label">Name *</label>
+                <input type="text" class="form-control" id="name" name="name" required>
+            </div>
+            <div class="col-md-6">
+                <label for="email" class="form-label">Email *</label>
+                <input type="email" class="form-control" id="email" name="email" required>
+            </div>
+            <div class="col-md-6">
+                <label for="company" class="form-label">Company</label>
+                <input type="text" class="form-control" id="company" name="company">
+            </div>
+            <div class="col-md-6">
+                <label for="phone" class="form-label">Phone</label>
+                <input type="tel" class="form-control" id="phone" name="phone">
+            </div>
+            <div class="col-12">
+                <label for="service" class="form-label">Service Interest</label>
+                <select class="form-control" id="service" name="service">
+                    <option value="Staff Augmentation - Networking & Infrastructure">Staff Augmentation - Networking & Infrastructure</option>
+                    <option value="Fractional IT Leadership">Fractional IT Leadership</option>
+                    <option value="Compliance & GxP Documentation">Compliance & GxP Documentation</option>
+                    <option value="Project Delivery">Project Delivery</option>
+                    <option value="Managed Services (Phase 2)">Managed Services (Phase 2)</option>
+                    <option value="Cybersecurity Readiness (Phase 2)">Cybersecurity Readiness (Phase 2)</option>
+                    <option value="Partnership Opportunities">Partnership Opportunities</option>
+                </select>
+            </div>
+            <div class="col-12">
+                <label for="message" class="form-label">Message *</label>
+                <textarea class="form-control" id="message" name="message" rows="5" required></textarea>
+            </div>
+            <div class="col-12">
+                <button type="submit" class="btn btn-primary-custom w-100">Send Message</button>
+            </div>
+        </div>
+    </form>
+</div>
