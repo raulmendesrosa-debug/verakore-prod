@@ -1,0 +1,1287 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verakore - Expert IT Solutions for Your Business</title>
+    <!-- Updated for root directory deployment -->
+    <meta name="description" content="Professional IT services including staff augmentation, fractional IT leadership, compliance documentation, and project delivery. Trusted by businesses to enhance their operations.">
+    <meta name="keywords" content="IT services, IT consulting, network solutions, cybersecurity, cloud services, IT support">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #059669;
+            --accent-color: #ea580c;
+            --dark-color: #1e293b;
+            --light-color: #f8fafc;
+            --text-color: #64748b;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+        }
+        
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--primary-color) !important;
+        }
+        
+        .nav-link {
+            font-weight: 500;
+            color: var(--dark-color) !important;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            color: var(--primary-color) !important;
+        }
+        
+        .hero-section {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            padding: 180px 0 12px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><polygon fill="rgba(255,255,255,0.1)" points="0,1000 1000,0 1000,1000"/></svg>');
+            background-size: cover;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+        
+        .btn-primary-custom {
+            background: var(--accent-color);
+            border: none;
+            padding: 15px 30px;
+            font-weight: 600;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary-custom:hover {
+            background: #dc2626;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(234, 88, 12, 0.3);
+        }
+        
+        .section-padding {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--dark-color);
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-color);
+            text-align: center;
+            margin-bottom: 3rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .service-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            height: 100%;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        .service-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .service-icon i {
+            font-size: 2rem;
+            color: white;
+        }
+        
+        .service-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--dark-color);
+            margin-bottom: 1rem;
+        }
+        
+        .service-description {
+            color: var(--text-color);
+            margin-bottom: 1.5rem;
+        }
+        
+        .stats-section {
+            background: var(--light-color);
+            padding: 60px 0;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 2rem;
+        }
+        
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-label {
+            font-size: 1.1rem;
+            color: var(--text-color);
+            font-weight: 500;
+        }
+        
+        .testimonial-section {
+            background: var(--dark-color);
+            color: white;
+            padding: 80px 0;
+        }
+        
+        .testimonial-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 2rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .testimonial-text {
+            font-size: 1.1rem;
+            font-style: italic;
+            margin-bottom: 1.5rem;
+        }
+        
+        .testimonial-author {
+            font-weight: 600;
+            color: var(--accent-color);
+        }
+        
+        .contact-section {
+            background: var(--light-color);
+            padding: 80px 0;
+        }
+        
+        .contact-form {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .form-control {
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 12px 15px;
+            transition: border-color 0.3s ease;
+        }
+        
+        .form-control:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.2rem rgba(37, 99, 235, 0.25);
+        }
+        
+        .footer {
+            background: var(--dark-color);
+            color: white;
+            padding: 40px 0 20px;
+        }
+        
+        .footer-link {
+            color: #94a3b8;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-link:hover {
+            color: white;
+        }
+        
+        .badge-core {
+            background: var(--primary-color);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-weight: 600;
+        }
+        
+        .badge-phase2 {
+            background: var(--text-color);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-weight: 600;
+        }
+        
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .hero-section {
+                padding: 60px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#home">
+                <div class="logo-container">
+                    <img src="assets/images/logos/verakore-2.png" alt="Verakore" height="154" class="logo-img">
+                </div>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="services.html">Services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <div class="hero-content">
+                        <h1 class="hero-title">Expert IT Solutions for Your Business</h1>
+                        <p class="hero-subtitle">Empowering businesses to thrive in a digital world with innovative technology solutions, reliable support, and strategic IT consulting.</p>
+                        <div class="d-flex gap-3">
+                            <a href="#contact" class="btn btn-primary-custom btn-lg">Get Started Today</a>
+                            <a href="services.html" class="btn btn-outline-light btn-lg">Our Services</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="text-center">
+                        <i class="fas fa-laptop-code" style="font-size: 15rem; opacity: 0.3;"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="stat-item">
+                        <div class="stat-number">500+</div>
+                        <div class="stat-label">Projects Completed</div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="stat-item">
+                        <div class="stat-number">150+</div>
+                        <div class="stat-label">Happy Clients</div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="stat-item">
+                        <div class="stat-number">25+</div>
+                        <div class="stat-label">Years Experience</div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="stat-item">
+                        <div class="stat-number">24/7</div>
+                        <div class="stat-label">Support Available</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="section-padding">
+        <div class="container">
+            <h2 class="section-title">Our IT Services</h2>
+            <p class="section-subtitle">Comprehensive technology solutions tailored to meet your business needs and drive growth.</p>
+            
+            <div class="row g-4">
+                <div class="col-lg-6 col-md-6">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h3 class="service-title">Staff Augmentation</h3>
+                        <p class="service-description">The right expertise, when you need it. We provide Networking Engineers, Systems Specialists, and Infrastructure Architects who integrate seamlessly into your team.</p>
+                        <ul class="list-unstyled">
+                            <li><i class="fas fa-check text-success me-2"></i>Network Engineers & Architects</li>
+                            <li><i class="fas fa-check text-success me-2"></i>Systems & Infrastructure Specialists</li>
+                            <li><i class="fas fa-check text-success me-2"></i>Cloud & Data Center Engineers</li>
+                        </ul>
+                        <div class="mt-3">
+                            <span class="badge-core">Core Service</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-6 col-md-6">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-user-tie"></i>
+                        </div>
+                        <h3 class="service-title">Fractional IT Leadership</h3>
+                        <p class="service-description">Leadership on demand. With 25+ years of infrastructure and IT leadership experience, we act as your Fractional Director of IT/Infrastructure.</p>
+                        <ul class="list-unstyled">
+                            <li><i class="fas fa-check text-success me-2"></i>Design IT roadmaps and manage vendors</li>
+                            <li><i class="fas fa-check text-success me-2"></i>Lead network refreshes and cloud migrations</li>
+                            <li><i class="fas fa-check text-success me-2"></i>Support regulated R&D environments</li>
+                        </ul>
+                        <div class="mt-3">
+                            <span class="badge-core">Core Service</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-6 col-md-6">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-clipboard-check"></i>
+                        </div>
+                        <h3 class="service-title">Compliance & GxP Documentation</h3>
+                        <p class="service-description">Stay audit-ready. We help life sciences organizations build the GxP documentation that regulators expectâ€”without slowing operations.</p>
+                        <ul class="list-unstyled">
+                            <li><i class="fas fa-check text-success me-2"></i>GxP documentation (SOPs, IQ/OQ/PQ)</li>
+                            <li><i class="fas fa-check text-success me-2"></i>IT change management & audit trails</li>
+                            <li><i class="fas fa-check text-success me-2"></i>SOX / 21 CFR Part 11 alignment</li>
+                        </ul>
+                        <div class="mt-3">
+                            <span class="badge-core">Core Service</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-6 col-md-6">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-project-diagram"></i>
+                        </div>
+                        <h3 class="service-title">Project Delivery</h3>
+                        <p class="service-description">Clear communication. Simple methodology. Reliable results. We manage technology projects with precision and transparency.</p>
+                        <ul class="list-unstyled">
+                            <li><i class="fas fa-check text-success me-2"></i>Plan â†’ Build â†’ Run framework</li>
+                            <li><i class="fas fa-check text-success me-2"></i>On time, on budget delivery</li>
+                            <li><i class="fas fa-check text-success me-2"></i>Measurable outcomes at every milestone</li>
+                        </ul>
+                        <div class="mt-3">
+                            <span class="badge-core">Core Service</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-6 col-md-6">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3 class="service-title">Cybersecurity Readiness</h3>
+                        <p class="service-description">Security assessments, endpoint protection, and incident playbooks to prepare for cybersecurity and compliance challenges ahead.</p>
+                        <ul class="list-unstyled">
+                            <li><i class="fas fa-check text-success me-2"></i>Security Assessments</li>
+                            <li><i class="fas fa-check text-success me-2"></i>Endpoint Protection</li>
+                            <li><i class="fas fa-check text-success me-2"></i>Incident Response Playbooks</li>
+                        </ul>
+                        <div class="mt-3">
+                            <span class="badge-core">Core Service</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section-padding bg-light">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <h2 class="section-title text-start">About Verakore</h2>
+                    <p class="lead">At Verakore, our mission is to provide exceptional IT services that empower businesses to thrive in a digital world.</p>
+                    <p>We focus on delivering innovative solutions tailored to meet the unique needs of each client, combining technical expertise with business acumen to drive real results.</p>
+                    
+                    <div class="row mt-4">
+                        <div class="col-md-6">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="me-3">
+                                    <i class="fas fa-award text-primary" style="font-size: 2rem;"></i>
+                                </div>
+                                <div>
+                                    <h5 class="mb-1">25+ Years Experience</h5>
+                                    <p class="mb-0 text-muted">Infrastructure and IT leadership</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="me-3">
+                                    <i class="fas fa-shield-alt text-primary" style="font-size: 2rem;"></i>
+                                </div>
+                                <div>
+                                    <h5 class="mb-1">Compliance Built-In</h5>
+                                    <p class="mb-0 text-muted">GxP and regulated environment expertise</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="text-center">
+                        <i class="fas fa-users" style="font-size: 12rem; color: var(--primary-color); opacity: 0.3;"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Verakore Section -->
+    <section class="section-padding">
+        <div class="container">
+            <h2 class="section-title">Why Clients Choose Verakore</h2>
+            <p class="section-subtitle">Our unique approach combines technical expertise with business acumen to deliver exceptional results.</p>
+            
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6">
+                    <div class="service-card text-center">
+                        <div class="service-icon mx-auto">
+                            <i class="fas fa-user-plus"></i>
+                        </div>
+                        <h3 class="service-title">Staff Augmentation with Purpose</h3>
+                        <p class="service-description">The right networking and infrastructure specialists at the right time. Our experts integrate seamlessly into your team.</p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6">
+                    <div class="service-card text-center">
+                        <div class="service-icon mx-auto">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h3 class="service-title">Fractional IT Leadership</h3>
+                        <p class="service-description">Strategic IT guidance without full-time executive cost. Get senior-level expertise when you need it most.</p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6">
+                    <div class="service-card text-center">
+                        <div class="service-icon mx-auto">
+                            <i class="fas fa-clipboard-check"></i>
+                        </div>
+                        <h3 class="service-title">Compliance Built-In</h3>
+                        <p class="service-description">GxP and regulated environment expertise in every engagement. Stay audit-ready without slowing operations.</p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6">
+                    <div class="service-card text-center">
+                        <div class="service-icon mx-auto">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <h3 class="service-title">Proven Project Delivery</h3>
+                        <p class="service-description">On time, on budget, with crystal-clear communication. Our Plan â†’ Build â†’ Run framework ensures success.</p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6">
+                    <div class="service-card text-center">
+                        <div class="service-icon mx-auto">
+                            <i class="fas fa-dollar-sign"></i>
+                        </div>
+                        <h3 class="service-title">Competitive Pricing</h3>
+                        <p class="service-description">MSP services designed to maximize value without compromise. Get enterprise-level service at competitive rates.</p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6">
+                    <div class="service-card text-center">
+                        <div class="service-icon mx-auto">
+                            <i class="fas fa-rocket"></i>
+                        </div>
+                        <h3 class="service-title">Future-Focused</h3>
+                        <p class="service-description">Preparing clients for cybersecurity and compliance challenges ahead. Stay ahead of the curve with proactive solutions.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonial-section">
+        <div class="container">
+            <h2 class="section-title text-white">What Our Clients Say</h2>
+            <p class="section-subtitle text-white-50">Real feedback from businesses we've helped</p>
+            
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">"Verakore provided exactly what we needed - experienced network engineers who could hit the ground running. No fluff, just solid technical expertise when we needed it most."</p>
+                        <div class="testimonial-author">Manufacturing Company, IT Director</div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">"Working with Verakore on our GxP documentation was straightforward and efficient. They understood our compliance requirements and delivered exactly what we needed for our audit."</p>
+                        <div class="testimonial-author">Life Sciences Company, QA Manager</div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">"The fractional IT leadership approach worked perfectly for us. We got strategic guidance without the overhead of a full-time position, and the project was delivered on time and on budget."</p>
+                        <div class="testimonial-author">Growing Tech Company, CEO</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <h2 class="section-title">Get In Touch</h2>
+            <p class="section-subtitle">Ready to enhance your IT infrastructure? Let's discuss your needs.</p>
+            
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <div class="contact-form">
+                        <form name="contact-form" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+                            <input type="hidden" name="form-name" value="contact-form" />
+                            <p style="display: none;">
+                                <label>Don't fill this out if you're human: <input name="bot-field" /></label>
+                            </p>
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label for="name" class="form-label">Name *</label>
+                                    <input type="text" class="form-control" id="name" name="name" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="email" class="form-label">Email *</label>
+                                    <input type="email" class="form-control" id="email" name="email" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="company" class="form-label">Company</label>
+                                    <input type="text" class="form-control" id="company" name="company">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="phone" class="form-label">Phone</label>
+                                    <input type="tel" class="form-control" id="phone" name="phone">
+                                </div>
+                                <div class="col-12">
+                                    <label for="service" class="form-label">Service Interest</label>
+                                    <select class="form-control" id="service" name="service">
+                                        <option value="Staff Augmentation - Networking & Infrastructure">Staff Augmentation - Networking & Infrastructure</option>
+                                        <option value="Fractional IT Leadership">Fractional IT Leadership</option>
+                                        <option value="Compliance & GxP Documentation">Compliance & GxP Documentation</option>
+                                        <option value="Project Delivery">Project Delivery</option>
+                                        <option value="Cybersecurity Readiness & Compliance">Cybersecurity Readiness & Compliance</option>
+                                        <option value="Partnership Opportunities">Partnership Opportunities</option>
+                                        <option value="Other">Other</option>
+                                    </select>
+                                </div>
+                                <div class="col-12">
+                                    <label for="message" class="form-label">Message *</label>
+                                    <textarea class="form-control" id="message" name="message" rows="5" required></textarea>
+                                </div>
+                                <div class="col-12">
+                                    <button type="submit" class="btn btn-primary-custom w-100">Send Message</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row mt-5">
+                <div class="col-md-4 text-center">
+                    <div class="mb-3">
+                        <a href="tel:+16178659705" class="text-decoration-none">
+                            <i class="fas fa-phone text-primary" style="font-size: 2rem;"></i>
+                        </a>
+                    </div>
+                    <h5>Call Us</h5>
+                    <p class="text-muted"><a href="tel:+16178659705" class="text-decoration-none text-muted">(617) 865-9705</a><br>Mon-Fri 9AM-5PM</p>
+                </div>
+                <div class="col-md-4 text-center">
+                    <div class="mb-3">
+                        <a href="mailto:info@verakore.com" class="text-decoration-none">
+                            <i class="fas fa-envelope text-primary" style="font-size: 2rem;"></i>
+                        </a>
+                    </div>
+                    <h5>Email Us</h5>
+                    <p class="text-muted"><a href="mailto:info@verakore.com" class="text-decoration-none text-muted">info@verakore.com</a><br>support@verakore.com</p>
+                </div>
+                <div class="col-md-4 text-center">
+                    <div class="mb-3">
+                        <a href="mailto:info@verakore.com?subject=Video Meeting Request&body=Hi, I'd like to schedule a video meeting. Please let me know your preferred platform (Zoom, Teams, Google Meet) and available times." class="text-decoration-none">
+                            <i class="fas fa-video text-primary" style="font-size: 2rem;"></i>
+                        </a>
+                    </div>
+                    <h5>Video Meeting</h5>
+                    <p class="text-muted"><a href="mailto:info@verakore.com?subject=Video Meeting Request&body=Hi, I'd like to schedule a video meeting. Please let me know your preferred platform (Zoom, Teams, Google Meet) and available times." class="text-decoration-none text-muted">Schedule Meeting</a><br>Zoom, Teams, Google Meet</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <h5 class="text-white mb-3">Verakore</h5>
+                    <p class="text-muted">Expert IT solutions for your business. Empowering digital transformation with innovative technology and reliable support.</p>
+                    <div class="mb-3">
+                        <p class="text-muted mb-1"><i class="fas fa-phone me-2"></i><a href="tel:+16178659705" class="footer-link">(617) 865-9705</a></p>
+                        <p class="text-muted mb-1"><i class="fas fa-envelope me-2"></i><a href="mailto:info@verakore.com" class="footer-link">info@verakore.com</a></p>
+                    </div>
+                    <div class="d-flex gap-3">
+                        <a href="#" class="footer-link"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h6 class="text-white mb-3">Services</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="services.html" class="footer-link">Staff Augmentation</a></li>
+                        <li><a href="services.html" class="footer-link">Fractional IT Leadership</a></li>
+                        <li><a href="services.html" class="footer-link">Compliance & GxP</a></li>
+                        <li><a href="services.html" class="footer-link">Project Delivery</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h6 class="text-white mb-3">Company</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="#about" class="footer-link">About Us</a></li>
+                        <li><a href="#contact" class="footer-link">Contact</a></li>
+                        <li><a href="mailto:info@verakore.com" class="footer-link">Partnerships</a></li>
+                        <li><a href="careers.html" class="footer-link">Careers</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h6 class="text-white mb-3">Resources</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="mailto:info@verakore.com" class="footer-link">Contact Support</a></li>
+                        <li><a href="mailto:info@verakore.com" class="footer-link">Request Quote</a></li>
+                        <li><a href="tel:+16178659705" class="footer-link">Call Us</a></li>
+                        <li><a href="mailto:info@verakore.com?subject=Video Meeting Request" class="footer-link">Schedule Meeting</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h6 class="text-white mb-3">Legal</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="privacy-policy.html" class="footer-link">Privacy Policy</a></li>
+                        <li><a href="terms-of-service.html" class="footer-link">Terms of Service</a></li>
+                        <li><a href="cookie-policy.html" class="footer-link">Cookie Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="my-4">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <p class="text-muted mb-0">&copy; 2025 Verakore. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p class="text-muted mb-0">Powered by innovation and expertise</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JavaScript -->
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Navbar background change on scroll
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.style.background = 'rgba(255, 255, 255, 0.98)';
+            } else {
+                navbar.style.background = 'rgba(255, 255, 255, 0.95)';
+            }
+        });
+
+        // Form submission handling
+        document.querySelector('form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData);
+            
+            // Simulate form submission
+            alert('Thank you for your message! We will get back to you within 24 hours.');
+            
+            // Reset form
+            this.reset();
+        });
+
+        // Animate numbers on scroll
+        function animateNumbers() {
+            const statNumbers = document.querySelectorAll('.stat-number');
+            statNumbers.forEach(stat => {
+                const target = parseInt(stat.textContent.replace(/\D/g, ''));
+                const increment = target / 100;
+                let current = 0;
+                
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= target) {
+                        current = target;
+                        clearInterval(timer);
+                    }
+                    
+                    if (stat.textContent.includes('+')) {
+                        stat.textContent = Math.floor(current) + '+';
+                    } else if (stat.textContent.includes('/')) {
+                        stat.textContent = stat.textContent;
+                    } else {
+                        stat.textContent = Math.floor(current);
+                    }
+                }, 20);
+            });
+        }
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    if (entry.target.classList.contains('stats-section')) {
+                        animateNumbers();
+                    }
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe elements for animation
+        document.querySelectorAll('.service-card, .testimonial-card, .stats-section').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
+
+    <!-- Verakore Chatbot Integration -->
+    <style>
+        /* Chatbot Styles */
+        .chatbot-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .chatbot-toggle {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(37, 99, 235, 0.3);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+        }
+
+        .chatbot-toggle:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 25px rgba(37, 99, 235, 0.4);
+        }
+
+        .chatbot-window {
+            position: absolute;
+            bottom: 80px;
+            right: 0;
+            width: 350px;
+            height: 500px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .chatbot-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .chatbot-title {
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        .chatbot-close {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            padding: 0;
+            width: 25px;
+            height: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .chatbot-messages {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            background: #f8fafc;
+        }
+
+        .message {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .message.bot {
+            justify-content: flex-start;
+        }
+
+        .message.user {
+            justify-content: flex-end;
+        }
+
+        .message-content {
+            max-width: 80%;
+            padding: 12px 16px;
+            border-radius: 18px;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+
+        .message.bot .message-content {
+            background: white;
+            border: 1px solid #e2e8f0;
+            color: #1e293b;
+        }
+
+        .message.user .message-content {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .chatbot-input {
+            padding: 15px 20px;
+            border-top: 1px solid #e2e8f0;
+            display: flex;
+            gap: 10px;
+        }
+
+        .chatbot-input input {
+            flex: 1;
+            border: 1px solid #e2e8f0;
+            border-radius: 25px;
+            padding: 10px 15px;
+            font-size: 14px;
+            outline: none;
+        }
+
+        .chatbot-input input:focus {
+            border-color: var(--primary-color);
+        }
+
+        .chatbot-send {
+            background: var(--primary-color);
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+        }
+
+        .quick-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .quick-action {
+            background: #f1f5f9;
+            border: 1px solid #e2e8f0;
+            border-radius: 20px;
+            padding: 6px 12px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .quick-action:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .typing-indicator {
+            display: none;
+            align-items: center;
+            gap: 5px;
+            padding: 12px 16px;
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 18px;
+            max-width: 80px;
+        }
+
+        .typing-dot {
+            width: 6px;
+            height: 6px;
+            background: #64748b;
+            border-radius: 50%;
+            animation: typing 1.4s infinite;
+        }
+
+        .typing-dot:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .typing-dot:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes typing {
+            0%, 60%, 100% {
+                transform: translateY(0);
+            }
+            30% {
+                transform: translateY(-10px);
+            }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 480px) {
+            .chatbot-window {
+                width: 300px;
+                height: 450px;
+            }
+            
+            .chatbot-container {
+                bottom: 10px;
+                right: 10px;
+            }
+        }
+    </style>
+
+    <!-- Chatbot HTML -->
+    <div class="chatbot-container">
+        <div class="chatbot-window" id="chatbotWindow">
+            <div class="chatbot-header">
+                <div class="chatbot-title">Verakore Assistant</div>
+                <button class="chatbot-close" onclick="toggleChatbot()">Ã—</button>
+            </div>
+            
+            <div class="chatbot-messages" id="chatbotMessages">
+                <div class="message bot">
+                    <div class="message-content">
+                        ðŸ‘‹ Hello! I'm your Verakore IT Assistant. How can I help you today?
+                        <div class="quick-actions">
+                            <div class="quick-action" onclick="sendQuickMessage('Staff Augmentation')">Staff Augmentation</div>
+                            <div class="quick-action" onclick="sendQuickMessage('Fractional IT Leadership')">IT Leadership</div>
+                            <div class="quick-action" onclick="sendQuickMessage('Compliance & GxP')">Compliance</div>
+                            <div class="quick-action" onclick="sendQuickMessage('Project Delivery')">Project Delivery</div>
+                            <div class="quick-action" onclick="sendQuickMessage('Contact Sales')">Contact Sales</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="chatbot-input">
+                <input type="text" id="chatbotInput" placeholder="Type your message..." onkeypress="handleKeyPress(event)">
+                <button class="chatbot-send" onclick="sendMessage()">â†’</button>
+            </div>
+        </div>
+        
+        <button class="chatbot-toggle" onclick="toggleChatbot()">
+            ðŸ’¬
+        </button>
+    </div>
+
+    <script>
+        // Chatbot functionality
+        let isOpen = false;
+        let conversationHistory = [];
+
+        function toggleChatbot() {
+            const window = document.getElementById('chatbotWindow');
+            isOpen = !isOpen;
+            window.style.display = isOpen ? 'flex' : 'none';
+            
+            if (isOpen) {
+                document.getElementById('chatbotInput').focus();
+            }
+        }
+
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        }
+
+        function sendQuickMessage(message) {
+            document.getElementById('chatbotInput').value = message;
+            sendMessage();
+        }
+
+        function sendMessage() {
+            const input = document.getElementById('chatbotInput');
+            const message = input.value.trim();
+            
+            if (!message) return;
+            
+            // Add user message
+            addMessage(message, 'user');
+            input.value = '';
+            
+            // Add typing indicator
+            showTypingIndicator();
+            
+            // Simulate bot response
+            setTimeout(() => {
+                hideTypingIndicator();
+                const response = getBotResponse(message);
+                addMessage(response, 'bot');
+            }, 1000 + Math.random() * 1000);
+        }
+
+        function addMessage(content, sender) {
+            const messagesContainer = document.getElementById('chatbotMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${sender}`;
+            
+            const contentDiv = document.createElement('div');
+            contentDiv.className = 'message-content';
+            contentDiv.textContent = content;
+            
+            messageDiv.appendChild(contentDiv);
+            messagesContainer.appendChild(messageDiv);
+            
+            // Scroll to bottom
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+            
+            // Store in conversation history
+            conversationHistory.push({ sender, content, timestamp: new Date() });
+        }
+
+        function showTypingIndicator() {
+            const messagesContainer = document.getElementById('chatbotMessages');
+            const typingDiv = document.createElement('div');
+            typingDiv.className = 'message bot';
+            typingDiv.id = 'typingIndicator';
+            
+            const typingContent = document.createElement('div');
+            typingContent.className = 'typing-indicator';
+            typingContent.style.display = 'flex';
+            
+            for (let i = 0; i < 3; i++) {
+                const dot = document.createElement('div');
+                dot.className = 'typing-dot';
+                typingContent.appendChild(dot);
+            }
+            
+            typingDiv.appendChild(typingContent);
+            messagesContainer.appendChild(typingDiv);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+
+        function hideTypingIndicator() {
+            const typingIndicator = document.getElementById('typingIndicator');
+            if (typingIndicator) {
+                typingIndicator.remove();
+            }
+        }
+
+        function getBotResponse(userMessage) {
+            const message = userMessage.toLowerCase();
+            
+            // Staff Augmentation responses
+            if (message.includes('staff') || message.includes('augmentation') || message.includes('networking')) {
+                return "Our Staff Augmentation service provides expert Networking Engineers, Systems Specialists, and Infrastructure Architects who integrate seamlessly into your team. We offer both interim project support and long-term staffing solutions. Would you like to discuss your specific needs?";
+            }
+            
+            // Fractional IT Leadership responses
+            if (message.includes('leadership') || message.includes('fractional') || message.includes('director')) {
+                return "Fractional IT Leadership gives you access to 25+ years of infrastructure and IT leadership experience without full-time overhead. We help design IT roadmaps, manage vendors, and lead major initiatives like network refreshes and cloud migrations. How can we support your IT strategy?";
+            }
+            
+            // Compliance responses
+            if (message.includes('compliance') || message.includes('gxp') || message.includes('audit')) {
+                return "Our Compliance & GxP Documentation service helps life sciences organizations build the documentation regulators expect without slowing operations. We provide SOPs, IQ/OQ/PQ protocols, and ensure SOX/21 CFR Part 11 alignment. Are you in a regulated industry?";
+            }
+            
+            // Project Delivery responses
+            if (message.includes('project') || message.includes('delivery') || message.includes('budget')) {
+                return "Our Project Delivery service uses a Plan â†’ Build â†’ Run framework to ensure projects are delivered on time and on budget. We provide clear communication, measurable outcomes, and a culture of accountability. What type of project are you planning?";
+            }
+            
+            // Contact responses
+            if (message.includes('contact') || message.includes('sales') || message.includes('reach')) {
+                return "I'd be happy to connect you with our team! You can reach us at info@verakore.com or use the contact form on this page. We typically respond within 24 hours. Would you like me to help you with any specific service questions?";
+            }
+            
+            // Pricing responses
+            if (message.includes('price') || message.includes('cost') || message.includes('quote')) {
+                return "Our pricing varies based on the specific services and scope of work. We offer competitive rates and can provide custom quotes for your needs. I'd recommend contacting our team at info@verakore.com for a detailed discussion about your requirements.";
+            }
+            
+            // General IT responses
+            if (message.includes('it') || message.includes('technology') || message.includes('infrastructure')) {
+                return "Verakore specializes in comprehensive IT solutions including networking, infrastructure, compliance, and project delivery. We serve businesses across various industries with 25+ years of experience. What specific IT challenge are you facing?";
+            }
+            
+            // Default responses
+            const defaultResponses = [
+                "That's a great question! I'd be happy to help you learn more about our IT services. Could you tell me more about what you're looking for?",
+                "I understand you're interested in our services. We offer Staff Augmentation, Fractional IT Leadership, Compliance & GxP Documentation, and Project Delivery. Which area interests you most?",
+                "Thanks for your interest! Our team at Verakore has extensive experience in IT solutions. Feel free to ask me about any of our services or contact us directly at info@verakore.com.",
+                "I'm here to help! We specialize in IT infrastructure, networking, compliance, and project delivery. What specific challenge can we help you solve?"
+            ];
+            
+            return defaultResponses[Math.floor(Math.random() * defaultResponses.length)];
+        }
+
+        // Auto-open chatbot after 30 seconds on page
+        setTimeout(() => {
+            if (!isOpen) {
+                // Show a subtle notification
+                const toggle = document.querySelector('.chatbot-toggle');
+                toggle.style.animation = 'pulse 2s infinite';
+            }
+        }, 30000);
+    </script>
+</body>
+</html>
