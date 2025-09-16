@@ -321,11 +321,65 @@ class VerakoreAutomation:
         except KeyboardInterrupt:
             self.logger.info("🛑 Automation system stopped by user")
             
-    def run_manual_check(self):
-        """Run a manual check of all systems"""
-        self.logger.info("🔧 Running manual system check...")
+    def startup_health_check(self):
+        """Run startup health check - lightweight version"""
+        self.logger.info("🚀 Running startup health check...")
         
-        return self.run_daily_maintenance()
+        # Quick checks only
+        checks = [
+            ("Python availability", self._check_python),
+            ("Automation script", self._check_automation_script),
+            ("Configuration", self._check_config),
+            ("Workspace structure", self._check_workspace_structure)
+        ]
+        
+        results = []
+        for check_name, check_func in checks:
+            try:
+                result = check_func()
+                results.append((check_name, result))
+                self.logger.info(f"{'✅' if result else '❌'} {check_name}")
+            except Exception as e:
+                self.logger.error(f"Error in {check_name}: {e}")
+                results.append((check_name, False))
+        
+        passed = sum(1 for _, result in results if result)
+        total = len(results)
+        
+        if passed == total:
+            self.logger.info("✅ Startup health check passed - workspace ready")
+        else:
+            self.logger.warning(f"⚠️ Startup health check: {passed}/{total} checks passed")
+        
+        return passed == total
+    
+    def _check_python(self):
+        """Check if Python is available"""
+        try:
+            result = subprocess.run(["python", "--version"], capture_output=True, text=True)
+            return result.returncode == 0
+        except:
+            return False
+    
+    def _check_automation_script(self):
+        """Check if automation script exists"""
+        return Path("automation.py").exists()
+    
+    def _check_config(self):
+        """Check if configuration file exists and is valid"""
+        if not self.config_file.exists():
+            return False
+        try:
+            with open(self.config_file, 'r') as f:
+                json.load(f)
+            return True
+        except:
+            return False
+    
+    def _check_workspace_structure(self):
+        """Check basic workspace structure"""
+        required_files = ["index.html", "automation.py"]
+        return all(Path(f).exists() for f in required_files)
 
 def main():
     """Main function"""
@@ -344,10 +398,12 @@ def main():
             automation.backup_workspace()
         elif command == "deploy-check":
             automation.deployment_readiness_check()
+        elif command == "startup":
+            automation.startup_health_check()
         elif command == "start":
             automation.start_scheduler()
         else:
-            print("Usage: python automation.py [daily|weekly|check|backup|deploy-check|start]")
+            print("Usage: python automation.py [daily|weekly|check|backup|deploy-check|startup|start]")
     else:
         # Default: run manual check
         automation.run_manual_check()
