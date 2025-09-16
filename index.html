@@ -1364,12 +1364,16 @@
         let conversationHistory = [];
 
         function toggleChatbot() {
+            console.log('Chatbot toggle clicked'); // Debug log
             const window = document.getElementById('chatbotWindow');
             isOpen = !isOpen;
             window.style.display = isOpen ? 'flex' : 'none';
             
             if (isOpen) {
                 document.getElementById('chatbotInput').focus();
+                console.log('Chatbot opened'); // Debug log
+            } else {
+                console.log('Chatbot closed'); // Debug log
             }
         }
 
@@ -1385,10 +1389,16 @@
         }
 
         function sendMessage() {
+            console.log('Send message called'); // Debug log
             const input = document.getElementById('chatbotInput');
             const message = input.value.trim();
             
-            if (!message) return;
+            if (!message) {
+                console.log('No message to send'); // Debug log
+                return;
+            }
+            
+            console.log('Sending message:', message); // Debug log
             
             // Add user message
             addMessage(message, 'user');
@@ -1401,6 +1411,7 @@
             setTimeout(() => {
                 hideTypingIndicator();
                 const response = getBotResponse(message);
+                console.log('Bot response:', response); // Debug log
                 addMessage(response, 'bot');
             }, 1000 + Math.random() * 1000);
         }
