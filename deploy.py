@@ -63,7 +63,7 @@ class DeploymentController:
         timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         log_entry = f"{timestamp} - {level} - {message}\n"
         
-        with open(self.deployment_log, 'a') as f:
+        with open(self.deployment_log, 'a', encoding='utf-8') as f:
             f.write(log_entry)
             
         print(f"[{level}] {message}")

@@ -1,8 +1,8 @@
 {
   "cloudflare": {
-    "account_id": "",
+    "account_id": "YOUR_CLOUDFLARE_ACCOUNT_ID",
     "project_name": "verakore-website",
-    "api_token": "",
+    "api_token": "YOUR_CLOUDFLARE_API_TOKEN",
     "pages_url": "https://verakore-website.pages.dev"
   },
   "github": {
