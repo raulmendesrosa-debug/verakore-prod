@@ -57,7 +57,7 @@
   },
   "notifications": {
     "slack_webhook": "",
-    "email": "",
+    "email": "raulmendesrosa@gmail.com",
     "enabled": true,
     "channels": ["deployment", "errors", "performance"]
   },

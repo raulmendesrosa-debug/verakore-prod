@@ -27,7 +27,7 @@
     "throttling": "4g"
   },
   "notifications": {
-    "email": "",
+    "email": "raulmendesrosa@gmail.com",
     "slack_webhook": "",
     "enabled": true
   },
