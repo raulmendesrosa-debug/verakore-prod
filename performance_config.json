@@ -1,0 +1,63 @@
+{
+  "monitoring": {
+    "enabled": true,
+    "interval_minutes": 60,
+    "retention_days": 30,
+    "alerts_enabled": true
+  },
+  "targets": {
+    "production": "https://verakore-website.pages.dev",
+    "staging": "https://staging.verakore-website.pages.dev"
+  },
+  "thresholds": {
+    "lcp": 2.5,
+    "fid": 100,
+    "cls": 0.1,
+    "fcp": 1.8,
+    "ttfb": 600,
+    "performance_score": 90,
+    "accessibility_score": 90,
+    "best_practices_score": 90,
+    "seo_score": 90
+  },
+  "lighthouse": {
+    "enabled": true,
+    "chrome_path": "",
+    "headless": true,
+    "throttling": "4g"
+  },
+  "notifications": {
+    "email": "",
+    "slack_webhook": "",
+    "enabled": true
+  },
+  "reports": {
+    "daily_summary": true,
+    "weekly_report": true,
+    "monthly_analysis": true
+  },
+  "core_web_vitals": {
+    "lcp": {
+      "good": 2.5,
+      "needs_improvement": 4.0,
+      "poor": 4.0
+    },
+    "fid": {
+      "good": 100,
+      "needs_improvement": 300,
+      "poor": 300
+    },
+    "cls": {
+      "good": 0.1,
+      "needs_improvement": 0.25,
+      "poor": 0.25
+    }
+  },
+  "performance_budget": {
+    "max_total_size_mb": 5,
+    "max_image_size_mb": 2,
+    "max_js_size_mb": 1,
+    "max_css_size_mb": 0.5,
+    "max_fonts_size_mb": 0.5
+  }
+}
