@@ -874,7 +874,7 @@
     
     <!-- Custom JavaScript -->
     <script>
-        // Smooth scrolling for navigation links with navbar offset
+        // Smooth scrolling for navigation links with navbar offset (iPad compatible)
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -887,9 +887,12 @@
                     // Calculate target position with navbar offset
                     const targetPosition = target.offsetTop - navbarHeight - 20; // 20px extra padding
                     
-                    window.scrollTo({
-                        top: targetPosition,
-                        behavior: 'smooth'
+                    // Use requestAnimationFrame for better iPad compatibility
+                    requestAnimationFrame(() => {
+                        window.scrollTo({
+                            top: targetPosition,
+                            behavior: 'smooth'
+                        });
                     });
                 }
             });
