@@ -23,7 +23,7 @@ def detect_encoding_issues(file_path):
     # Common problematic character patterns
     problematic_patterns = [
         (r'â€"', 'Em dash (—) should be &#x2014;'),
-               (r'â†'', 'Arrow (→) should be &#x2192;'),
+               (r'â†'', 'Arrow should be &#x2192;'),
         (r'â€™', 'Right single quote (') should be &#x2019;'),
         (r'â€œ', 'Left double quote (") should be &#x201C;'),
         (r'â€', 'Right double quote (") should be &#x201D;'),
