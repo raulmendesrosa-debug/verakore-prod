@@ -1,0 +1,124 @@
+{
+  "analytics": {
+    "enabled": true,
+    "collection_interval_minutes": 15,
+    "retention_days": 365,
+    "real_time_enabled": true
+  },
+  "data_sources": {
+    "website_analytics": {
+      "enabled": true,
+      "page_views": true,
+      "user_sessions": true,
+      "bounce_rate": true,
+      "conversion_tracking": true
+    },
+    "performance_metrics": {
+      "enabled": true,
+      "core_web_vitals": true,
+      "page_load_times": true,
+      "resource_metrics": true
+    },
+    "business_metrics": {
+      "enabled": true,
+      "lead_generation": true,
+      "contact_form_submissions": true,
+      "service_inquiries": true,
+      "conversion_funnels": true
+    },
+    "user_behavior": {
+      "enabled": true,
+      "click_tracking": true,
+      "scroll_depth": true,
+      "time_on_page": true,
+      "exit_pages": true
+    }
+  },
+  "tracking": {
+    "google_analytics": {
+      "enabled": false,
+      "tracking_id": "",
+      "measurement_id": ""
+    },
+    "custom_analytics": {
+      "enabled": true,
+      "privacy_compliant": true,
+      "cookie_consent": true
+    }
+  },
+  "reports": {
+    "daily_summary": true,
+    "weekly_report": true,
+    "monthly_analysis": true,
+    "quarterly_review": true,
+    "custom_reports": true
+  },
+  "kpis": {
+    "website_traffic": {
+      "page_views": true,
+      "unique_visitors": true,
+      "session_duration": true,
+      "bounce_rate": true
+    },
+    "business_metrics": {
+      "lead_generation": true,
+      "conversion_rate": true,
+      "contact_submissions": true,
+      "service_inquiries": true
+    },
+    "performance_metrics": {
+      "page_load_time": true,
+      "core_web_vitals": true,
+      "mobile_performance": true,
+      "seo_score": true
+    }
+  },
+  "notifications": {
+    "email": "raulmendesrosa@gmail.com",
+    "slack_webhook": "",
+    "enabled": true,
+    "daily_summary": true,
+    "weekly_report": true,
+    "alert_thresholds": true
+  },
+  "privacy": {
+    "gdpr_compliant": true,
+    "data_anonymization": true,
+    "retention_policy": true,
+    "consent_management": true
+  },
+  "conversion_tracking": {
+    "contact_form": {
+      "enabled": true,
+      "conversion_value": 100,
+      "tracking_events": ["form_submit", "form_complete"]
+    },
+    "service_inquiry": {
+      "enabled": true,
+      "conversion_value": 500,
+      "tracking_events": ["service_click", "inquiry_submit"]
+    },
+    "lead_generation": {
+      "enabled": true,
+      "conversion_value": 1000,
+      "tracking_events": ["lead_capture", "demo_request"]
+    }
+  },
+  "alert_thresholds": {
+    "traffic_drop": {
+      "enabled": true,
+      "threshold_percentage": 20,
+      "time_window_hours": 24
+    },
+    "conversion_drop": {
+      "enabled": true,
+      "threshold_percentage": 15,
+      "time_window_hours": 48
+    },
+    "performance_degradation": {
+      "enabled": true,
+      "threshold_percentage": 25,
+      "time_window_hours": 12
+    }
+  }
+}

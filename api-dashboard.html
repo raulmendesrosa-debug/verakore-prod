@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verakore API Integration Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .api-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .api-metric {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .api-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        .status-online { color: #28a745; }
+        .status-offline { color: #dc3545; }
+        .status-warning { color: #ffc107; }
+        .chart-container {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        .service-card {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-left: 4px solid #17a2b8;
+        }
+        .service-card.cloudflare {
+            border-left-color: #f38020;
+        }
+        .service-card.github {
+            border-left-color: #333;
+        }
+        .service-card.google {
+            border-left-color: #4285f4;
+        }
+        .service-card.slack {
+            border-left-color: #4a154b;
+        }
+        .endpoint-item {
+            background: #e9ecef;
+            border-radius: 8px;
+            padding: 10px;
+            margin-bottom: 8px;
+            font-family: monospace;
+            font-size: 0.9rem;
+        }
+        .test-result {
+            border-radius: 8px;
+            padding: 10px;
+            margin-bottom: 8px;
+        }
+        .test-result.passed {
+            background: #d4edda;
+            border-left: 4px solid #28a745;
+        }
+        .test-result.failed {
+            background: #f8d7da;
+            border-left: 4px solid #dc3545;
+        }
+        .test-result.warning {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="text-center my-4">
+                    <i class="fas fa-plug"></i> Verakore API Integration Dashboard
+                </h1>
+            </div>
+        </div>
+
+        <!-- API Overview -->
+        <div class="row">
+            <div class="col-12">
+                <h3><i class="fas fa-tachometer-alt"></i> API Overview</h3>
+            </div>
+            <div class="col-md-3">
+                <div class="api-card">
+                    <div class="api-metric" id="total-apis">--</div>
+                    <div class="api-label">Total APIs</div>
+                    <div class="api-label" id="apis-status">Loading...</div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="api-card">
+                    <div class="api-metric" id="active-apis">--</div>
+                    <div class="api-label">Active APIs</div>
+                    <div class="api-label" id="active-status">Loading...</div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="api-card">
+                    <div class="api-metric" id="avg-response-time">--</div>
+                    <div class="api-label">Avg Response Time</div>
+                    <div class="api-label" id="response-status">Loading...</div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="api-card">
+                    <div class="api-metric" id="success-rate">--</div>
+                    <div class="api-label">Success Rate</div>
+                    <div class="api-label" id="success-status">Loading...</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Service Status -->
+        <div class="row">
+            <div class="col-md-6">
+                <h3><i class="fas fa-server"></i> Service Status</h3>
+                <div id="services-container">
+                    <div class="alert alert-info">Loading services...</div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <h3><i class="fas fa-chart-line"></i> Response Time Trends</h3>
+                <div class="chart-container">
+                    <canvas id="responseTimeChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- API Endpoints -->
+        <div class="row">
+            <div class="col-md-6">
+                <h3><i class="fas fa-link"></i> Cloudflare API</h3>
+                <div class="service-card cloudflare">
+                    <h6><i class="fas fa-shield-alt"></i> Cloudflare Integration</h6>
+                    <p><strong>Status:</strong> <span class="status-online">Online</span></p>
+                    <p><strong>Token:</strong> Valid</p>
+                    <div class="endpoint-item">GET /user/tokens/verify</div>
+                    <div class="endpoint-item">GET /accounts</div>
+                    <div class="endpoint-item">GET /zones</div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <h3><i class="fas fa-code-branch"></i> GitHub API</h3>
+                <div class="service-card github">
+                    <h6><i class="fas fa-github"></i> GitHub Integration</h6>
+                    <p><strong>Status:</strong> <span class="status-online">Online</span></p>
+                    <p><strong>Repository:</strong> raulmendesrosa-debug/verakore-website</p>
+                    <div class="endpoint-item">GET /repos/{owner}/{repo}</div>
+                    <div class="endpoint-item">GET /repos/{owner}/{repo}/commits</div>
+                    <div class="endpoint-item">GET /repos/{owner}/{repo}/deployments</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Test Results -->
+        <div class="row">
+            <div class="col-md-6">
+                <h3><i class="fas fa-vial"></i> Recent Test Results</h3>
+                <div id="test-results-container">
+                    <div class="alert alert-info">Loading test results...</div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <h3><i class="fas fa-chart-pie"></i> API Usage Distribution</h3>
+                <div class="chart-container">
+                    <canvas id="usageChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Performance Metrics -->
+        <div class="row">
+            <div class="col-md-6">
+                <h3><i class="fas fa-tachometer-alt"></i> Performance Metrics</h3>
+                <div class="chart-container">
+                    <canvas id="performanceChart"></canvas>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <h3><i class="fas fa-exclamation-triangle"></i> Alerts & Issues</h3>
+                <div id="alerts-container">
+                    <div class="alert alert-success">No active alerts</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Rate Limiting -->
+        <div class="row">
+            <div class="col-12">
+                <h3><i class="fas fa-clock"></i> Rate Limiting Status</h3>
+                <div class="chart-container">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="text-center">
+                                <h5>Cloudflare</h5>
+                                <div class="progress mb-2">
+                                    <div class="progress-bar" style="width: 25%"></div>
+                                </div>
+                                <small>300/1200 requests/min</small>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="text-center">
+                                <h5>GitHub</h5>
+                                <div class="progress mb-2">
+                                    <div class="progress-bar bg-warning" style="width: 60%"></div>
+                                </div>
+                                <small>3000/5000 requests/hour</small>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="text-center">
+                                <h5>Google Analytics</h5>
+                                <div class="progress mb-2">
+                                    <div class="progress-bar bg-secondary" style="width: 0%"></div>
+                                </div>
+                                <small>Not configured</small>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="text-center">
+                                <h5>Slack</h5>
+                                <div class="progress mb-2">
+                                    <div class="progress-bar bg-secondary" style="width: 0%"></div>
+                                </div>
+                                <small>Not configured</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- API Actions -->
+        <div class="row">
+            <div class="col-12">
+                <h3><i class="fas fa-cogs"></i> API Actions</h3>
+                <div class="chart-container">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <button class="btn btn-primary w-100" onclick="runHealthChecks()">
+                                <i class="fas fa-heartbeat"></i> Health Checks
+                            </button>
+                        </div>
+                        <div class="col-md-3">
+                            <button class="btn btn-info w-100" onclick="testCloudflare()">
+                                <i class="fas fa-shield-alt"></i> Test Cloudflare
+                            </button>
+                        </div>
+                        <div class="col-md-3">
+                            <button class="btn btn-dark w-100" onclick="testGitHub()">
+                                <i class="fas fa-github"></i> Test GitHub
+                            </button>
+                        </div>
+                        <div class="col-md-3">
+                            <button class="btn btn-success w-100" onclick="generateReport()">
+                                <i class="fas fa-file-alt"></i> Generate Report
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // API Dashboard JavaScript
+        class APIDashboard {
+            constructor() {
+                this.charts = {};
+                this.init();
+            }
+
+            init() {
+                this.loadData();
+                this.setupCharts();
+                this.startAutoRefresh();
+            }
+
+            async loadData() {
+                try {
+                    // Simulate API call - replace with actual endpoint
+                    const response = await fetch('/api/api-data');
+                    const data = await response.json();
+                    this.updateDashboard(data);
+                } catch (error) {
+                    console.error('Error loading API data:', error);
+                    this.loadSampleData();
+                }
+            }
+
+            loadSampleData() {
+                // Sample data for demonstration
+                const sampleData = {
+                    overview: {
+                        totalApis: 4,
+                        activeApis: 2,
+                        avgResponseTime: '245ms',
+                        successRate: 98.5
+                    },
+                    services: [
+                        {
+                            name: 'Cloudflare',
+                            status: 'online',
+                            responseTime: '180ms',
+                            uptime: '99.9%',
+                            lastCheck: '2 minutes ago'
+                        },
+                        {
+                            name: 'GitHub',
+                            status: 'online',
+                            responseTime: '320ms',
+                            uptime: '99.8%',
+                            lastCheck: '1 minute ago'
+                        },
+                        {
+                            name: 'Google Analytics',
+                            status: 'offline',
+                            responseTime: 'N/A',
+                            uptime: 'N/A',
+                            lastCheck: 'Not configured'
+                        },
+                        {
+                            name: 'Slack',
+                            status: 'offline',
+                            responseTime: 'N/A',
+                            uptime: 'N/A',
+                            lastCheck: 'Not configured'
+                        }
+                    ],
+                    testResults: [
+                        {
+                            service: 'Cloudflare',
+                            test: 'Token Verification',
+                            status: 'passed',
+                            responseTime: '156ms',
+                            timestamp: '2 minutes ago'
+                        },
+                        {
+                            service: 'Cloudflare',
+                            test: 'Account Info',
+                            status: 'passed',
+                            responseTime: '203ms',
+                            timestamp: '2 minutes ago'
+                        },
+                        {
+                            service: 'GitHub',
+                            test: 'Repository Info',
+                            status: 'passed',
+                            responseTime: '298ms',
+                            timestamp: '1 minute ago'
+                        },
+                        {
+                            service: 'GitHub',
+                            test: 'Recent Commits',
+                            status: 'passed',
+                            responseTime: '342ms',
+                            timestamp: '1 minute ago'
+                        }
+                    ],
+                    trends: [
+                        { time: '10:00', cloudflare: 180, github: 320 },
+                        { time: '10:15', cloudflare: 175, github: 315 },
+                        { time: '10:30', cloudflare: 185, github: 325 },
+                        { time: '10:45', cloudflare: 170, github: 310 },
+                        { time: '11:00', cloudflare: 190, github: 335 }
+                    ],
+                    usage: {
+                        cloudflare: 45,
+                        github: 35,
+                        google: 0,
+                        slack: 0
+                    },
+                    performance: [
+                        { metric: 'Avg Response Time', value: 245, unit: 'ms' },
+                        { metric: 'Success Rate', value: 98.5, unit: '%' },
+                        { metric: 'Uptime', value: 99.8, unit: '%' },
+                        { metric: 'Error Rate', value: 1.5, unit: '%' }
+                    ]
+                };
+
+                this.updateDashboard(sampleData);
+            }
+
+            updateDashboard(data) {
+                this.updateOverview(data.overview);
+                this.updateServices(data.services);
+                this.updateTestResults(data.testResults);
+                this.updateCharts(data);
+            }
+
+            updateOverview(overview) {
+                document.getElementById('total-apis').textContent = overview.totalApis;
+                document.getElementById('active-apis').textContent = overview.activeApis;
+                document.getElementById('avg-response-time').textContent = overview.avgResponseTime;
+                document.getElementById('success-rate').textContent = overview.successRate + '%';
+            }
+
+            updateServices(services) {
+                const container = document.getElementById('services-container');
+                
+                container.innerHTML = services.map(service => `
+                    <div class="service-card ${service.name.toLowerCase().replace(' ', '-')}">
+                        <h6><i class="fas fa-server"></i> ${service.name}</h6>
+                        <p><strong>Status:</strong> <span class="status-${service.status}">${service.status.toUpperCase()}</span></p>
+                        <p><strong>Response Time:</strong> ${service.responseTime}</p>
+                        <p><strong>Uptime:</strong> ${service.uptime}</p>
+                        <p><strong>Last Check:</strong> ${service.lastCheck}</p>
+                    </div>
+                `).join('');
+            }
+
+            updateTestResults(testResults) {
+                const container = document.getElementById('test-results-container');
+                
+                container.innerHTML = testResults.map(test => `
+                    <div class="test-result ${test.status}">
+                        <h6><i class="fas fa-vial"></i> ${test.service} - ${test.test}</h6>
+                        <p><strong>Status:</strong> <span class="badge ${this.getStatusBadgeClass(test.status)}">${test.status.toUpperCase()}</span></p>
+                        <p><strong>Response Time:</strong> ${test.responseTime}</p>
+                        <p><strong>Timestamp:</strong> ${test.timestamp}</p>
+                    </div>
+                `).join('');
+            }
+
+            setupCharts() {
+                this.setupResponseTimeChart();
+                this.setupUsageChart();
+                this.setupPerformanceChart();
+            }
+
+            setupResponseTimeChart() {
+                const ctx = document.getElementById('responseTimeChart').getContext('2d');
+                this.charts.responseTime = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: [],
+                        datasets: [
+                            {
+                                label: 'Cloudflare',
+                                data: [],
+                                borderColor: '#f38020',
+                                backgroundColor: 'rgba(243, 128, 32, 0.1)',
+                                tension: 0.4
+                            },
+                            {
+                                label: 'GitHub',
+                                data: [],
+                                borderColor: '#333',
+                                backgroundColor: 'rgba(51, 51, 51, 0.1)',
+                                tension: 0.4
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                title: {
+                                    display: true,
+                                    text: 'Response Time (ms)'
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+            setupUsageChart() {
+                const ctx = document.getElementById('usageChart').getContext('2d');
+                this.charts.usage = new Chart(ctx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Cloudflare', 'GitHub', 'Google Analytics', 'Slack'],
+                        datasets: [{
+                            data: [45, 35, 0, 0],
+                            backgroundColor: [
+                                '#f38020',
+                                '#333',
+                                '#4285f4',
+                                '#4a154b'
+                            ]
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: {
+                                position: 'bottom'
+                            }
+                        }
+                    }
+                });
+            }
+
+            setupPerformanceChart() {
+                const ctx = document.getElementById('performanceChart').getContext('2d');
+                this.charts.performance = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Avg Response Time', 'Success Rate', 'Uptime', 'Error Rate'],
+                        datasets: [{
+                            data: [245, 98.5, 99.8, 1.5],
+                            backgroundColor: [
+                                '#667eea',
+                                '#28a745',
+                                '#17a2b8',
+                                '#dc3545'
+                            ]
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                max: 100
+                            }
+                        }
+                    }
+                });
+            }
+
+            updateCharts(data) {
+                if (data.trends) {
+                    this.charts.responseTime.data.labels = data.trends.map(t => t.time);
+                    this.charts.responseTime.data.datasets[0].data = data.trends.map(t => t.cloudflare);
+                    this.charts.responseTime.data.datasets[1].data = data.trends.map(t => t.github);
+                    this.charts.responseTime.update();
+                }
+
+                if (data.usage) {
+                    this.charts.usage.data.datasets[0].data = [
+                        data.usage.cloudflare,
+                        data.usage.github,
+                        data.usage.google,
+                        data.usage.slack
+                    ];
+                    this.charts.usage.update();
+                }
+
+                if (data.performance) {
+                    this.charts.performance.data.datasets[0].data = data.performance.map(p => p.value);
+                    this.charts.performance.update();
+                }
+            }
+
+            getStatusBadgeClass(status) {
+                switch (status) {
+                    case 'passed': return 'bg-success';
+                    case 'failed': return 'bg-danger';
+                    case 'warning': return 'bg-warning';
+                    default: return 'bg-secondary';
+                }
+            }
+
+            startAutoRefresh() {
+                setInterval(() => {
+                    this.loadData();
+                }, 30000); // Refresh every 30 seconds
+            }
+        }
+
+        // API actions
+        function runHealthChecks() {
+            alert('Running health checks...');
+            // Implement health check trigger
+        }
+
+        function testCloudflare() {
+            alert('Testing Cloudflare API...');
+            // Implement Cloudflare test trigger
+        }
+
+        function testGitHub() {
+            alert('Testing GitHub API...');
+            // Implement GitHub test trigger
+        }
+
+        function generateReport() {
+            alert('Generating API report...');
+            // Implement report generation trigger
+        }
+
+        // Initialize dashboard when page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            new APIDashboard();
+        });
+    </script>
+</body>
+</html>

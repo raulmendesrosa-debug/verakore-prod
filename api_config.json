@@ -1,0 +1,104 @@
+{
+  "api_integration": {
+    "enabled": true,
+    "test_interval_minutes": 30,
+    "retention_days": 90,
+    "alert_threshold_ms": 5000
+  },
+  "integrations": {
+    "cloudflare": {
+      "enabled": true,
+      "base_url": "https://api.cloudflare.com/client/v4",
+      "api_token": "Fs6nOuqwFQYj9w_ncNDmxg6jP2HKCn7V5leGA2HN",
+      "endpoints": {
+        "zones": "/zones",
+        "dns_records": "/zones/{zone_id}/dns_records",
+        "analytics": "/zones/{zone_id}/analytics/dashboard",
+        "user_tokens": "/user/tokens/verify",
+        "accounts": "/accounts"
+      }
+    },
+    "github": {
+      "enabled": true,
+      "base_url": "https://api.github.com",
+      "api_token": "",
+      "endpoints": {
+        "repos": "/repos/{owner}/{repo}",
+        "commits": "/repos/{owner}/{repo}/commits",
+        "deployments": "/repos/{owner}/{repo}/deployments",
+        "actions": "/repos/{owner}/{repo}/actions/runs"
+      }
+    },
+    "google_analytics": {
+      "enabled": false,
+      "base_url": "https://analyticsreporting.googleapis.com/v4",
+      "api_key": "",
+      "endpoints": {
+        "reports": "/reports:batchGet"
+      }
+    },
+    "slack": {
+      "enabled": false,
+      "base_url": "https://slack.com/api",
+      "webhook_url": "",
+      "endpoints": {
+        "chat_post": "/chat.postMessage",
+        "webhook": "/webhook"
+      }
+    }
+  },
+  "testing": {
+    "enabled": true,
+    "test_suite": {
+      "health_checks": true,
+      "response_time": true,
+      "status_codes": true,
+      "data_validation": true,
+      "rate_limiting": true,
+      "authentication": true
+    },
+    "test_scenarios": {
+      "smoke_tests": true,
+      "integration_tests": true,
+      "load_tests": false,
+      "security_tests": true
+    }
+  },
+  "monitoring": {
+    "enabled": true,
+    "uptime_monitoring": true,
+    "response_time_monitoring": true,
+    "error_rate_monitoring": true,
+    "rate_limit_monitoring": true
+  },
+  "notifications": {
+    "email": "raulmendesrosa@gmail.com",
+    "slack_webhook": "",
+    "enabled": true,
+    "on_failure": true,
+    "on_slow_response": true,
+    "on_rate_limit": true
+  },
+  "security": {
+    "api_key_rotation": false,
+    "rate_limiting": true,
+    "request_signing": false,
+    "ssl_verification": true
+  },
+  "rate_limits": {
+    "cloudflare": {
+      "requests_per_minute": 1200,
+      "requests_per_hour": 72000
+    },
+    "github": {
+      "requests_per_hour": 5000,
+      "requests_per_minute": 60
+    }
+  },
+  "alert_thresholds": {
+    "response_time_ms": 5000,
+    "error_rate_percentage": 10,
+    "uptime_percentage": 95,
+    "rate_limit_usage_percentage": 80
+  }
+}
