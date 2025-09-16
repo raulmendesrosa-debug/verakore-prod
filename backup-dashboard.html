@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verakore Backup & Recovery Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .backup-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .backup-metric {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .backup-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        .status-success { color: #28a745; }
+        .status-warning { color: #ffc107; }
+        .status-danger { color: #dc3545; }
+        .status-info { color: #17a2b8; }
+        .chart-container {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        .backup-item {
+            border-left: 4px solid #17a2b8;
+            background: #d1ecf1;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 10px;
+        }
+        .backup-item.success {
+            border-left-color: #28a745;
+            background: #d4edda;
+        }
+        .backup-item.warning {
+            border-left-color: #ffc107;
+            background: #fff3cd;
+        }
+        .backup-item.danger {
+            border-left-color: #dc3545;
+            background: #f8d7da;
+        }
+        .recovery-item {
+            border-left: 4px solid #6f42c1;
+            background: #e2e3e5;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 10px;
+        }
+        .recovery-item.success {
+            border-left-color: #28a745;
+            background: #d4edda;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="text-center my-4">
+                    <i class="fas fa-database"></i> Verakore Backup & Recovery Dashboard
+                </h1>
+            </div>
+        </div>
+
+        <!-- Backup Overview -->
+        <div class="row">
+            <div class="col-12">
+                <h3><i class="fas fa-shield-alt"></i> Backup Overview</h3>
+            </div>
+            <div class="col-md-3">
+                <div class="backup-card">
+                    <div class="backup-metric" id="total-backups">--</div>
+                    <div class="backup-label">Total Backups</div>
+                    <div class="backup-label" id="total-status">Loading...</div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="backup-card">
+                    <div class="backup-metric" id="last-backup">--</div>
+                    <div class="backup-label">Last Backup</div>
+                    <div class="backup-label" id="last-status">Loading...</div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="backup-card">
+                    <div class="backup-metric" id="backup-size">--</div>
+                    <div class="backup-label">Total Size</div>
+                    <div class="backup-label" id="size-status">Loading...</div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="backup-card">
+                    <div class="backup-metric" id="success-rate">--</div>
+                    <div class="backup-label">Success Rate</div>
+                    <div class="backup-label" id="rate-status">Loading...</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Backup Types -->
+        <div class="row">
+            <div class="col-md-4">
+                <h3><i class="fas fa-archive"></i> Full Backups</h3>
+                <div id="full-backups-container">
+                    <div class="alert alert-info">Loading full backups...</div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <h3><i class="fas fa-plus-circle"></i> Incremental Backups</h3>
+                <div id="incremental-backups-container">
+                    <div class="alert alert-info">Loading incremental backups...</div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <h3><i class="fas fa-exchange-alt"></i> Differential Backups</h3>
+                <div id="differential-backups-container">
+                    <div class="alert alert-info">Loading differential backups...</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Charts -->
+        <div class="row">
+            <div class="col-md-6">
+                <div class="chart-container">
+                    <h5><i class="fas fa-chart-line"></i> Backup Trends</h5>
+                    <canvas id="backupChart"></canvas>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="chart-container">
+                    <h5><i class="fas fa-chart-pie"></i> Backup Types Distribution</h5>
+                    <canvas id="backupTypesChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recovery Operations -->
+        <div class="row">
+            <div class="col-md-6">
+                <h3><i class="fas fa-undo"></i> Recent Recovery Operations</h3>
+                <div id="recovery-container">
+                    <div class="alert alert-info">Loading recovery operations...</div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <h3><i class="fas fa-check-circle"></i> Backup Verification</h3>
+                <div id="verification-container">
+                    <div class="alert alert-info">Loading verification results...</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Disaster Recovery -->
+        <div class="row">
+            <div class="col-12">
+                <h3><i class="fas fa-exclamation-triangle"></i> Disaster Recovery Status</h3>
+                <div class="chart-container">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="text-center">
+                                <h4 id="rto-value">--</h4>
+                                <p>Recovery Time Objective (RTO)</p>
+                                <small class="text-muted">Target: 4 hours</small>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="text-center">
+                                <h4 id="rpo-value">--</h4>
+                                <p>Recovery Point Objective (RPO)</p>
+                                <small class="text-muted">Target: 1 hour</small>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="text-center">
+                                <h4 id="failover-status">--</h4>
+                                <p>Failover Status</p>
+                                <small class="text-muted">Automatic failover</small>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="text-center">
+                                <h4 id="replication-status">--</h4>
+                                <p>Replication Status</p>
+                                <small class="text-muted">Data replication</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Backup Actions -->
+        <div class="row">
+            <div class="col-12">
+                <h3><i class="fas fa-cogs"></i> Backup Actions</h3>
+                <div class="chart-container">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <button class="btn btn-primary w-100" onclick="runBackup('full')">
+                                <i class="fas fa-archive"></i> Full Backup
+                            </button>
+                        </div>
+                        <div class="col-md-3">
+                            <button class="btn btn-info w-100" onclick="runBackup('incremental')">
+                                <i class="fas fa-plus-circle"></i> Incremental
+                            </button>
+                        </div>
+                        <div class="col-md-3">
+                            <button class="btn btn-warning w-100" onclick="runBackup('differential')">
+                                <i class="fas fa-exchange-alt"></i> Differential
+                            </button>
+                        </div>
+                        <div class="col-md-3">
+                            <button class="btn btn-success w-100" onclick="verifyBackups()">
+                                <i class="fas fa-check-circle"></i> Verify Backups
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Backup Dashboard JavaScript
+        class BackupDashboard {
+            constructor() {
+                this.charts = {};
+                this.init();
+            }
+
+            init() {
+                this.loadData();
+                this.setupCharts();
+                this.startAutoRefresh();
+            }
+
+            async loadData() {
+                try {
+                    // Simulate API call - replace with actual endpoint
+                    const response = await fetch('/api/backup-data');
+                    const data = await response.json();
+                    this.updateDashboard(data);
+                } catch (error) {
+                    console.error('Error loading backup data:', error);
+                    this.loadSampleData();
+                }
+            }
+
+            loadSampleData() {
+                // Sample data for demonstration
+                const sampleData = {
+                    overview: {
+                        totalBackups: 45,
+                        lastBackup: '2 hours ago',
+                        totalSize: '2.3 GB',
+                        successRate: 98
+                    },
+                    fullBackups: [
+                        {
+                            timestamp: '2024-01-05 02:00:00',
+                            size: '850 MB',
+                            status: 'SUCCESS',
+                            files: 1250
+                        },
+                        {
+                            timestamp: '2024-01-04 02:00:00',
+                            size: '845 MB',
+                            status: 'SUCCESS',
+                            files: 1248
+                        }
+                    ],
+                    incrementalBackups: [
+                        {
+                            timestamp: '2024-01-05 14:00:00',
+                            size: '15 MB',
+                            status: 'SUCCESS',
+                            files: 23
+                        },
+                        {
+                            timestamp: '2024-01-05 08:00:00',
+                            size: '12 MB',
+                            status: 'SUCCESS',
+                            files: 18
+                        }
+                    ],
+                    differentialBackups: [
+                        {
+                            timestamp: '2024-01-05 20:00:00',
+                            size: '45 MB',
+                            status: 'SUCCESS',
+                            files: 67
+                        },
+                        {
+                            timestamp: '2024-01-05 08:00:00',
+                            size: '42 MB',
+                            status: 'SUCCESS',
+                            files: 63
+                        }
+                    ],
+                    recoveryOperations: [
+                        {
+                            timestamp: '2024-01-04 15:30:00',
+                            type: 'Restore',
+                            status: 'SUCCESS',
+                            files: 1250,
+                            duration: '2m 15s'
+                        }
+                    ],
+                    verification: [
+                        {
+                            timestamp: '2024-01-05 03:00:00',
+                            status: 'PASSED',
+                            checksum: 'Valid',
+                            integrity: 'Good'
+                        }
+                    ],
+                    disasterRecovery: {
+                        rto: '3.5 hours',
+                        rpo: '45 minutes',
+                        failover: 'Ready',
+                        replication: 'Active'
+                    },
+                    trends: [
+                        { date: '2024-01-01', backups: 4, size: 2.1 },
+                        { date: '2024-01-02', backups: 4, size: 2.15 },
+                        { date: '2024-01-03', backups: 4, size: 2.2 },
+                        { date: '2024-01-04', backups: 4, size: 2.25 },
+                        { date: '2024-01-05', backups: 4, size: 2.3 }
+                    ]
+                };
+
+                this.updateDashboard(sampleData);
+            }
+
+            updateDashboard(data) {
+                this.updateOverview(data.overview);
+                this.updateBackupLists(data);
+                this.updateRecoveryOperations(data.recoveryOperations);
+                this.updateVerification(data.verification);
+                this.updateDisasterRecovery(data.disasterRecovery);
+                this.updateCharts(data.trends);
+            }
+
+            updateOverview(overview) {
+                document.getElementById('total-backups').textContent = overview.totalBackups;
+                document.getElementById('total-status').textContent = 'Active';
+                document.getElementById('total-status').className = 'backup-label status-success';
+
+                document.getElementById('last-backup').textContent = overview.lastBackup;
+                document.getElementById('last-status').textContent = 'Recent';
+                document.getElementById('last-status').className = 'backup-label status-success';
+
+                document.getElementById('backup-size').textContent = overview.totalSize;
+                document.getElementById('size-status').textContent = 'Growing';
+                document.getElementById('size-status').className = 'backup-label status-info';
+
+                document.getElementById('success-rate').textContent = overview.successRate + '%';
+                document.getElementById('rate-status').textContent = 'Excellent';
+                document.getElementById('rate-status').className = 'backup-label status-success';
+            }
+
+            updateBackupLists(data) {
+                this.updateBackupList('full-backups-container', data.fullBackups);
+                this.updateBackupList('incremental-backups-container', data.incrementalBackups);
+                this.updateBackupList('differential-backups-container', data.differentialBackups);
+            }
+
+            updateBackupList(containerId, backups) {
+                const container = document.getElementById(containerId);
+                
+                if (backups.length === 0) {
+                    container.innerHTML = '<div class="alert alert-warning">No backups found</div>';
+                    return;
+                }
+
+                container.innerHTML = backups.map(backup => `
+                    <div class="backup-item ${backup.status.toLowerCase()}">
+                        <h6><i class="fas fa-archive"></i> ${backup.timestamp}</h6>
+                        <p><strong>Size:</strong> ${backup.size} | <strong>Files:</strong> ${backup.files}</p>
+                        <p><strong>Status:</strong> <span class="badge ${this.getStatusBadgeClass(backup.status)}">${backup.status}</span></p>
+                    </div>
+                `).join('');
+            }
+
+            updateRecoveryOperations(operations) {
+                const container = document.getElementById('recovery-container');
+                
+                if (operations.length === 0) {
+                    container.innerHTML = '<div class="alert alert-info">No recent recovery operations</div>';
+                    return;
+                }
+
+                container.innerHTML = operations.map(op => `
+                    <div class="recovery-item ${op.status.toLowerCase()}">
+                        <h6><i class="fas fa-undo"></i> ${op.type} - ${op.timestamp}</h6>
+                        <p><strong>Status:</strong> <span class="badge ${this.getStatusBadgeClass(op.status)}">${op.status}</span></p>
+                        <p><strong>Files:</strong> ${op.files} | <strong>Duration:</strong> ${op.duration}</p>
+                    </div>
+                `).join('');
+            }
+
+            updateVerification(verification) {
+                const container = document.getElementById('verification-container');
+                
+                if (verification.length === 0) {
+                    container.innerHTML = '<div class="alert alert-warning">No verification data</div>';
+                    return;
+                }
+
+                container.innerHTML = verification.map(ver => `
+                    <div class="backup-item ${ver.status.toLowerCase()}">
+                        <h6><i class="fas fa-check-circle"></i> ${ver.timestamp}</h6>
+                        <p><strong>Status:</strong> <span class="badge ${this.getStatusBadgeClass(ver.status)}">${ver.status}</span></p>
+                        <p><strong>Checksum:</strong> ${ver.checksum} | <strong>Integrity:</strong> ${ver.integrity}</p>
+                    </div>
+                `).join('');
+            }
+
+            updateDisasterRecovery(dr) {
+                document.getElementById('rto-value').textContent = dr.rto;
+                document.getElementById('rpo-value').textContent = dr.rpo;
+                document.getElementById('failover-status').textContent = dr.failover;
+                document.getElementById('replication-status').textContent = dr.replication;
+            }
+
+            setupCharts() {
+                this.setupBackupChart();
+                this.setupBackupTypesChart();
+            }
+
+            setupBackupChart() {
+                const ctx = document.getElementById('backupChart').getContext('2d');
+                this.charts.backup = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: [],
+                        datasets: [
+                            {
+                                label: 'Backups per Day',
+                                data: [],
+                                borderColor: '#667eea',
+                                backgroundColor: 'rgba(102, 126, 234, 0.1)',
+                                tension: 0.4
+                            },
+                            {
+                                label: 'Total Size (GB)',
+                                data: [],
+                                borderColor: '#764ba2',
+                                backgroundColor: 'rgba(118, 75, 162, 0.1)',
+                                tension: 0.4,
+                                yAxisID: 'y1'
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        scales: {
+                            y: {
+                                type: 'linear',
+                                display: true,
+                                position: 'left',
+                            },
+                            y1: {
+                                type: 'linear',
+                                display: true,
+                                position: 'right',
+                                grid: {
+                                    drawOnChartArea: false,
+                                },
+                            }
+                        }
+                    }
+                });
+            }
+
+            setupBackupTypesChart() {
+                const ctx = document.getElementById('backupTypesChart').getContext('2d');
+                this.charts.backupTypes = new Chart(ctx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Full', 'Incremental', 'Differential'],
+                        datasets: [{
+                            data: [12, 24, 9],
+                            backgroundColor: [
+                                '#667eea',
+                                '#764ba2',
+                                '#f093fb'
+                            ]
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: {
+                                position: 'bottom'
+                            }
+                        }
+                    }
+                });
+            }
+
+            updateCharts(trends) {
+                if (trends) {
+                    this.charts.backup.data.labels = trends.map(t => t.date);
+                    this.charts.backup.data.datasets[0].data = trends.map(t => t.backups);
+                    this.charts.backup.data.datasets[1].data = trends.map(t => t.size);
+                    this.charts.backup.update();
+                }
+            }
+
+            getStatusBadgeClass(status) {
+                switch (status) {
+                    case 'SUCCESS': return 'bg-success';
+                    case 'WARNING': return 'bg-warning';
+                    case 'FAILED': return 'bg-danger';
+                    case 'PASSED': return 'bg-success';
+                    default: return 'bg-secondary';
+                }
+            }
+
+            startAutoRefresh() {
+                setInterval(() => {
+                    this.loadData();
+                }, 300000); // Refresh every 5 minutes
+            }
+        }
+
+        // Backup actions
+        function runBackup(type) {
+            alert(`Starting ${type} backup...`);
+            // Implement backup trigger
+        }
+
+        function verifyBackups() {
+            alert('Starting backup verification...');
+            // Implement verification trigger
+        }
+
+        // Initialize dashboard when page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            new BackupDashboard();
+        });
+    </script>
+</body>
+</html>

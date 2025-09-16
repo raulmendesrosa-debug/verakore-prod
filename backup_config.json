@@ -1,0 +1,114 @@
+{
+  "backup": {
+    "enabled": true,
+    "interval_hours": 24,
+    "retention_days": 30,
+    "compression": true,
+    "encryption": false,
+    "verify_backups": true
+  },
+  "backup_locations": {
+    "local": "./backups",
+    "cloud": "",
+    "network": ""
+  },
+  "backup_types": {
+    "full": {
+      "enabled": true,
+      "interval_days": 7,
+      "include_files": true,
+      "include_database": true,
+      "include_config": true
+    },
+    "incremental": {
+      "enabled": true,
+      "interval_hours": 6,
+      "include_files": true,
+      "include_database": true
+    },
+    "differential": {
+      "enabled": true,
+      "interval_hours": 12,
+      "include_files": true,
+      "include_database": true
+    }
+  },
+  "backup_sources": {
+    "website_files": [
+      "*.html",
+      "*.css",
+      "*.js",
+      "*.json",
+      "*.md",
+      "*.py",
+      "*.bat",
+      "*.ps1",
+      "*.sh",
+      "assets/",
+      "tools/"
+    ],
+    "configuration_files": [
+      "*.config.json",
+      "*.toml",
+      "_headers",
+      ".github/"
+    ],
+    "database_files": [
+      "*.db",
+      "*.sqlite",
+      "*.sqlite3"
+    ],
+    "log_files": [
+      "*.log"
+    ]
+  },
+  "exclude_patterns": [
+    "node_modules/",
+    ".git/",
+    "__pycache__/",
+    "*.pyc",
+    "*.pyo",
+    ".DS_Store",
+    "Thumbs.db",
+    "*.tmp",
+    "*.temp",
+    "backups/",
+    "*.bak"
+  ],
+  "recovery": {
+    "enabled": true,
+    "test_restore": true,
+    "recovery_time_objective": 4,
+    "recovery_point_objective": 1
+  },
+  "notifications": {
+    "email": "raulmendesrosa@gmail.com",
+    "slack_webhook": "",
+    "enabled": true,
+    "on_success": true,
+    "on_failure": true,
+    "on_recovery": true
+  },
+  "cloud_storage": {
+    "enabled": false,
+    "provider": "aws_s3",
+    "bucket_name": "",
+    "access_key": "",
+    "secret_key": "",
+    "region": "us-east-1"
+  },
+  "disaster_recovery": {
+    "enabled": true,
+    "rto_hours": 4,
+    "rpo_hours": 1,
+    "failover_enabled": false,
+    "replication_enabled": false
+  },
+  "backup_verification": {
+    "enabled": true,
+    "checksum_verification": true,
+    "integrity_test": true,
+    "restore_test": true,
+    "test_frequency_days": 7
+  }
+}
