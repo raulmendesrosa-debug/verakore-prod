@@ -1,56 +1,50 @@
 # Cloudflare Pages Configuration
-# This file configures Cloudflare Pages for deployment
+# This file configures the build and deployment settings for Cloudflare Pages
 
 [build]
-  # Build command (none needed for static sites)
-  command = ""
-  
-  # Output directory
-  output = "."
+  command = "echo 'Static site - no build required'"
+  publish = "."
 
 [build.environment]
-  # Node.js version
   NODE_VERSION = "18"
+  PYTHON_VERSION = "3.11"
 
 # Headers for security and performance
 [[headers]]
   for = "/*"
   [headers.values]
     X-Frame-Options = "DENY"
-    X-XSS-Protection = "1; mode=block"
     X-Content-Type-Options = "nosniff"
+    X-XSS-Protection = "1; mode=block"
     Referrer-Policy = "strict-origin-when-cross-origin"
-    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://kit.fontawesome.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://kit.fontawesome.com; img-src 'self' data:; connect-src 'self';"
-    Strict-Transport-Security = "max-age=31536000; includeSubDomains"
-    Permissions-Policy = "geolocation=(), microphone=(), camera=()"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self';"
 
+# Cache static assets
 [[headers]]
   for = "/assets/*"
   [headers.values]
-    Cache-Control = "public, max-age=31536000"
+    Cache-Control = "public, max-age=31536000, immutable"
 
-# Redirect rules
+# Cache HTML files for shorter period
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=3600"
+
+# Redirects
 [[redirects]]
-  from = "/services"
-  to = "/services.html"
+  from = "/home"
+  to = "/"
   status = 301
 
 [[redirects]]
-  from = "/careers"
-  to = "/careers.html"
+  from = "/index"
+  to = "/"
   status = 301
 
+# Custom 404 page
 [[redirects]]
-  from = "/privacy"
-  to = "/privacy-policy.html"
-  status = 301
-
-[[redirects]]
-  from = "/terms"
-  to = "/terms-of-service.html"
-  status = 301
-
-[[redirects]]
-  from = "/cookies"
-  to = "/cookie-policy.html"
-  status = 301
+  from = "/*"
+  to = "/404.html"
+  status = 404

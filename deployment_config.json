@@ -1,0 +1,69 @@
+{
+  "cloudflare": {
+    "account_id": "",
+    "project_name": "verakore-website",
+    "api_token": "",
+    "pages_url": "https://verakore-website.pages.dev"
+  },
+  "github": {
+    "repository": "raulmendesrosa-debug/verakore-website",
+    "branch": "main"
+  },
+  "deployment": {
+    "auto_deploy": false,
+    "quality_gates": true,
+    "rollback_enabled": true,
+    "staging_enabled": false,
+    "environments": {
+      "staging": {
+        "url": "https://staging.verakore-website.pages.dev",
+        "branch": "staging"
+      },
+      "production": {
+        "url": "https://verakore-website.pages.dev",
+        "branch": "main"
+      }
+    }
+  },
+  "quality_gates": {
+    "character_encoding": true,
+    "mobile_responsiveness": true,
+    "performance": true,
+    "security": true,
+    "accessibility": false
+  },
+  "performance": {
+    "lighthouse_thresholds": {
+      "performance": 90,
+      "accessibility": 90,
+      "best_practices": 90,
+      "seo": 90
+    },
+    "file_size_limits": {
+      "html": 1048576,
+      "css": 524288,
+      "js": 1048576,
+      "images": 2097152
+    }
+  },
+  "security": {
+    "headers_required": true,
+    "https_required": true,
+    "external_scripts_allowed": [
+      "cdn.jsdelivr.net",
+      "cdnjs.cloudflare.com",
+      "fonts.googleapis.com"
+    ]
+  },
+  "notifications": {
+    "slack_webhook": "",
+    "email": "",
+    "enabled": true,
+    "channels": ["deployment", "errors", "performance"]
+  },
+  "backup": {
+    "pre_deployment": true,
+    "retention_days": 7,
+    "cloud_storage": false
+  }
+}

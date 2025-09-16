@@ -1,47 +1,68 @@
 @echo off
-echo ========================================
-echo    Verakore Website Deployment Helper
-echo ========================================
-echo.
+REM Verakore Deployment Pipeline - Windows Integration
+REM Automated deployment with quality gates and rollback
 
-echo Creating deployment package...
-echo.
-
-REM Create a temporary directory for deployment
-if exist "deploy_temp" rmdir /s /q "deploy_temp"
-mkdir "deploy_temp"
-
-REM Copy all files to deployment directory
-echo Copying website files...
-xcopy /E /I /Y "assets" "deploy_temp\assets"
-copy /Y "*.html" "deploy_temp\"
-copy /Y "netlify.toml" "deploy_temp\"
-copy /Y "DEPLOYMENT_GUIDE.md" "deploy_temp\"
-
-echo.
-echo Files copied successfully!
-echo.
-
-REM Create ZIP file
-echo Creating ZIP file for Netlify deployment...
-powershell -command "Compress-Archive -Path 'deploy_temp\*' -DestinationPath 'verakore-website-deploy.zip' -Force"
-
-REM Clean up temporary directory
-rmdir /s /q "deploy_temp"
+setlocal enabledelayedexpansion
 
 echo.
 echo ========================================
-echo    DEPLOYMENT PACKAGE READY!
+echo 🚀 Verakore Deployment Pipeline
 echo ========================================
 echo.
-echo File created: verakore-website-deploy.zip
+
+REM Get current directory
+set "WORKSPACE_DIR=%~dp0"
+cd /d "%WORKSPACE_DIR%"
+
+REM Check Python availability
+python --version >nul 2>&1
+if errorlevel 1 (
+    echo ❌ Python not found. Please install Python 3.x
+    pause
+    exit /b 1
+)
+
+echo ✅ Python found
 echo.
-echo Next steps:
-echo 1. Go to https://netlify.com
-echo 2. Sign up/Login to your account
-echo 3. Drag verakore-website-deploy.zip to the deploy area
-echo 4. Your site will be live in minutes!
+
+REM Check command line arguments
+if "%1"=="" (
+    set "COMMAND=deploy"
+) else (
+    set "COMMAND=%1"
+)
+
+echo 📁 Workspace: %WORKSPACE_DIR%
+echo 🔧 Command: %COMMAND%
 echo.
-echo For detailed instructions, see DEPLOYMENT_GUIDE.md
+
+REM Run the deployment pipeline
+python deploy.py %COMMAND%
+
+REM Check result
+if errorlevel 1 (
+    echo.
+    echo ❌ Deployment pipeline failed
+    echo 📋 Check deployment.log for details
+    echo.
+    echo 🔄 Rollback options:
+    echo   1. Run 'python deploy.py rollback'
+    echo   2. Check previous deployment
+    echo   3. Fix issues and retry
+) else (
+    echo.
+    echo ✅ Deployment pipeline completed successfully!
+    echo 🌍 Website deployed to Cloudflare Pages
+    echo 📊 Quality gates passed
+    echo 🔒 Security scan completed
+)
+
 echo.
+echo 📋 Available Commands:
+echo   • deploy: Full deployment pipeline
+echo   • quality-gates: Run quality gates only
+echo   • validate: Validate current deployment
+echo   • rollback: Rollback to previous version
+echo.
+
 pause
