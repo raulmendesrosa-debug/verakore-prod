@@ -1,6 +1,6 @@
 {
   "cloudflare": {
-    "account_id": "YOUR_CLOUDFLARE_ACCOUNT_ID",
+    "account_id": "GET_FROM_DASHBOARD",
     "project_name": "verakore-website",
     "api_token": "Fs6nOuqwFQYj9w_ncNDmxg6jP2HKCn7V5leGA2HN",
     "pages_url": "https://verakore-website.pages.dev"
