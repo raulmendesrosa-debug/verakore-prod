@@ -1,0 +1,101 @@
+<!-- BACKUP: Testimonials Section for Future Use -->
+<!-- This file contains the complete testimonials section that can be restored later -->
+
+<!-- Testimonials Section -->
+<section class="testimonial-section">
+    <div class="container">
+        <h2 class="section-title text-white">What Our Clients Say</h2>
+        <p class="section-subtitle text-white-50">Real feedback from businesses we've helped</p>
+        
+        <div class="row g-4">
+            <div class="col-lg-4">
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"Verakore provided exactly what we needed - experienced network engineers who could hit the ground running. No fluff, just solid technical expertise when we needed it most."</p>
+                    <div class="testimonial-author">Manufacturing Company, IT Director</div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"Working with Verakore on our GxP documentation was straightforward and efficient. They understood our compliance requirements and delivered exactly what we needed for our audit."</p>
+                    <div class="testimonial-author">Life Sciences Company, QA Manager</div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"The fractional IT leadership approach worked perfectly for us. We got strategic guidance without the overhead of a full-time position, and the project was delivered on time and on budget."</p>
+                    <div class="testimonial-author">Growing Tech Company, CEO</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CSS for the testimonials section -->
+<style>
+.testimonial-section {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    padding: 80px 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.testimonial-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><polygon fill="rgba(255,255,255,0.1)" points="0,1000 1000,0 1000,1000"/></svg>');
+    background-size: cover;
+}
+
+.testimonial-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 15px;
+    padding: 30px;
+    height: 100%;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    z-index: 2;
+}
+
+.testimonial-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.testimonial-text {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: white;
+    margin-bottom: 20px;
+    font-style: italic;
+}
+
+.testimonial-author {
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.95rem;
+}
+
+@media (max-width: 768px) {
+    .testimonial-section {
+        padding: 60px 0;
+    }
+    
+    .testimonial-card {
+        padding: 25px;
+        margin-bottom: 20px;
+    }
+    
+    .testimonial-text {
+        font-size: 1rem;
+    }
+}
+</style>
+
+
+
