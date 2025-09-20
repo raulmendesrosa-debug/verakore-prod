@@ -39,10 +39,6 @@
             color: var(--text-color);
         }
         
-        html {
-            scroll-padding-top: 100px;
-        }
-        
         .navbar {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
@@ -61,7 +57,7 @@
         }
 
         .logo-img {
-            max-height: 195px; /* Increased by 62.5% from original 120px */
+            max-height: 120px;
             width: auto;
             transition: all 0.3s ease;
         }
@@ -289,10 +285,34 @@
             font-weight: 500;
         }
         
+        .testimonial-section {
+            background: var(--dark-color);
+            color: white;
+            padding: 80px 0;
+        }
+        
+        .testimonial-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 2rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .testimonial-text {
+            font-size: 1.1rem;
+            font-style: italic;
+            margin-bottom: 1.5rem;
+        }
+        
+        .testimonial-author {
+            font-weight: 600;
+            color: var(--accent-color);
+        }
         
         .contact-section {
             background: var(--light-color);
-            padding: 120px 0 80px 0;
+            padding: 80px 0;
         }
         
         .contact-form {
@@ -404,7 +424,7 @@
         
         @media (min-width: 769px) {
             .logo-img {
-                max-height: 195px; /* Increased by 62.5% from original 120px */
+                max-height: 120px;
             }
         }
         
@@ -529,14 +549,26 @@
     <!-- Stats Section -->
     <section class="stats-section">
         <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="stat-item">
+                        <div class="stat-number">500+</div>
+                        <div class="stat-label">Projects Completed</div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="stat-item">
+                        <div class="stat-number">150+</div>
+                        <div class="stat-label">Happy Clients</div>
+                    </div>
+                </div>
+                <div class="col-md-3">
                     <div class="stat-item">
                         <div class="stat-number">25+</div>
                         <div class="stat-label">Years Experience</div>
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-3">
                     <div class="stat-item">
                         <div class="stat-number">24/7</div>
                         <div class="stat-label">Support Available</div>
@@ -577,18 +609,14 @@
                             <i class="fas fa-user-tie"></i>
                         </div>
                         <h3 class="service-title">Fractional IT Leadership</h3>
-                        <p class="service-description">Strategic IT leadership, when you need it most. With over 25 years of guiding infrastructure and IT operations across global, regulated environments, we provide senior-level expertise without the overhead of a full-time executive.</p>
+                        <p class="service-description">Leadership on demand. With 25+ years of infrastructure and IT leadership experience, we act as your Fractional Director of IT/Infrastructure.</p>
                         <ul class="list-unstyled">
-                            <li><i class="fas fa-check text-success me-2"></i>Strategic IT Roadmap Design</li>
-                            <li><i class="fas fa-check text-success me-2"></i>Digital Transformation Leadership</li>
-                            <li><i class="fas fa-check text-success me-2"></i>Compliance & Governance Support</li>
-                            <li><i class="fas fa-check text-success me-2"></i>Vendor & Contract Management</li>
-                            <li><i class="fas fa-check text-success me-2"></i>Executive-Level Strategic Guidance</li>
+                            <li><i class="fas fa-check text-success me-2"></i>Design IT roadmaps and manage vendors</li>
+                            <li><i class="fas fa-check text-success me-2"></i>Lead network refreshes and cloud migrations</li>
+                            <li><i class="fas fa-check text-success me-2"></i>Support regulated R&D environments</li>
                         </ul>
                         <div class="mt-3">
                             <span class="badge-core">Core Service</span>
-                            <span class="badge badge-secondary ms-2">Life Sciences Ready</span>
-                            <span class="badge badge-secondary ms-1">25+ Years</span>
                         </div>
                     </div>
                 </div>
@@ -634,19 +662,15 @@
                         <div class="service-icon">
                             <i class="fas fa-shield-alt"></i>
                         </div>
-                        <h3 class="service-title">Cybersecurity Readiness & Compliance</h3>
-                        <p class="service-description">Comprehensive cybersecurity strategy that protects your business while ensuring regulatory compliance. From vulnerability assessments to incident response, we prepare you for today's threats and tomorrow's audits.</p>
+                        <h3 class="service-title">Cybersecurity Readiness</h3>
+                        <p class="service-description">Security assessments, endpoint protection, and incident playbooks to prepare for cybersecurity and compliance challenges ahead.</p>
                         <ul class="list-unstyled">
-                            <li><i class="fas fa-check text-success me-2"></i>Risk & Security Assessments</li>
-                            <li><i class="fas fa-check text-success me-2"></i>Endpoint Protection & Monitoring</li>
-                            <li><i class="fas fa-check text-success me-2"></i>Threat Detection & Response</li>
-                            <li><i class="fas fa-check text-success me-2"></i>Governance & Compliance Alignment</li>
-                            <li><i class="fas fa-check text-success me-2"></i>Business Continuity Planning</li>
+                            <li><i class="fas fa-check text-success me-2"></i>Security Assessments</li>
+                            <li><i class="fas fa-check text-success me-2"></i>Endpoint Protection</li>
+                            <li><i class="fas fa-check text-success me-2"></i>Incident Response Playbooks</li>
                         </ul>
                         <div class="mt-3">
                             <span class="badge-core">Core Service</span>
-                            <span class="badge badge-secondary ms-2">GxP Ready</span>
-                            <span class="badge badge-secondary ms-1">SOX Compliant</span>
                         </div>
                     </div>
                 </div>
@@ -767,6 +791,34 @@
         </div>
     </section>
 
+    <!-- Testimonials Section -->
+    <section class="testimonial-section">
+        <div class="container">
+            <h2 class="section-title text-white">What Our Clients Say</h2>
+            <p class="section-subtitle text-white-50">Real feedback from businesses we've helped</p>
+            
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">"Verakore provided exactly what we needed - experienced network engineers who could hit the ground running. No fluff, just solid technical expertise when we needed it most."</p>
+                        <div class="testimonial-author">Manufacturing Company, IT Director</div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">"Working with Verakore on our GxP documentation was straightforward and efficient. They understood our compliance requirements and delivered exactly what we needed for our audit."</p>
+                        <div class="testimonial-author">Life Sciences Company, QA Manager</div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">"The fractional IT leadership approach worked perfectly for us. We got strategic guidance without the overhead of a full-time position, and the project was delivered on time and on budget."</p>
+                        <div class="testimonial-author">Growing Tech Company, CEO</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- Contact Section -->
     <section id="contact" class="contact-section">
@@ -868,34 +920,34 @@
                         <p class="text-muted mb-1"><i class="fas fa-envelope me-2"></i><a href="mailto:info@verakore.com" class="footer-link">info@verakore.com</a></p>
                     </div>
                     <div class="d-flex gap-3">
-                        <a href="https://linkedin.com/company/verakore" class="footer-link"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" class="footer-link"><i class="fab fa-linkedin"></i></a>
                     </div>
                 </div>
                 <div class="col-lg-2 col-md-6 mb-4">
                     <h6 class="text-white mb-3">Services</h6>
                     <ul class="list-unstyled">
-                        <li><a href="services.html#staff-augmentation" class="footer-link">Staff Augmentation</a></li>
-                        <li><a href="services.html#fractional-it-leadership" class="footer-link">Fractional IT Leadership</a></li>
-                        <li><a href="services.html#compliance-gxp" class="footer-link">Compliance & GxP</a></li>
-                        <li><a href="services.html#project-delivery" class="footer-link">Project Delivery</a></li>
+                        <li><a href="services.html" class="footer-link">Staff Augmentation</a></li>
+                        <li><a href="services.html" class="footer-link">Fractional IT Leadership</a></li>
+                        <li><a href="services.html" class="footer-link">Compliance & GxP</a></li>
+                        <li><a href="services.html" class="footer-link">Project Delivery</a></li>
                     </ul>
                 </div>
                 <div class="col-lg-2 col-md-6 mb-4">
                     <h6 class="text-white mb-3">Company</h6>
                     <ul class="list-unstyled">
-                        <li><a href="index.html#about" class="footer-link">About Us</a></li>
-                        <li><a href="index.html#contact" class="footer-link">Contact</a></li>
-                        <li><a href="partnerships.html" class="footer-link">Partnerships</a></li>
+                        <li><a href="#about" class="footer-link">About Us</a></li>
+                        <li><a href="#contact" class="footer-link">Contact</a></li>
+                        <li><a href="mailto:info@verakore.com" class="footer-link">Partnerships</a></li>
                         <li><a href="careers.html" class="footer-link">Careers</a></li>
                     </ul>
                 </div>
                 <div class="col-lg-2 col-md-6 mb-4">
                     <h6 class="text-white mb-3">Resources</h6>
                     <ul class="list-unstyled">
-                        <li><a href="mailto:support@verakore.com?subject=Support Request" class="footer-link">Contact Support</a></li>
-                        <li><a href="mailto:quotes@verakore.com?subject=Quote Request&body=Please provide details about your IT needs and we'll get back to you with a customized quote." class="footer-link">Request Quote</a></li>
+                        <li><a href="mailto:info@verakore.com" class="footer-link">Contact Support</a></li>
+                        <li><a href="mailto:info@verakore.com" class="footer-link">Request Quote</a></li>
                         <li><a href="tel:+16178659705" class="footer-link">Call Us</a></li>
-                        <li><a href="mailto:info@verakore.com?subject=Meeting Request&body=Hi, I'd like to schedule a meeting to discuss our IT needs. Please let me know your available times and preferred platform (Zoom, Teams, Google Meet)." class="footer-link">Schedule Meeting</a></li>
+                        <li><a href="mailto:info@verakore.com?subject=Video Meeting Request" class="footer-link">Schedule Meeting</a></li>
                     </ul>
                 </div>
                 <div class="col-lg-2 col-md-6 mb-4">
@@ -1018,32 +1070,11 @@
         }, observerOptions);
 
         // Observe elements for animation
-        document.querySelectorAll('.service-card, .stats-section').forEach(el => {
+        document.querySelectorAll('.service-card, .testimonial-card, .stats-section').forEach(el => {
             el.style.opacity = '0';
             el.style.transform = 'translateY(30px)';
             el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
             observer.observe(el);
-        });
-
-        // Cross-page anchor scrolling - handle all anchors on page load
-        document.addEventListener('DOMContentLoaded', function() {
-            // Check if URL has any anchor
-            if (window.location.hash) {
-                // Wait for page to fully render
-                setTimeout(() => {
-                    const target = document.querySelector(window.location.hash);
-                    if (target) {
-                        const navbar = document.querySelector('.navbar');
-                        const navbarHeight = navbar ? navbar.offsetHeight : 0;
-                        const targetPosition = target.offsetTop - navbarHeight - 20;
-                        
-                        window.scrollTo({
-                            top: targetPosition,
-                            behavior: 'smooth'
-                        });
-                    }
-                }, 100);
-            }
         });
     </script>
 

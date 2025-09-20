@@ -46,12 +46,6 @@
             align-items: center;
         }
         
-        .logo-img {
-            max-height: 195px; /* Increased by 62.5% from original 120px */
-            width: auto;
-            transition: all 0.3s ease;
-        }
-        
         .nav-link {
             font-weight: 500;
             color: var(--dark-color) !important;
@@ -66,9 +60,7 @@
         .hero-section {
             background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
             color: white;
-            padding: 220px 0 0px;
-            position: relative;
-            overflow: hidden;
+            padding: 120px 0 80px;
         }
         
         .content-section {
@@ -102,8 +94,8 @@
             }
             
             .hero-section {
-                padding: 160px 0 0px 0 !important;
-                min-height: 295px !important;
+                padding: 80px 0 40px 0 !important;
+                min-height: auto !important;
             }
             
             .logo-img {
@@ -144,7 +136,7 @@
         
         @media (min-width: 769px) {
             .logo-img {
-                max-height: 195px; /* Increased by 62.5% from original 120px */
+                max-height: 120px;
             }
         }
         
@@ -159,8 +151,8 @@
             }
             
             .hero-section {
-                padding: 140px 0 0px 0 !important;
-                min-height: 270px !important;
+                padding: 70px 0 30px 0 !important;
+                min-height: auto !important;
             }
             
             .logo-img {
@@ -382,27 +374,6 @@
                 navbar.style.background = 'rgba(255, 255, 255, 0.98)';
             } else {
                 navbar.style.background = 'rgba(255, 255, 255, 0.95)';
-            }
-        });
-
-        // Cross-page anchor scrolling - handle all anchors on page load
-        document.addEventListener('DOMContentLoaded', function() {
-            // Check if URL has any anchor
-            if (window.location.hash) {
-                // Wait for page to fully render
-                setTimeout(() => {
-                    const target = document.querySelector(window.location.hash);
-                    if (target) {
-                        const navbar = document.querySelector('.navbar');
-                        const navbarHeight = navbar ? navbar.offsetHeight : 0;
-                        const targetPosition = target.offsetTop - navbarHeight - 20;
-                        
-                        window.scrollTo({
-                            top: targetPosition,
-                            behavior: 'smooth'
-                        });
-                    }
-                }, 100);
             }
         });
     </script>
