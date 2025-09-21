@@ -3,8 +3,8 @@
 ## 🎉 **Your Systems Are Ready!**
 
 ### ✅ **What's Been Configured**
-- **Email**: raulmendesrosa@gmail.com
-- **API Token**: Fs6nOuqwFQYj9w_ncNDmxg6jP2HKCn7V5leGA2HN (Valid & Active)
+- **Email**: REMOVED_FOR_SECURITY
+- **API Token**: REMOVED_FOR_SECURITY (Valid & Active)
 - **Project**: verakore-website
 - **Repository**: raulmendesrosa-debug/verakore-website
 
@@ -12,7 +12,7 @@
 
 #### 1. Get Your Cloudflare Account ID
 1. Go to [Cloudflare Dashboard](https://dash.cloudflare.com/)
-2. Log in with: **raulmendesrosa@gmail.com**
+2. Log in with: **YOUR_EMAIL_HERE**
 3. Copy your **Account ID** from the right sidebar
 4. Update `deployment_config.json`:
    ```json
@@ -22,7 +22,7 @@
 #### 2. GitHub Secrets Setup
 1. Go to: https://github.com/raulmendesrosa-debug/verakore-website/settings/secrets/actions
 2. Add these secrets:
-   - `CLOUDFLARE_API_TOKEN`: Fs6nOuqwFQYj9w_ncNDmxg6jP2HKCn7V5leGA2HN
+   - `CLOUDFLARE_API_TOKEN`: YOUR_API_TOKEN_HERE
    - `CLOUDFLARE_ACCOUNT_ID`: [Your Account ID]
 
 #### 3. Test Everything
@@ -44,7 +44,7 @@ python deploy.py deploy
 - **Quality Gates** → Character encoding, mobile, performance checks
 - **Security Headers** → Automatic security configuration
 - **Performance Monitoring** → Core Web Vitals tracking
-- **Email Notifications** → raulmendesrosa@gmail.com
+- **Email Notifications** → YOUR_EMAIL_HERE
 
 ### **Your Website URLs**
 - **Production**: https://verakore-website.pages.dev

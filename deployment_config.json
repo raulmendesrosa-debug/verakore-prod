@@ -2,7 +2,7 @@
   "cloudflare": {
     "account_id": "GET_FROM_DASHBOARD",
     "project_name": "verakore-website",
-    "api_token": "Fs6nOuqwFQYj9w_ncNDmxg6jP2HKCn7V5leGA2HN",
+    "api_token": "REMOVED_FOR_SECURITY",
     "pages_url": "https://verakore-website.pages.dev"
   },
   "github": {
@@ -57,7 +57,7 @@
   },
   "notifications": {
     "slack_webhook": "",
-    "email": "raulmendesrosa@gmail.com",
+    "email": "REMOVED_FOR_SECURITY",
     "enabled": true,
     "channels": ["deployment", "errors", "performance"]
   },
