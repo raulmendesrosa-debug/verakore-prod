@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Partnerships - Verakore IT Solutions</title>
+    <meta name="description" content="Partner with Verakore for strategic IT collaborations, technology partnerships, and business growth opportunities in the technology sector.">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #059669;
+            --accent-color: #ea580c;
+            --dark-color: #1e293b;
+            --light-color: #f8fafc;
+            --text-color: #64748b;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+        }
+        
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+        
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--primary-color) !important;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo-img {
+            max-height: 180px;
+            height: auto;
+            width: auto;
+        }
+        
+        .nav-link {
+            font-weight: 500;
+            color: var(--dark-color) !important;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--primary-color) !important;
+        }
+        
+        .hero-section {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            padding: 201px 0 1px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><polygon fill="rgba(255,255,255,0.1)" points="0,1000 1000,0 1000,1000"/></svg>');
+            background-size: cover;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }
+        
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .hero-subtitle {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+        
+        .section-padding {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--dark-color);
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-color);
+            text-align: center;
+            margin-bottom: 3rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .partnership-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            height: 100%;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .partnership-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        .partnership-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            color: white;
+            font-size: 2rem;
+        }
+        
+        .partnership-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--dark-color);
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        
+        .partnership-description {
+            color: var(--text-color);
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        
+        .benefit-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .benefit-list li {
+            padding: 0.5rem 0;
+            color: var(--text-color);
+            position: relative;
+            padding-left: 1.5rem;
+        }
+        
+        .benefit-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--secondary-color);
+            font-weight: bold;
+        }
+        
+        .btn-primary-custom {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border: none;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .btn-primary-custom:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(37, 99, 235, 0.3);
+        }
+        
+        .btn-outline-primary {
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-outline-primary:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        .contact-section {
+            background: var(--light-color);
+            padding: 80px 0;
+        }
+        
+        .contact-card {
+            background: white;
+            border-radius: 15px;
+            padding: 3rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        
+        .contact-info {
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: rgba(37, 99, 235, 0.05);
+            border-radius: 10px;
+            border: 1px solid rgba(37, 99, 235, 0.1);
+        }
+        
+        .contact-info h4 {
+            color: var(--dark-color);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+        
+        .contact-info p {
+            color: var(--text-color);
+            margin-bottom: 0;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+        
+        .footer {
+            background: var(--dark-color);
+            color: white;
+            padding: 60px 0 30px;
+        }
+        
+        .footer h6 {
+            color: white;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        
+        .footer-link {
+            color: #cbd5e1;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-link:hover {
+            color: white;
+        }
+        
+        .footer-bottom {
+            border-top: 1px solid #374151;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            text-align: center;
+            color: #9ca3af;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 991.98px) {
+            .hero-title {
+                font-size: 2.5rem !important;
+            }
+            
+            .logo-img {
+                height: 80px !important;
+                max-height: 80px !important;
+                width: auto !important;
+            }
+            
+            .hero-section {
+                padding: 121px 0 1px 0 !important;
+                min-height: auto !important;
+            }
+        }
+        
+        @media (max-width: 767.98px) {
+            .hero-title {
+                font-size: 2rem !important;
+            }
+            
+            .hero-subtitle {
+                font-size: 1rem !important;
+            }
+            
+            .logo-img {
+                height: 60px !important;
+                max-height: 60px !important;
+                width: auto !important;
+            }
+            
+            .hero-section {
+                padding: 101px 0 1px 0 !important;
+                min-height: auto !important;
+            }
+            
+            .section-padding {
+                padding: 60px 0;
+            }
+            
+            .partnership-card {
+                margin-bottom: 2rem;
+            }
+            
+            .contact-card {
+                padding: 2rem !important;
+            }
+            
+            .contact-info {
+                margin-bottom: 1rem;
+                padding: 0.75rem;
+            }
+            
+            .d-flex.flex-column.flex-md-row {
+                flex-direction: column !important;
+            }
+            
+            .btn-lg {
+                width: 100%;
+                margin-bottom: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="index.html">
+                <div class="logo-container">
+                    <img src="assets/images/logos/verakore_main_logo.png" alt="Verakore" class="logo-img">
+                </div>
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="services.html">Services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="partnerships.html">Partnerships</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="careers.html">Careers</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">Strategic Partnerships</h1>
+                <p class="hero-subtitle">Join forces with Verakore to unlock new opportunities, expand your reach, and deliver exceptional value to clients through collaborative technology solutions.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Partnership Types Section -->
+    <section id="partnership-types" class="section-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h2 class="section-title">Partnership Opportunities</h2>
+                    <p class="section-subtitle">We offer various partnership models designed to create mutual value and drive business growth for all parties involved.</p>
+                </div>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6">
+                    <div class="partnership-card">
+                        <div class="partnership-icon">
+                            <i class="fas fa-handshake"></i>
+                        </div>
+                        <h3 class="partnership-title">Technology Partners</h3>
+                        <p class="partnership-description">Collaborate with us to integrate cutting-edge technologies and solutions into our service offerings.</p>
+                        <ul class="benefit-list">
+                            <li>Joint solution development</li>
+                            <li>Technology integration support</li>
+                            <li>Co-marketing opportunities</li>
+                            <li>Technical training and certification</li>
+                            <li>Revenue sharing programs</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6">
+                    <div class="partnership-card">
+                        <div class="partnership-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h3 class="partnership-title">Channel Partners</h3>
+                        <p class="partnership-description">Resell our services and solutions to your clients while earning attractive commissions and benefits.</p>
+                        <ul class="benefit-list">
+                            <li>Competitive commission structure</li>
+                            <li>Sales and technical support</li>
+                            <li>Marketing materials and tools</li>
+                            <li>Lead generation assistance</li>
+                            <li>Partner portal access</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6">
+                    <div class="partnership-card">
+                        <div class="partnership-icon">
+                            <i class="fas fa-building"></i>
+                        </div>
+                        <h3 class="partnership-title">Strategic Alliances</h3>
+                        <p class="partnership-description">Form long-term strategic relationships to tackle complex projects and expand market presence.</p>
+                        <ul class="benefit-list">
+                            <li>Joint venture opportunities</li>
+                            <li>Market expansion support</li>
+                            <li>Resource sharing programs</li>
+                            <li>Industry expertise exchange</li>
+                            <li>Exclusive partnership benefits</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section id="benefits" class="section-padding bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h2 class="section-title">Why Partner With Us?</h2>
+                    <p class="section-subtitle">Discover the advantages of partnering with Verakore and how we can help grow your business together.</p>
+                </div>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-lg-6 col-md-6">
+                    <div class="partnership-card">
+                        <div class="partnership-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h3 class="partnership-title">Proven Track Record</h3>
+                        <p class="partnership-description">25+ years of experience delivering successful IT solutions and maintaining strong client relationships across various industries.</p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-6 col-md-6">
+                    <div class="partnership-card">
+                        <div class="partnership-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3 class="partnership-title">Reliable Support</h3>
+                        <p class="partnership-description">24/7 technical support and dedicated account management to ensure your success and client satisfaction.</p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-6 col-md-6">
+                    <div class="partnership-card">
+                        <div class="partnership-icon">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <h3 class="partnership-title">Innovation Focus</h3>
+                        <p class="partnership-description">Stay ahead with cutting-edge technologies and innovative solutions that drive business growth and competitive advantage.</p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-6 col-md-6">
+                    <div class="partnership-card">
+                        <div class="partnership-icon">
+                            <i class="fas fa-globe"></i>
+                        </div>
+                        <h3 class="partnership-title">Market Reach</h3>
+                        <p class="partnership-description">Access to our established client base and market presence to expand your business opportunities and revenue streams.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="contact-card">
+                        <h2 class="section-title">Ready to Partner?</h2>
+                        <p class="section-subtitle">Let's discuss how we can work together to create mutual value and drive business success.</p>
+                        
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <div class="contact-info">
+                                    <h4><i class="fas fa-envelope me-2"></i>Email Us</h4>
+                                    <p>partnerships@verakore.com</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="contact-info">
+                                    <h4><i class="fas fa-phone me-2"></i>Call Us</h4>
+                                    <p>+1 (555) 123-4567</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="d-flex flex-column flex-md-row gap-3 justify-content-center mt-4">
+                            <a href="mailto:partnerships@verakore.com" class="btn btn-primary-custom btn-lg flex-fill flex-md-fill-0">Start Partnership Discussion</a>
+                            <a href="index.html#contact" class="btn btn-outline-primary btn-lg flex-fill flex-md-fill-0">General Contact</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="logo-container mb-3">
+                        <img src="assets/images/logos/verakore_main_logo.png" alt="Verakore" class="logo-img" style="max-height: 120px;">
+                    </div>
+                    <p class="text-white-50">Empowering businesses with innovative IT solutions and strategic technology partnerships.</p>
+                </div>
+                
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h6 class="text-white mb-3">Services</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="services.html#staff-augmentation" class="footer-link">Staff Augmentation</a></li>
+                        <li><a href="services.html#fractional-leadership" class="footer-link">Fractional IT Leadership</a></li>
+                        <li><a href="services.html#compliance-gxp" class="footer-link">Compliance & GxP</a></li>
+                        <li><a href="services.html#project-delivery" class="footer-link">Project Delivery</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h6 class="text-white mb-3">Company</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="partnerships.html" class="footer-link">Partnerships</a></li>
+                        <li><a href="careers.html" class="footer-link">Careers</a></li>
+                        <li><a href="index.html#about" class="footer-link">About Us</a></li>
+                        <li><a href="index.html#contact" class="footer-link">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h6 class="text-white mb-3">Legal</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="privacy-policy.html" class="footer-link">Privacy Policy</a></li>
+                        <li><a href="terms-of-service.html" class="footer-link">Terms of Service</a></li>
+                        <li><a href="cookie-policy.html" class="footer-link">Cookie Policy</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h6 class="text-white mb-3">Contact Info</h6>
+                    <ul class="list-unstyled">
+                        <li class="text-white-50"><i class="fas fa-envelope me-2"></i>info@verakore.com</li>
+                        <li class="text-white-50"><i class="fas fa-phone me-2"></i>+1 (555) 123-4567</li>
+                        <li class="text-white-50"><i class="fas fa-map-marker-alt me-2"></i>Your Business Address</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 Verakore. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JavaScript -->
+    <script>
+        // Smooth scrolling for navigation links with navbar offset
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const target = document.querySelector(targetId);
+                
+                if (target) {
+                    // Get navbar height to account for fixed positioning
+                    const navbar = document.querySelector('.navbar');
+                    const navbarHeight = navbar ? navbar.offsetHeight : 0;
+                    
+                    // Calculate target position with navbar offset
+                    let targetPosition = target.offsetTop - navbarHeight - 30; // 30px extra padding
+                    
+                    // Add extra offset for sections with top padding
+                    if (target.classList.contains('py-5') || target.classList.contains('hero-section')) {
+                        targetPosition -= 50; // Additional offset for sections with top padding
+                    }
+                    
+                    // Check if smooth scrolling is supported
+                    if ('scrollBehavior' in document.documentElement.style) {
+                        // Smooth scroll to target
+                        window.scrollTo({
+                            top: Math.max(0, targetPosition), // Ensure we don't scroll to negative position
+                            behavior: 'smooth'
+                        });
+                    } else {
+                        // Fallback for browsers without smooth scrolling support
+                        window.scrollTo(0, Math.max(0, targetPosition));
+                    }
+                }
+            });
+        });
+
+        // Navbar background change on scroll
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.style.background = 'rgba(255, 255, 255, 0.98)';
+            } else {
+                navbar.style.background = 'rgba(255, 255, 255, 0.95)';
+            }
+        });
+    </script>
+</body>
+</html>

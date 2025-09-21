@@ -33,6 +33,10 @@
             box-sizing: border-box;
         }
         
+        html {
+            scroll-behavior: smooth;
+        }
+        
         body {
             font-family: 'Inter', sans-serif;
             line-height: 1.6;
@@ -43,6 +47,7 @@
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
             box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
         }
         
         .navbar-brand {
@@ -57,7 +62,7 @@
         }
 
         .logo-img {
-            max-height: 120px;
+            max-height: 180px;
             width: auto;
             transition: all 0.3s ease;
         }
@@ -83,13 +88,13 @@
             }
             
             img.logo-img {
-                height: 50px !important;
-                max-height: 50px !important;
+                height: 80px !important;
+                max-height: 80px !important;
                 width: auto !important;
             }
             
             .hero-section {
-                padding: 80px 0 40px 0 !important;
+                padding: 121px 0 40px 0 !important;
                 min-height: auto !important;
             }
             
@@ -119,13 +124,13 @@
             }
             
             img.logo-img {
-                height: 40px !important;
-                max-height: 40px !important;
+                height: 60px !important;
+                max-height: 60px !important;
                 width: auto !important;
             }
             
             .hero-section {
-                padding: 70px 0 30px 0 !important;
+                padding: 101px 0 30px 0 !important;
                 min-height: auto !important;
             }
             
@@ -148,9 +153,8 @@
         .hero-section {
             background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
             color: white;
-            padding: 150px 0 20px 0;
+            padding: 201px 0 20px 0;
             position: relative;
-            overflow: hidden;
         }
         
         .hero-section::before {
@@ -285,30 +289,6 @@
             font-weight: 500;
         }
         
-        .testimonial-section {
-            background: var(--dark-color);
-            color: white;
-            padding: 80px 0;
-        }
-        
-        .testimonial-card {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-            padding: 2rem;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-        
-        .testimonial-text {
-            font-size: 1.1rem;
-            font-style: italic;
-            margin-bottom: 1.5rem;
-        }
-        
-        .testimonial-author {
-            font-weight: 600;
-            color: var(--accent-color);
-        }
         
         .contact-section {
             background: var(--light-color);
@@ -382,8 +362,8 @@
             }
             
             .logo-img {
-                height: 50px !important;
-                max-height: 50px !important;
+                height: 80px !important;
+                max-height: 80px !important;
                 width: auto !important;
             }
             
@@ -424,7 +404,7 @@
         
         @media (min-width: 769px) {
             .logo-img {
-                max-height: 120px;
+                max-height: 180px;
             }
         }
         
@@ -444,8 +424,8 @@
             }
             
             .logo-img {
-                height: 40px !important;
-                max-height: 40px !important;
+                height: 60px !important;
+                max-height: 60px !important;
                 width: auto !important;
             }
             
@@ -498,7 +478,7 @@
         <div class="container">
             <a class="navbar-brand" href="#home">
                 <div class="logo-container">
-                    <img src="assets/images/logos/verakore 2.png" alt="Verakore" class="logo-img">
+                    <img src="assets/images/logos/verakore_main_logo.png" alt="Verakore" class="logo-img">
                 </div>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -550,25 +530,13 @@
     <section class="stats-section">
         <div class="container">
             <div class="row">
-                <div class="col-md-3">
-                    <div class="stat-item">
-                        <div class="stat-number">500+</div>
-                        <div class="stat-label">Projects Completed</div>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="stat-item">
-                        <div class="stat-number">150+</div>
-                        <div class="stat-label">Happy Clients</div>
-                    </div>
-                </div>
-                <div class="col-md-3">
+                <div class="col-md-6">
                     <div class="stat-item">
                         <div class="stat-number">25+</div>
                         <div class="stat-label">Years Experience</div>
                     </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-6">
                     <div class="stat-item">
                         <div class="stat-number">24/7</div>
                         <div class="stat-label">Support Available</div>
@@ -663,11 +631,14 @@
                             <i class="fas fa-shield-alt"></i>
                         </div>
                         <h3 class="service-title">Cybersecurity Readiness</h3>
-                        <p class="service-description">Security assessments, endpoint protection, and incident playbooks to prepare for cybersecurity and compliance challenges ahead.</p>
+                        <p class="service-description">Comprehensive security solutions to protect your business from evolving threats while maintaining compliance and operational continuity.</p>
                         <ul class="list-unstyled">
-                            <li><i class="fas fa-check text-success me-2"></i>Security Assessments</li>
-                            <li><i class="fas fa-check text-success me-2"></i>Endpoint Protection</li>
-                            <li><i class="fas fa-check text-success me-2"></i>Incident Response Playbooks</li>
+                            <li><i class="fas fa-check text-success me-2"></i>Risk & Security Assessments – Deep-dive analysis of vulnerabilities, compliance posture, and business impact</li>
+                            <li><i class="fas fa-check text-success me-2"></i>Endpoint Protection & Monitoring – Safeguard every device and data point, from laptops to lab equipment, with proactive monitoring</li>
+                            <li><i class="fas fa-check text-success me-2"></i>Threat Detection & Response – Identify suspicious activity early and respond with pre-tested, incident-ready playbooks</li>
+                            <li><i class="fas fa-check text-success me-2"></i>Governance & Compliance Alignment – Map controls to GxP, SOX, and 21 CFR Part 11 to ensure audit-readiness</li>
+                            <li><i class="fas fa-check text-success me-2"></i>Regulatory Compliance Support – Specialized expertise in FDA, HIPAA, PCI-DSS, and industry-specific security frameworks</li>
+                            <li><i class="fas fa-check text-success me-2"></i>Business Continuity – Recovery strategies and simulations to minimize downtime and maintain trust</li>
                         </ul>
                         <div class="mt-3">
                             <span class="badge-core">Core Service</span>
@@ -791,34 +762,6 @@
         </div>
     </section>
 
-    <!-- Testimonials Section -->
-    <section class="testimonial-section">
-        <div class="container">
-            <h2 class="section-title text-white">What Our Clients Say</h2>
-            <p class="section-subtitle text-white-50">Real feedback from businesses we've helped</p>
-            
-            <div class="row g-4">
-                <div class="col-lg-4">
-                    <div class="testimonial-card">
-                        <p class="testimonial-text">"Verakore provided exactly what we needed - experienced network engineers who could hit the ground running. No fluff, just solid technical expertise when we needed it most."</p>
-                        <div class="testimonial-author">Manufacturing Company, IT Director</div>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="testimonial-card">
-                        <p class="testimonial-text">"Working with Verakore on our GxP documentation was straightforward and efficient. They understood our compliance requirements and delivered exactly what we needed for our audit."</p>
-                        <div class="testimonial-author">Life Sciences Company, QA Manager</div>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="testimonial-card">
-                        <p class="testimonial-text">"The fractional IT leadership approach worked perfectly for us. We got strategic guidance without the overhead of a full-time position, and the project was delivered on time and on budget."</p>
-                        <div class="testimonial-author">Growing Tech Company, CEO</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 
     <!-- Contact Section -->
     <section id="contact" class="contact-section">
@@ -926,10 +869,10 @@
                 <div class="col-lg-2 col-md-6 mb-4">
                     <h6 class="text-white mb-3">Services</h6>
                     <ul class="list-unstyled">
-                        <li><a href="services.html" class="footer-link">Staff Augmentation</a></li>
-                        <li><a href="services.html" class="footer-link">Fractional IT Leadership</a></li>
-                        <li><a href="services.html" class="footer-link">Compliance & GxP</a></li>
-                        <li><a href="services.html" class="footer-link">Project Delivery</a></li>
+                        <li><a href="services.html#staff-augmentation" class="footer-link">Staff Augmentation</a></li>
+                        <li><a href="services.html#fractional-leadership" class="footer-link">Fractional IT Leadership</a></li>
+                        <li><a href="services.html#compliance-gxp" class="footer-link">Compliance & GxP</a></li>
+                        <li><a href="services.html#project-delivery" class="footer-link">Project Delivery</a></li>
                     </ul>
                 </div>
                 <div class="col-lg-2 col-md-6 mb-4">
@@ -937,7 +880,7 @@
                     <ul class="list-unstyled">
                         <li><a href="#about" class="footer-link">About Us</a></li>
                         <li><a href="#contact" class="footer-link">Contact</a></li>
-                        <li><a href="mailto:info@verakore.com" class="footer-link">Partnerships</a></li>
+                        <li><a href="partnerships.html" class="footer-link">Partnerships</a></li>
                         <li><a href="careers.html" class="footer-link">Careers</a></li>
                     </ul>
                 </div>
@@ -976,26 +919,37 @@
     
     <!-- Custom JavaScript -->
     <script>
-        // Smooth scrolling for navigation links with navbar offset (iPad compatible)
+        // Smooth scrolling for navigation links with navbar offset
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
+                const targetId = this.getAttribute('href');
+                const target = document.querySelector(targetId);
+                
                 if (target) {
                     // Get navbar height to account for fixed positioning
                     const navbar = document.querySelector('.navbar');
                     const navbarHeight = navbar ? navbar.offsetHeight : 0;
                     
                     // Calculate target position with navbar offset
-                    const targetPosition = target.offsetTop - navbarHeight - 20; // 20px extra padding
+                    let targetPosition = target.offsetTop - navbarHeight - 30; // 30px extra padding
                     
-                    // Use requestAnimationFrame for better iPad compatibility
-                    requestAnimationFrame(() => {
+                    // Add extra offset for sections with top padding
+                    if (target.classList.contains('section-padding') || target.classList.contains('contact-section')) {
+                        targetPosition -= 50; // Additional offset for sections with top padding
+                    }
+                    
+                    // Check if smooth scrolling is supported
+                    if ('scrollBehavior' in document.documentElement.style) {
+                        // Smooth scroll to target
                         window.scrollTo({
-                            top: targetPosition,
+                            top: Math.max(0, targetPosition), // Ensure we don't scroll to negative position
                             behavior: 'smooth'
                         });
-                    });
+                    } else {
+                        // Fallback for browsers without smooth scrolling support
+                        window.scrollTo(0, Math.max(0, targetPosition));
+                    }
                 }
             });
         });
@@ -1070,7 +1024,7 @@
         }, observerOptions);
 
         // Observe elements for animation
-        document.querySelectorAll('.service-card, .testimonial-card, .stats-section').forEach(el => {
+        document.querySelectorAll('.service-card, .stats-section').forEach(el => {
             el.style.opacity = '0';
             el.style.transform = 'translateY(30px)';
             el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';

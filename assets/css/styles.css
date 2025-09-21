@@ -72,10 +72,10 @@ body {
 .hero-section {
     background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
     color: white;
-    padding: 200px 0 100px 0;
+    padding: 36px 0 1px;
     position: relative;
     overflow: hidden;
-    min-height: 100vh;
+    min-height: auto;
 }
 
 .hero-section::before {
@@ -383,7 +383,7 @@ body {
     }
     
     .hero-section {
-        padding: 60px 0;
+        padding: 36px 0 1px;
     }
     
     .service-detail-card {
@@ -434,4 +434,88 @@ body {
 
 .bg-accent-custom {
     background-color: var(--accent-color) !important;
+}
+
+/* Partnerships Page Styles */
+.partnership-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    height: 100%;
+    border: 1px solid #e2e8f0;
+}
+
+.partnership-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.partnership-icon {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+    color: white;
+    font-size: 2rem;
+}
+
+.partnership-features {
+    list-style: none;
+    padding: 0;
+    margin-top: 1.5rem;
+}
+
+.partnership-features li {
+    padding: 0.5rem 0;
+    color: var(--text-color);
+}
+
+.partnership-features li i {
+    color: var(--secondary-color);
+    margin-right: 0.5rem;
+}
+
+.contact-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    text-align: center;
+    border: 1px solid #e2e8f0;
+}
+
+.contact-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.contact-icon {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem;
+    color: white;
+    font-size: 1.5rem;
+}
+
+.contact-link {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.contact-link:hover {
+    color: var(--secondary-color);
+    text-decoration: underline;
 }

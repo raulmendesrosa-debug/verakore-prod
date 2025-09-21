@@ -1,0 +1,96 @@
+<!-- Stats Section - Saved for Later Use -->
+<!-- CSS Styles for Stats Section -->
+<style>
+.stats-section {
+    background: var(--light-color);
+    padding: 60px 0;
+}
+
+.stat-item {
+    text-align: center;
+    padding: 2rem;
+}
+
+.stat-number {
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+.stat-label {
+    font-size: 1.1rem;
+    color: var(--text-color);
+    font-weight: 500;
+}
+</style>
+
+<!-- HTML Section -->
+<section class="stats-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="stat-item">
+                    <div class="stat-number">500+</div>
+                    <div class="stat-label">Projects Completed</div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stat-item">
+                    <div class="stat-number">150+</div>
+                    <div class="stat-label">Happy Clients</div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stat-item">
+                    <div class="stat-number">25+</div>
+                    <div class="stat-label">Years Experience</div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stat-item">
+                    <div class="stat-number">24/7</div>
+                    <div class="stat-label">Support Available</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- JavaScript Animation Function (include this in your script section) -->
+<script>
+// Animate numbers on scroll
+function animateNumbers() {
+    const statNumbers = document.querySelectorAll('.stat-number');
+    statNumbers.forEach(stat => {
+        const target = parseInt(stat.textContent.replace(/\D/g, ''));
+        const increment = target / 100;
+        let current = 0;
+        
+        const timer = setInterval(() => {
+            current += increment;
+            if (current >= target) {
+                current = target;
+                clearInterval(timer);
+            }
+            
+            if (stat.textContent.includes('+')) {
+                stat.textContent = Math.floor(current) + '+';
+            } else if (stat.textContent.includes('/')) {
+                stat.textContent = stat.textContent;
+            } else {
+                stat.textContent = Math.floor(current);
+            }
+        }, 20);
+    });
+}
+
+// Add to your intersection observer
+// document.querySelectorAll('.stats-section').forEach(el => {
+//     el.style.opacity = '0';
+//     el.style.transform = 'translateY(30px)';
+//     el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+//     observer.observe(el);
+// });
+</script>
+
