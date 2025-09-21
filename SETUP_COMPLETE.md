@@ -4,7 +4,7 @@
 
 ### ✅ **What's Been Configured**
 - **Email**: REMOVED_FOR_SECURITY
-- **API Token**: REMOVED_FOR_SECURITY (Valid & Active)
+- **API Token**: JBjzdeaKIhvTf3DF9b5Oa_gVJ9k50kpLIoGTNJ_b (Valid & Active)
 - **Project**: verakore-website
 - **Repository**: raulmendesrosa-debug/verakore-website
 
@@ -22,7 +22,7 @@
 #### 2. GitHub Secrets Setup
 1. Go to: https://github.com/raulmendesrosa-debug/verakore-website/settings/secrets/actions
 2. Add these secrets:
-   - `CLOUDFLARE_API_TOKEN`: YOUR_API_TOKEN_HERE
+   - `CLOUDFLARE_API_TOKEN`: JBjzdeaKIhvTf3DF9b5Oa_gVJ9k50kpLIoGTNJ_b
    - `CLOUDFLARE_ACCOUNT_ID`: [Your Account ID]
 
 #### 3. Test Everything

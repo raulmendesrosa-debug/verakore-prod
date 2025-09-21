@@ -2,7 +2,7 @@
   "cloudflare": {
     "account_id": "GET_FROM_DASHBOARD",
     "project_name": "verakore-website",
-    "api_token": "REMOVED_FOR_SECURITY",
+    "api_token": "JBjzdeaKIhvTf3DF9b5Oa_gVJ9k50kpLIoGTNJ_b",
     "pages_url": "https://verakore-website.pages.dev"
   },
   "github": {
