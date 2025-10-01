@@ -40,21 +40,39 @@ body {
 .logo-container {
     display: flex;
     align-items: center;
-    background: rgba(0, 0, 0, 0.1);
-    padding: 15px 20px;
-    border-radius: 15px;
-    transition: all 0.3s ease;
-}
-
-.logo-container:hover {
-    background: rgba(0, 0, 0, 0.2);
-    transform: scale(1.05);
 }
 
 .logo-img {
-    max-height: 120px;
+    max-height: 180px;
     width: auto;
     transition: all 0.3s ease;
+}
+
+/* Logo responsive sizing - matches all pages */
+@media screen and (max-width: 768px) {
+    .logo-container { 
+        max-height: 48px !important; 
+        overflow: hidden !important; 
+        padding: 4px 8px !important; 
+    }
+    img.logo-img { 
+        height: 64px !important; 
+        max-height: 64px !important; 
+        width: auto !important; 
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .logo-container { 
+        max-height: 40px !important; 
+        overflow: hidden !important; 
+        padding: 3px 8px !important; 
+    }
+    img.logo-img { 
+        height: 54px !important; 
+        max-height: 54px !important; 
+        width: auto !important; 
+    }
 }
 
 .nav-link {
