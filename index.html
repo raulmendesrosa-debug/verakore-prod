@@ -1029,6 +1029,280 @@
         });
     </script>
 
+    <!-- Cookie Consent Banner -->
+    <style>
+        .cookie-banner {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            color: white;
+            padding: 20px;
+            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.3);
+            z-index: 9999;
+            display: none;
+            animation: slideUp 0.5s ease;
+        }
+
+        .cookie-banner.show {
+            display: block;
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(100%);
+            }
+            to {
+                transform: translateY(0);
+            }
+        }
+
+        .cookie-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .cookie-text {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .cookie-text h4 {
+            margin: 0 0 8px 0;
+            font-size: 18px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .cookie-text p {
+            margin: 0;
+            font-size: 14px;
+            opacity: 0.9;
+            line-height: 1.5;
+        }
+
+        .cookie-text a {
+            color: #60a5fa;
+            text-decoration: underline;
+        }
+
+        .cookie-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .cookie-btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .cookie-btn-accept {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .cookie-btn-accept:hover {
+            background: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+
+        .cookie-btn-reject {
+            background: transparent;
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .cookie-btn-reject:hover {
+            border-color: rgba(255, 255, 255, 0.6);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .cookie-btn-customize {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .cookie-btn-customize:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        @media (max-width: 768px) {
+            .cookie-content {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .cookie-buttons {
+                width: 100%;
+            }
+
+            .cookie-btn {
+                flex: 1;
+                min-width: 100px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .cookie-banner {
+                padding: 15px;
+            }
+
+            .cookie-text h4 {
+                font-size: 16px;
+            }
+
+            .cookie-text p {
+                font-size: 13px;
+            }
+
+            .cookie-buttons {
+                flex-direction: column;
+            }
+
+            .cookie-btn {
+                width: 100%;
+            }
+        }
+    </style>
+
+    <!-- Cookie Banner HTML -->
+    <div class="cookie-banner" id="cookieBanner">
+        <div class="cookie-content">
+            <div class="cookie-text">
+                <h4>🍪 We Value Your Privacy</h4>
+                <p>We use cookies to enhance your browsing experience and analyze our traffic. By clicking "Accept All", you consent to our use of cookies. <a href="cookie-policy.html">Learn more in our Cookie Policy</a>.</p>
+            </div>
+            <div class="cookie-buttons">
+                <button class="cookie-btn cookie-btn-reject" onclick="rejectCookies()">Reject</button>
+                <button class="cookie-btn cookie-btn-customize" onclick="customizeCookies()">Customize</button>
+                <button class="cookie-btn cookie-btn-accept" onclick="acceptCookies()">Accept All</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Cookie Consent Management
+        const COOKIE_CONSENT_KEY = 'verakore_cookie_consent';
+        const COOKIE_EXPIRY_DAYS = 365;
+
+        // Check if user has already made a choice
+        function checkCookieConsent() {
+            const consent = localStorage.getItem(COOKIE_CONSENT_KEY);
+            if (!consent) {
+                // Show banner after 2 seconds
+                setTimeout(() => {
+                    document.getElementById('cookieBanner').classList.add('show');
+                }, 2000);
+            } else {
+                // Apply user's previous choice
+                applyCookieConsent(JSON.parse(consent));
+            }
+        }
+
+        // Accept all cookies
+        function acceptCookies() {
+            const consent = {
+                necessary: true,
+                analytics: true,
+                marketing: true,
+                timestamp: new Date().toISOString()
+            };
+            saveCookieConsent(consent);
+            hideBanner();
+            applyCookieConsent(consent);
+            console.log('Cookies accepted');
+        }
+
+        // Reject optional cookies (keep only necessary)
+        function rejectCookies() {
+            const consent = {
+                necessary: true,
+                analytics: false,
+                marketing: false,
+                timestamp: new Date().toISOString()
+            };
+            saveCookieConsent(consent);
+            hideBanner();
+            applyCookieConsent(consent);
+            console.log('Optional cookies rejected');
+        }
+
+        // Customize cookies (simplified - accept necessary only for now)
+        function customizeCookies() {
+            // For now, treat customize same as reject
+            // You can add a modal for detailed preferences later
+            alert('Cookie preferences: You can manage detailed preferences in our Cookie Policy page. For now, we\'ll only enable necessary cookies.');
+            rejectCookies();
+        }
+
+        // Save consent to localStorage
+        function saveCookieConsent(consent) {
+            localStorage.setItem(COOKIE_CONSENT_KEY, JSON.stringify(consent));
+        }
+
+        // Hide banner
+        function hideBanner() {
+            const banner = document.getElementById('cookieBanner');
+            banner.style.animation = 'slideDown 0.5s ease';
+            setTimeout(() => {
+                banner.classList.remove('show');
+            }, 500);
+        }
+
+        // Apply cookie consent (enable/disable tracking)
+        function applyCookieConsent(consent) {
+            if (consent.analytics) {
+                // Enable Google Analytics or other analytics
+                console.log('Analytics cookies enabled');
+                // TODO: Add your analytics initialization here
+                // Example: gtag('consent', 'update', {'analytics_storage': 'granted'});
+            }
+
+            if (consent.marketing) {
+                // Enable marketing/advertising cookies
+                console.log('Marketing cookies enabled');
+                // TODO: Add your marketing cookies here
+                // Example: fbq('consent', 'grant');
+            }
+
+            // Necessary cookies are always enabled
+            console.log('Necessary cookies enabled');
+        }
+
+        // Add slideDown animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideDown {
+                from {
+                    transform: translateY(0);
+                }
+                to {
+                    transform: translateY(100%);
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', checkCookieConsent);
+    </script>
+
     <!-- Verakore Chatbot Integration -->
     <style>
         /* Chatbot Styles */
