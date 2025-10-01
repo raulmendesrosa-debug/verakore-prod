@@ -16,6 +16,28 @@
     <link rel="stylesheet" href="assets/css/styles.css">
     
     <style>
+        .logo-img {
+            max-height: 180px;
+            width: auto;
+            transition: all 0.3s ease;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+        
+        /* Mobile CSS improvements - Match index.html */
+        @media screen and (max-width: 768px) {
+            .logo-container { max-height: 48px !important; overflow: hidden !important; padding: 4px 8px !important; }
+            img.logo-img { height: 64px !important; max-height: 64px !important; width: auto !important; }
+        }
+        
+        @media screen and (max-width: 480px) {
+            .logo-container { max-height: 40px !important; overflow: hidden !important; padding: 3px 8px !important; }
+            img.logo-img { height: 54px !important; max-height: 54px !important; width: auto !important; }
+        }
+        
         .hero-section {
             background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
             color: white;
