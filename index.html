@@ -194,6 +194,15 @@
             padding: 80px 0;
         }
         
+        /* Scroll offset for anchor links */
+        #about {
+            scroll-margin-top: 100px;
+        }
+        
+        #contact {
+            scroll-margin-top: 100px;
+        }
+        
         .section-title {
             font-size: 2.5rem;
             font-weight: 700;
@@ -932,6 +941,32 @@
                     }
                 }
             });
+        });
+
+        // Handle hash in URL on page load (e.g., coming from services.html#about)
+        window.addEventListener('load', function() {
+            if (window.location.hash) {
+                setTimeout(() => {
+                    const hash = window.location.hash;
+                    const target = document.querySelector(hash);
+                    
+                    if (target) {
+                        const navbar = document.querySelector('.navbar');
+                        const navbarHeight = navbar ? navbar.offsetHeight : 0;
+                        let targetPosition = target.offsetTop - navbarHeight - 30;
+                        
+                        // Add extra offset for sections with top padding
+                        if (target.classList.contains('section-padding') || target.classList.contains('contact-section')) {
+                            targetPosition -= 50;
+                        }
+                        
+                        window.scrollTo({
+                            top: Math.max(0, targetPosition),
+                            behavior: 'smooth'
+                        });
+                    }
+                }, 100); // Small delay to ensure page is fully loaded
+            }
         });
 
         // Navbar background change on scroll
