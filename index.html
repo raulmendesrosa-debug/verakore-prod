@@ -67,11 +67,11 @@
             transition: all 0.3s ease;
         }
         
-        /* Ultra-aggressive mobile CSS override */
+        /* Mobile CSS improvements */
         @media screen and (max-width: 768px) {
             .navbar.navbar-expand-lg.navbar-light.fixed-top {
-                min-height: 60px !important;
-                max-height: 60px !important;
+                min-height: 56px !important;
+                max-height: 56px !important;
                 padding: 0.25rem 0 !important;
             }
             
@@ -81,35 +81,36 @@
                 margin: 0 !important;
             }
             
-            .logo-container {
-                max-height: 50px !important;
-                overflow: hidden !important;
-                padding: 5px 10px !important;
-            }
+            .logo-container { max-height: 48px !important; overflow: hidden !important; padding: 4px 8px !important; }
             
-            img.logo-img {
-                height: 80px !important;
-                max-height: 80px !important;
-                width: auto !important;
-            }
+            img.logo-img { height: 64px !important; max-height: 64px !important; width: auto !important; }
             
-            .hero-section {
-                padding: 121px 0 40px 0 !important;
-                min-height: auto !important;
-            }
+            .hero-section { padding: 88px 0 32px 0 !important; min-height: auto !important; }
             
             .hero-title {
                 font-size: 2.2rem !important;
                 margin-top: 1rem !important;
             }
+
+            /* Hide oversized hero icon on small screens */
+            .hero-section .col-lg-6:last-child { display: none !important; }
+
+            /* Buttons stack and fill width */
+            .d-flex.gap-3 { flex-direction: column !important; gap: 0.75rem !important; }
+            .d-flex.gap-3 .btn { width: 100% !important; }
+
+            /* Card spacing */
+            .service-card { padding: 1.25rem !important; margin-bottom: 1rem !important; }
+
+            /* Mobile menu overlay */
+            .navbar-collapse { position: absolute; top: 100%; left: 0; right: 0; background: #ffffff; box-shadow: 0 8px 20px rgba(0,0,0,0.12); padding: 0.5rem 1rem; z-index: 1100; }
+            .navbar-collapse .nav-link { padding: 0.75rem 0; font-size: 1.05rem; color: #0f172a !important; }
+            .navbar-collapse .nav-link.active, .navbar-collapse .nav-link:focus, .navbar-collapse .nav-link:hover { color: #2563eb !important; }
+            .navbar-toggler { border: 0; }
         }
         
         @media screen and (max-width: 480px) {
-            .navbar.navbar-expand-lg.navbar-light.fixed-top {
-                min-height: 50px !important;
-                max-height: 50px !important;
-                padding: 0.25rem 0 !important;
-            }
+            .navbar.navbar-expand-lg.navbar-light.fixed-top { min-height: 50px !important; max-height: 50px !important; padding: 0.2rem 0 !important; }
             
             .navbar-brand.navbar-brand {
                 font-size: 1rem !important;
@@ -117,22 +118,11 @@
                 margin: 0 !important;
             }
             
-            .logo-container {
-                max-height: 40px !important;
-                overflow: hidden !important;
-                padding: 3px 8px !important;
-            }
+            .logo-container { max-height: 40px !important; overflow: hidden !important; padding: 3px 8px !important; }
             
-            img.logo-img {
-                height: 60px !important;
-                max-height: 60px !important;
-                width: auto !important;
-            }
+            img.logo-img { height: 54px !important; max-height: 54px !important; width: auto !important; }
             
-            .hero-section {
-                padding: 101px 0 30px 0 !important;
-                min-height: auto !important;
-            }
+            .hero-section { padding: 80px 0 28px 0 !important; min-height: auto !important; }
             
             .hero-title {
                 font-size: 1.8rem !important;
@@ -146,9 +136,8 @@
             transition: color 0.3s ease;
         }
         
-        .nav-link:hover {
-            color: var(--primary-color) !important;
-        }
+        .nav-link:hover { color: var(--primary-color) !important; }
+        .nav-link.active, .nav-link:focus { color: var(--primary-color) !important; font-weight: 600; }
         
         .hero-section {
             background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
@@ -376,6 +365,7 @@
                 min-height: 60px !important;
                 max-height: 60px !important;
             }
+            .navbar-light .navbar-toggler-icon { filter: invert(0.5); opacity: 0.9; }
             
             .navbar-brand {
                 font-size: 1.2rem !important;
@@ -461,14 +451,12 @@
                 margin-bottom: 1.25rem !important;
             }
             
-            .d-flex.gap-3 {
-                flex-direction: column !important;
-                gap: 1rem !important;
-            }
-            
-            .d-flex.gap-3 .btn {
-                width: 100% !important;
-            }
+            .d-flex.gap-3 { flex-direction: column !important; gap: 0.75rem !important; }
+            .d-flex.gap-3 .btn { width: 100% !important; }
+
+            /* Hide oversized hero icon on extra-small screens */
+            .hero-section .col-lg-6:last-child { display: none !important; }
+            .hero-illustration { display: none !important; }
         }
     </style>
 </head>
@@ -486,18 +474,10 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#home">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="services.html#home">Services</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#about">About</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#contact">Contact</a>
-                    </li>
+                    <li class="nav-item"><a class="nav-link active" href="#home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="services.html#home">Services</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
                 </ul>
             </div>
         </div>
@@ -517,7 +497,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-6">
+                <div class="col-lg-6 hero-illustration">
                     <div class="text-center">
                         <i class="fas fa-laptop-code" style="font-size: 15rem; opacity: 0.3;"></i>
                     </div>
@@ -963,6 +943,23 @@
                 navbar.style.background = 'rgba(255, 255, 255, 0.95)';
             }
         });
+
+        // Close mobile menu on link click and lock scroll when open
+        document.querySelectorAll('.navbar .nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                const nav = document.getElementById('navbarNav');
+                if (nav && nav.classList.contains('show')) {
+                    new bootstrap.Collapse(nav).hide();
+                    document.body.style.overflow = '';
+                }
+            });
+        });
+
+        const navCollapse = document.getElementById('navbarNav');
+        if (navCollapse) {
+            navCollapse.addEventListener('shown.bs.collapse', () => document.body.style.overflow = 'hidden');
+            navCollapse.addEventListener('hidden.bs.collapse', () => document.body.style.overflow = '');
+        }
 
         // Form submission handling
         document.querySelector('form').addEventListener('submit', function(e) {

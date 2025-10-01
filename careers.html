@@ -184,6 +184,12 @@
                 padding: 12px 20px !important;
                 font-size: 0.9rem !important;
             }
+
+            /* Mobile menu overlay */
+            .navbar-collapse { position: absolute; top: 100%; left: 0; right: 0; background: #ffffff; box-shadow: 0 8px 20px rgba(0,0,0,0.12); padding: 0.5rem 1rem; z-index: 1100; }
+            .navbar-collapse .nav-link { padding: 0.75rem 0; font-size: 1.05rem; color: #0f172a !important; }
+            .navbar-collapse .nav-link.active, .navbar-collapse .nav-link:focus, .navbar-collapse .nav-link:hover { color: #2563eb !important; }
+            .navbar-toggler { border: 0; }
         }
         
         @media (max-width: 480px) {
@@ -265,18 +271,10 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="index.html#home">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="services.html#home">Services</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="index.html#about">About</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="index.html#contact">Contact</a>
-                    </li>
+                    <li class="nav-item"><a class="nav-link" href="index.html#home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="services.html#home">Services</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html#contact">Contact</a></li>
                 </ul>
             </div>
         </div>
@@ -561,6 +559,23 @@
                 navbar.style.background = 'rgba(255, 255, 255, 0.95)';
             }
         });
+
+        // Close mobile menu on link click and lock scroll when open
+        document.querySelectorAll('.navbar .nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                const nav = document.getElementById('navbarNav');
+                if (nav && nav.classList.contains('show')) {
+                    new bootstrap.Collapse(nav).hide();
+                    document.body.style.overflow = '';
+                }
+            });
+        });
+
+        const navCollapse = document.getElementById('navbarNav');
+        if (navCollapse) {
+            navCollapse.addEventListener('shown.bs.collapse', () => document.body.style.overflow = 'hidden');
+            navCollapse.addEventListener('hidden.bs.collapse', () => document.body.style.overflow = '');
+        }
     </script>
 </body>
 </html>

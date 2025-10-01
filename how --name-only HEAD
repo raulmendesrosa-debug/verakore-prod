@@ -1,0 +1,32 @@
+[33mcommit 0093971be2f0b8c8263c285cf42238465ba233fe[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: verakore-site <raulmendesrosa@gmail.com>
+Date:   Sun Sep 21 03:20:44 2025 -0400
+
+    Major website updates: logo standardization, padding fixes, new partnerships page, and UI improvements
+    
+    - Standardized logo across all pages to verakore_main_logo.png
+    - Fixed hero section padding on index and partnerships pages
+    - Created new comprehensive partnerships.html page
+    - Improved 'Ready to Partner?' section with better styling and mobile responsiveness
+    - Updated footer links to use anchor navigation
+    - Removed testimonials section from index page
+    - Enhanced scrolling behavior and navbar positioning
+    - Added new logo files and cleaned up unused assets
+    - Improved responsive design across all pages
+
+ assets/css/styles.css                              |  90 [32m++[m[31m-[m
+ .../images/logos/{VeraKore White.png => Logo.png}  | Bin
+ assets/images/logos/{verakore 4.png => Logo1.png}  | Bin
+ assets/images/logos/verakore 2.png                 | Bin [31m1301796[m -> [32m0[m bytes
+ assets/images/logos/verakore 5.png                 | Bin [31m1553347[m -> [32m0[m bytes
+ .../{verakore 3.png => verakore_main_logo.png}     | Bin
+ careers.html                                       |  78 [32m++[m[31m-[m
+ cookie-policy.html                                 |  77 [32m++[m[31m-[m
+ index.html                                         | 150 [32m++[m[31m---[m
+ partnerships.html                                  | 668 [32m+++++++++++++++++++++[m
+ privacy-policy.html                                |  77 [32m++[m[31m-[m
+ services.html                                      |  68 [32m++[m[31m-[m
+ stats-section.html                                 |  96 [32m+++[m
+ terms-of-service.html                              |  77 [32m++[m[31m-[m
+ testimonials-section.html                          |  58 [32m++[m
+ 15 files changed, 1247 insertions(+), 192 deletions(-)

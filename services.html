@@ -72,7 +72,7 @@
         .hero-section {
             background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
             color: white;
-            padding: 200px 0 1px;
+            padding: 144px 0 1px;
             position: relative;
             overflow: hidden;
             display: flex;
@@ -242,7 +242,7 @@
             }
             
             .hero-section {
-                padding: 120px 0 1px 0 !important;
+                padding: 10px 0 1px 0 !important;
                 min-height: auto !important;
             }
             
@@ -289,6 +289,12 @@
                 padding: 12px 20px !important;
                 font-size: 0.9rem !important;
             }
+
+            /* Mobile menu overlay */
+            .navbar-collapse { position: absolute; top: 100%; left: 0; right: 0; background: #ffffff; box-shadow: 0 8px 20px rgba(0,0,0,0.12); padding: 0.5rem 1rem; z-index: 1100; }
+            .navbar-collapse .nav-link { padding: 0.75rem 0; font-size: 1.05rem; color: #0f172a !important; }
+            .navbar-collapse .nav-link.active, .navbar-collapse .nav-link:focus, .navbar-collapse .nav-link:hover { color: #2563eb !important; }
+            .navbar-toggler { border: 0; }
         }
         
         @media (max-width: 480px) {
@@ -302,7 +308,7 @@
             }
             
             .hero-section {
-                padding: 100px 0 1px 0 !important;
+                padding: 8px 0 1px 0 !important;
                 min-height: auto !important;
             }
             
@@ -376,7 +382,7 @@
         
         @media (min-width: 769px) {
             .logo-img {
-                max-height: 180px;
+                max-height: 120px;
             }
         }
     </style>
@@ -387,7 +393,7 @@
         <div class="container">
             <a class="navbar-brand" href="index.html">
                 <div class="logo-container">
-                    <img src="assets/images/logos/verakore_main_logo.png" alt="Verakore" class="logo-img">
+                    <img src="Logo1" alt="Verakore" class="logo-img">
                 </div>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -395,18 +401,10 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="index.html#home">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" href="services.html">Services</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="index.html#about">About</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="index.html#contact">Contact</a>
-                    </li>
+                    <li class="nav-item"><a class="nav-link" href="index.html#home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="services.html#home">Services</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html#contact">Contact</a></li>
                 </ul>
             </div>
         </div>
@@ -622,10 +620,10 @@
                 <div class="col-lg-2 col-md-6 mb-4">
                     <h6 class="text-white mb-3">Services</h6>
                     <ul class="list-unstyled">
-                        <li><a href="services.html#staff-augmentation" class="footer-link">Staff Augmentation</a></li>
-                        <li><a href="services.html#fractional-leadership" class="footer-link">Fractional IT Leadership</a></li>
-                        <li><a href="services.html#compliance-gxp" class="footer-link">Compliance & GxP</a></li>
-                        <li><a href="services.html#project-delivery" class="footer-link">Project Delivery</a></li>
+                        <li><a href="#staff-augmentation" class="footer-link">Staff Augmentation</a></li>
+                        <li><a href="#fractional-leadership" class="footer-link">Fractional IT Leadership</a></li>
+                        <li><a href="#compliance-gxp" class="footer-link">Compliance & GxP</a></li>
+                        <li><a href="#project-delivery" class="footer-link">Project Delivery</a></li>
                     </ul>
                 </div>
                 <div class="col-lg-2 col-md-6 mb-4">
@@ -712,6 +710,23 @@
                 navbar.style.background = 'rgba(255, 255, 255, 0.95)';
             }
         });
+
+        // Close mobile menu on link click and lock scroll when open
+        document.querySelectorAll('.navbar .nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                const nav = document.getElementById('navbarNav');
+                if (nav && nav.classList.contains('show')) {
+                    new bootstrap.Collapse(nav).hide();
+                    document.body.style.overflow = '';
+                }
+            });
+        });
+
+        const navCollapse = document.getElementById('navbarNav');
+        if (navCollapse) {
+            navCollapse.addEventListener('shown.bs.collapse', () => document.body.style.overflow = 'hidden');
+            navCollapse.addEventListener('hidden.bs.collapse', () => document.body.style.overflow = '');
+        }
     </script>
 </body>
 </html>
