@@ -317,7 +317,7 @@
                             <p class="text-muted">Share your information and we&#x2019;ll reach out when roles become available.</p>
                         </div>
                         
-                        <form name="career-application" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+                        <form name="career-application" method="POST" data-netlify="true" netlify-honeypot="bot-field" enctype="multipart/form-data">
                             <input type="hidden" name="form-name" value="career-application" />
                             <p style="display: none;">
                                 <label>Don't fill this out if you're human: <input name="bot-field" /></label>
@@ -382,6 +382,15 @@
                                 <div class="col-12">
                                     <label for="message" class="form-label">Additional Information</label>
                                     <textarea class="form-control" id="message" name="message" rows="4" placeholder="Tell us about your background, interests, or any specific areas you'd like to work in..."></textarea>
+                                </div>
+                                <div class="col-12">
+                                    <label for="resume" class="form-label">Resume / CV (Optional)</label>
+                                    <input type="file" class="form-control" id="resume" name="resume" accept=".pdf,.doc,.docx" />
+                                    <small class="form-text text-muted">Accepted formats: PDF, DOC, DOCX (Max 5MB)</small>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="captcha" class="form-label">Security Check: What is 7 + 3? *</label>
+                                    <input type="text" class="form-control" id="captcha" name="captcha" required placeholder="Enter answer">
                                 </div>
                                 <div class="col-12">
                                     <div class="form-check">
@@ -575,6 +584,33 @@
         if (navCollapse) {
             navCollapse.addEventListener('shown.bs.collapse', () => document.body.style.overflow = 'hidden');
             navCollapse.addEventListener('hidden.bs.collapse', () => document.body.style.overflow = '');
+        }
+
+        // Form validation for CAPTCHA and file size
+        const careerForm = document.querySelector('form[name="career-application"]');
+        if (careerForm) {
+            careerForm.addEventListener('submit', function(e) {
+                // Check CAPTCHA
+                const captchaInput = document.getElementById('captcha');
+                if (captchaInput && captchaInput.value.trim() !== '10') {
+                    e.preventDefault();
+                    alert('Security check failed. Please answer the math question correctly.');
+                    captchaInput.focus();
+                    return false;
+                }
+
+                // Check file size (max 5MB)
+                const resumeInput = document.getElementById('resume');
+                if (resumeInput && resumeInput.files.length > 0) {
+                    const fileSize = resumeInput.files[0].size / 1024 / 1024; // in MB
+                    if (fileSize > 5) {
+                        e.preventDefault();
+                        alert('Resume file size exceeds 5MB. Please upload a smaller file.');
+                        resumeInput.focus();
+                        return false;
+                    }
+                }
+            });
         }
     </script>
 </body>
