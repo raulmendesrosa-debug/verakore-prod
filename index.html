@@ -1550,108 +1550,6 @@
             100% { transform: scale(1); }
         }
 
-        /* Enhanced Interactive Elements */
-        .button-group {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            margin-top: 10px;
-            max-width: 85%;
-        }
-
-        .chat-button {
-            background: var(--primary-color);
-            color: white;
-            border: none;
-            border-radius: 8px;
-            padding: 10px 15px;
-            font-size: 13px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            text-align: left;
-            font-weight: 500;
-        }
-
-        .chat-button:hover {
-            background: var(--secondary-color);
-            transform: translateX(5px);
-        }
-
-        .service-card {
-            background: white;
-            border: 1px solid #e2e8f0;
-            border-radius: 12px;
-            padding: 15px;
-            margin-top: 10px;
-            max-width: 90%;
-        }
-
-        .service-card-title {
-            font-weight: 600;
-            color: var(--primary-color);
-            margin-bottom: 8px;
-            font-size: 14px;
-        }
-
-        .service-card-desc {
-            font-size: 12px;
-            color: #64748b;
-            margin-bottom: 10px;
-            line-height: 1.5;
-        }
-
-        .service-card-action {
-            background: var(--accent-color);
-            color: white;
-            border: none;
-            border-radius: 6px;
-            padding: 8px 12px;
-            font-size: 12px;
-            cursor: pointer;
-            font-weight: 500;
-        }
-
-        .lead-form {
-            background: white;
-            border: 1px solid #e2e8f0;
-            border-radius: 12px;
-            padding: 15px;
-            margin-top: 10px;
-            max-width: 90%;
-        }
-
-        .lead-form input {
-            width: 100%;
-            border: 1px solid #e2e8f0;
-            border-radius: 6px;
-            padding: 8px 12px;
-            font-size: 13px;
-            margin-bottom: 8px;
-            box-sizing: border-box;
-        }
-
-        .lead-form input:focus {
-            border-color: var(--primary-color);
-            outline: none;
-        }
-
-        .lead-form button {
-            width: 100%;
-            background: var(--primary-color);
-            color: white;
-            border: none;
-            border-radius: 6px;
-            padding: 10px;
-            font-size: 13px;
-            cursor: pointer;
-            font-weight: 500;
-        }
-
-        .emoji {
-            display: inline-block;
-            margin-right: 5px;
-        }
-
         /* Mobile Responsive */
         @media (max-width: 768px) {
             .chatbot-window {
@@ -1823,368 +1721,50 @@
             }
         }
 
-        // Helper function to add interactive buttons
-        function addButtonGroup(buttons) {
-            const messagesContainer = document.getElementById('chatbotMessages');
-            const buttonGroup = document.createElement('div');
-            buttonGroup.className = 'message bot';
-            
-            const buttonContainer = document.createElement('div');
-            buttonContainer.className = 'button-group';
-            
-            buttons.forEach(btn => {
-                const button = document.createElement('button');
-                button.className = 'chat-button';
-                button.textContent = btn.text;
-                button.onclick = () => {
-                    sendQuickMessage(btn.action);
-                    buttonContainer.remove();
-                };
-                buttonContainer.appendChild(button);
-            });
-            
-            buttonGroup.appendChild(buttonContainer);
-            messagesContainer.appendChild(buttonGroup);
-            messagesContainer.scrollTop = messagesContainer.scrollHeight;
-        }
-
-        // Helper function to add service card
-        function addServiceCard(title, description, action) {
-            const messagesContainer = document.getElementById('chatbotMessages');
-            const cardWrapper = document.createElement('div');
-            cardWrapper.className = 'message bot';
-            
-            const card = document.createElement('div');
-            card.className = 'service-card';
-            card.innerHTML = `
-                <div class="service-card-title">${title}</div>
-                <div class="service-card-desc">${description}</div>
-                <button class="service-card-action" onclick="sendQuickMessage('${action}')">Learn More</button>
-            `;
-            
-            cardWrapper.appendChild(card);
-            messagesContainer.appendChild(cardWrapper);
-            messagesContainer.scrollTop = messagesContainer.scrollHeight;
-        }
-
-        // Helper function to add lead capture form
-        function addLeadForm() {
-            const messagesContainer = document.getElementById('chatbotMessages');
-            const formWrapper = document.createElement('div');
-            formWrapper.className = 'message bot';
-            
-            const form = document.createElement('div');
-            form.className = 'lead-form';
-            form.innerHTML = `
-                <input type="text" id="leadName" placeholder="Your Name *" required>
-                <input type="email" id="leadEmail" placeholder="Your Email *" required>
-                <input type="text" id="leadCompany" placeholder="Company Name">
-                <input type="tel" id="leadPhone" placeholder="Phone Number">
-                <button onclick="submitLead(this.parentElement.parentElement)">Submit 📩</button>
-            `;
-            
-            formWrapper.appendChild(form);
-            messagesContainer.appendChild(formWrapper);
-            messagesContainer.scrollTop = messagesContainer.scrollHeight;
-        }
-
-        // Submit lead form
-        async function submitLead(formWrapper) {
-            const name = document.getElementById('leadName').value.trim();
-            const email = document.getElementById('leadEmail').value.trim();
-            const company = document.getElementById('leadCompany').value.trim();
-            const phone = document.getElementById('leadPhone').value.trim();
-            
-            if (!name || !email) {
-                alert('Please fill in required fields (Name and Email)');
-                return;
-            }
-            
-            // Prepare lead data
-            const leadData = {
-                name: name,
-                email: email,
-                company: company || 'Not provided',
-                phone: phone || 'Not provided',
-                timestamp: new Date().toISOString(),
-                source: 'Website Chatbot',
-                page_url: window.location.href,
-                conversation_history: conversationHistory.slice(-5).map(msg => 
-                    `${msg.sender}: ${msg.content}`
-                ).join('\n')
-            };
-            
-            console.log('Lead captured:', leadData);
-            
-            // Show submitting message
-            const submitBtn = formWrapper.querySelector('button');
-            const originalText = submitBtn.innerHTML;
-            submitBtn.innerHTML = 'Submitting... ⏳';
-            submitBtn.disabled = true;
-            
-            try {
-                // Send to Google Sheets
-                await sendToGoogleSheets(leadData);
-                
-                // Send to HubSpot
-                await sendToHubSpot(leadData);
-                
-                // Remove form
-                formWrapper.remove();
-                
-                // Show confirmation
-                addMessage(`✅ Thanks ${name}! We've received your information and will reach out to ${email} within 24 hours.`, 'bot');
-                
-                setTimeout(() => {
-                    addMessage("Is there anything else you'd like to know about our services? 😊", 'bot');
-                }, 1000);
-                
-            } catch (error) {
-                console.error('Error submitting lead:', error);
-                submitBtn.innerHTML = originalText;
-                submitBtn.disabled = false;
-                alert('There was an issue submitting your information. Please try again or email us directly at info@verakore.com');
-            }
-        }
-
-        // Send lead to Google Sheets
-        async function sendToGoogleSheets(leadData) {
-            // TODO: Replace with your Google Apps Script Web App URL
-            const GOOGLE_SCRIPT_URL = 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE';
-            
-            // Skip if not configured
-            if (GOOGLE_SCRIPT_URL === 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE') {
-                console.log('Google Sheets not configured yet');
-                return;
-            }
-            
-            try {
-                const response = await fetch(GOOGLE_SCRIPT_URL, {
-                    method: 'POST',
-                    mode: 'no-cors',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(leadData)
-                });
-                
-                console.log('Sent to Google Sheets successfully');
-            } catch (error) {
-                console.error('Google Sheets error:', error);
-                // Don't throw - continue even if Google Sheets fails
-            }
-        }
-
-        // Send lead to HubSpot
-        async function sendToHubSpot(leadData) {
-            // TODO: Replace with your HubSpot Portal ID and Form GUID
-            const HUBSPOT_PORTAL_ID = 'YOUR_HUBSPOT_PORTAL_ID';
-            const HUBSPOT_FORM_GUID = 'YOUR_HUBSPOT_FORM_GUID';
-            
-            // Skip if not configured
-            if (HUBSPOT_PORTAL_ID === 'YOUR_HUBSPOT_PORTAL_ID') {
-                console.log('HubSpot not configured yet');
-                return;
-            }
-            
-            const hubspotUrl = `https://api.hsforms.com/submissions/v3/integration/submit/${HUBSPOT_PORTAL_ID}/${HUBSPOT_FORM_GUID}`;
-            
-            // Format data for HubSpot
-            const hubspotData = {
-                fields: [
-                    { name: 'firstname', value: leadData.name.split(' ')[0] },
-                    { name: 'lastname', value: leadData.name.split(' ').slice(1).join(' ') || leadData.name.split(' ')[0] },
-                    { name: 'email', value: leadData.email },
-                    { name: 'company', value: leadData.company },
-                    { name: 'phone', value: leadData.phone },
-                    { name: 'lead_source', value: leadData.source },
-                    { name: 'message', value: leadData.conversation_history }
-                ],
-                context: {
-                    pageUri: leadData.page_url,
-                    pageName: document.title
-                }
-            };
-            
-            try {
-                const response = await fetch(hubspotUrl, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(hubspotData)
-                });
-                
-                if (response.ok) {
-                    console.log('Sent to HubSpot successfully');
-                } else {
-                    console.error('HubSpot error:', await response.text());
-                }
-            } catch (error) {
-                console.error('HubSpot error:', error);
-                // Don't throw - continue even if HubSpot fails
-            }
-        }
-
         function getBotResponse(userMessage) {
             const message = userMessage.toLowerCase();
             
-            // Staff Augmentation responses with interactive card
+            // Staff Augmentation responses
             if (message.includes('staff') || message.includes('augmentation') || message.includes('networking')) {
-                setTimeout(() => {
-                    addServiceCard(
-                        '👥 Staff Augmentation',
-                        'Expert Networking Engineers, Systems Specialists, and Infrastructure Architects who integrate seamlessly into your team. Interim or long-term support.',
-                        'Tell me more about staff augmentation'
-                    );
-                }, 500);
-                
-                setTimeout(() => {
-                    addButtonGroup([
-                        { text: '📅 Schedule a Call', action: 'Schedule a call' },
-                        { text: '💰 Get a Quote', action: 'Get a quote' },
-                        { text: '📧 Contact Sales', action: 'Contact sales' }
-                    ]);
-                }, 1000);
-                
-                return "🎯 Great choice! Staff Augmentation is perfect for scaling your IT team quickly. Here's what we offer:";
+                return "Our Staff Augmentation service provides expert Networking Engineers, Systems Specialists, and Infrastructure Architects who integrate seamlessly into your team. We offer both interim project support and long-term staffing solutions. Would you like to discuss your specific needs?";
             }
             
-            // Fractional IT Leadership responses with interactive card
+            // Fractional IT Leadership responses
             if (message.includes('leadership') || message.includes('fractional') || message.includes('director')) {
-                setTimeout(() => {
-                    addServiceCard(
-                        '🎖️ Fractional IT Leadership',
-                        '25+ years of infrastructure and IT leadership experience without full-time overhead. We design IT roadmaps, manage vendors, and lead major initiatives.',
-                        'Tell me more about IT leadership'
-                    );
-                }, 500);
-                
-                setTimeout(() => {
-                    addButtonGroup([
-                        { text: '📊 View Case Studies', action: 'Show me case studies' },
-                        { text: '💼 Schedule Consultation', action: 'Schedule consultation' },
-                        { text: '📬 Get More Info', action: 'More information' }
-                    ]);
-                }, 1000);
-                
-                return "🚀 Excellent! Fractional IT Leadership gives you senior-level expertise without the full-time cost:";
+                return "Fractional IT Leadership gives you access to 25+ years of infrastructure and IT leadership experience without full-time overhead. We help design IT roadmaps, manage vendors, and lead major initiatives like network refreshes and cloud migrations. How can we support your IT strategy?";
             }
             
-            // Compliance responses with interactive card
+            // Compliance responses
             if (message.includes('compliance') || message.includes('gxp') || message.includes('audit')) {
-                setTimeout(() => {
-                    addServiceCard(
-                        '✅ Compliance & GxP Documentation',
-                        'Help life sciences organizations build the documentation regulators expect. SOPs, IQ/OQ/PQ protocols, SOX/21 CFR Part 11 alignment.',
-                        'Tell me about compliance services'
-                    );
-                }, 500);
-                
-                setTimeout(() => {
-                    addMessage("Are you in a regulated industry like life sciences, finance, or healthcare? 🏥", 'bot');
-                }, 1500);
-                
-                setTimeout(() => {
-                    addButtonGroup([
-                        { text: '🧬 Life Sciences', action: 'Yes, life sciences' },
-                        { text: '🏦 Financial Services', action: 'Yes, financial services' },
-                        { text: '🏥 Healthcare', action: 'Yes, healthcare' },
-                        { text: '🏢 Other Industry', action: 'Other industry' }
-                    ]);
-                }, 2000);
-                
-                return "🛡️ Perfect! Compliance is crucial for regulated industries. We specialize in:";
+                return "Our Compliance & GxP Documentation service helps life sciences organizations build the documentation regulators expect without slowing operations. We provide SOPs, IQ/OQ/PQ protocols, and ensure SOX/21 CFR Part 11 alignment. Are you in a regulated industry?";
             }
             
-            // Project Delivery responses with interactive card
+            // Project Delivery responses
             if (message.includes('project') || message.includes('delivery') || message.includes('budget')) {
-                setTimeout(() => {
-                    addServiceCard(
-                        '🎯 Project Delivery',
-                        'Plan → Build → Run framework ensures projects delivered on time and on budget. Clear communication, measurable outcomes, complete accountability.',
-                        'Tell me about project delivery'
-                    );
-                }, 500);
-                
-                setTimeout(() => {
-                    addMessage("What type of project are you planning? 🤔", 'bot');
-                }, 1500);
-                
-                setTimeout(() => {
-                    addButtonGroup([
-                        { text: '☁️ Cloud Migration', action: 'Cloud migration project' },
-                        { text: '🌐 Network Refresh', action: 'Network refresh project' },
-                        { text: '🔒 Security Upgrade', action: 'Security upgrade project' },
-                        { text: '💻 Other Project', action: 'Other IT project' }
-                    ]);
-                }, 2000);
-                
-                return "📦 Excellent! Our Project Delivery service ensures success:";
+                return "Our Project Delivery service uses a Plan → Build → Run framework to ensure projects are delivered on time and on budget. We provide clear communication, measurable outcomes, and a culture of accountability. What type of project are you planning?";
             }
             
-            // Contact/Sales responses with lead form
-            if (message.includes('contact') || message.includes('sales') || message.includes('reach') || message.includes('quote') || message.includes('schedule') || message.includes('call')) {
-                setTimeout(() => {
-                    addMessage("I'd love to connect you with our team! 🤝 Please share your information:", 'bot');
-                }, 500);
-                
-                setTimeout(() => {
-                    addLeadForm();
-                }, 1000);
-                
-                return "📞 Great! Let's get you in touch with the right person.";
+            // Contact responses
+            if (message.includes('contact') || message.includes('sales') || message.includes('reach')) {
+                return "I'd be happy to connect you with our team! You can reach us at info@verakore.com or call (617) 865-9705. We typically respond within 24 hours. Would you like me to help you with any specific service questions?";
             }
             
             // Pricing responses
-            if (message.includes('price') || message.includes('cost')) {
-                setTimeout(() => {
-                    addMessage("Our pricing is customized based on your specific needs and project scope. 📊", 'bot');
-                }, 500);
-                
-                setTimeout(() => {
-                    addButtonGroup([
-                        { text: '💰 Request Quote', action: 'Get a quote' },
-                        { text: '📞 Discuss Pricing', action: 'Discuss pricing with sales' },
-                        { text: '📧 Email Sales', action: 'Contact sales' }
-                    ]);
-                }, 1000);
-                
-                return "💵 Great question! Let me help you get pricing information:";
+            if (message.includes('price') || message.includes('cost') || message.includes('quote')) {
+                return "Our pricing varies based on the specific services and scope of work. We offer competitive rates and can provide custom quotes for your needs. Contact our team at info@verakore.com or call (617) 865-9705 for a detailed discussion about your requirements.";
             }
             
             // General IT responses
             if (message.includes('it') || message.includes('technology') || message.includes('infrastructure')) {
-                setTimeout(() => {
-                    addMessage("We specialize in four key areas: 🎯", 'bot');
-                }, 500);
-                
-                setTimeout(() => {
-                    addButtonGroup([
-                        { text: '👥 Staff Augmentation', action: 'Staff Augmentation' },
-                        { text: '🎖️ IT Leadership', action: 'Fractional IT Leadership' },
-                        { text: '✅ Compliance & GxP', action: 'Compliance & GxP' },
-                        { text: '🎯 Project Delivery', action: 'Project Delivery' }
-                    ]);
-                }, 1000);
-                
-                return "🖥️ We're your comprehensive IT partner with 25+ years of experience!";
+                return "Verakore specializes in comprehensive IT solutions including networking, infrastructure, compliance, and project delivery. We serve businesses across various industries with 25+ years of experience. What specific IT challenge are you facing?";
             }
             
-            // Default responses with interactive options
-            setTimeout(() => {
-                addButtonGroup([
-                    { text: '🔍 Explore Services', action: 'Show me all services' },
-                    { text: '💬 Talk to Sales', action: 'Contact sales' },
-                    { text: '📚 Learn More', action: 'Tell me about Verakore' }
-                ]);
-            }, 1000);
-            
+            // Default responses
             const defaultResponses = [
-                "That's a great question! 😊 I'd be happy to help you learn more about our IT services.",
-                "I'm here to help! 👋 We specialize in IT infrastructure, networking, compliance, and project delivery.",
-                "Thanks for your interest! 🎉 Our team has extensive experience in IT solutions. What brings you here today?",
-                "Great to chat with you! 💬 How can we help solve your IT challenges?"
+                "That's a great question! I'd be happy to help you learn more about our IT services. Could you tell me more about what you're looking for?",
+                "I understand you're interested in our services. We offer Staff Augmentation, Fractional IT Leadership, Compliance & GxP Documentation, and Project Delivery. Which area interests you most?",
+                "Thanks for your interest! Our team at Verakore has extensive experience in IT solutions. Feel free to ask me about any of our services or contact us directly at info@verakore.com.",
+                "I'm here to help! We specialize in IT infrastructure, networking, compliance, and project delivery. What specific challenge can we help you solve?"
             ];
             
             return defaultResponses[Math.floor(Math.random() * defaultResponses.length)];
