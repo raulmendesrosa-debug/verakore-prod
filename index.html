@@ -1580,7 +1580,7 @@
         }
 
         // Submit lead form
-        function submitLead(formWrapper) {
+        async function submitLead(formWrapper) {
             const name = document.getElementById('leadName').value.trim();
             const email = document.getElementById('leadEmail').value.trim();
             const company = document.getElementById('leadCompany').value.trim();
@@ -1591,19 +1591,130 @@
                 return;
             }
             
-            // Store lead info (you can send this to your backend)
-            const leadData = { name, email, company, phone, timestamp: new Date() };
+            // Prepare lead data
+            const leadData = {
+                name: name,
+                email: email,
+                company: company || 'Not provided',
+                phone: phone || 'Not provided',
+                timestamp: new Date().toISOString(),
+                source: 'Website Chatbot',
+                page_url: window.location.href,
+                conversation_history: conversationHistory.slice(-5).map(msg => 
+                    `${msg.sender}: ${msg.content}`
+                ).join('\n')
+            };
+            
             console.log('Lead captured:', leadData);
             
-            // Remove form
-            formWrapper.remove();
+            // Show submitting message
+            const submitBtn = formWrapper.querySelector('button');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = 'Submitting... ⏳';
+            submitBtn.disabled = true;
             
-            // Show confirmation
-            addMessage(`✅ Thanks ${name}! We've received your information and will reach out to ${email} within 24 hours.`, 'bot');
+            try {
+                // Send to Google Sheets
+                await sendToGoogleSheets(leadData);
+                
+                // Send to HubSpot
+                await sendToHubSpot(leadData);
+                
+                // Remove form
+                formWrapper.remove();
+                
+                // Show confirmation
+                addMessage(`✅ Thanks ${name}! We've received your information and will reach out to ${email} within 24 hours.`, 'bot');
+                
+                setTimeout(() => {
+                    addMessage("Is there anything else you'd like to know about our services? 😊", 'bot');
+                }, 1000);
+                
+            } catch (error) {
+                console.error('Error submitting lead:', error);
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+                alert('There was an issue submitting your information. Please try again or email us directly at info@verakore.com');
+            }
+        }
+
+        // Send lead to Google Sheets
+        async function sendToGoogleSheets(leadData) {
+            // TODO: Replace with your Google Apps Script Web App URL
+            const GOOGLE_SCRIPT_URL = 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE';
             
-            setTimeout(() => {
-                addMessage("Is there anything else you'd like to know about our services? 😊", 'bot');
-            }, 1000);
+            // Skip if not configured
+            if (GOOGLE_SCRIPT_URL === 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE') {
+                console.log('Google Sheets not configured yet');
+                return;
+            }
+            
+            try {
+                const response = await fetch(GOOGLE_SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(leadData)
+                });
+                
+                console.log('Sent to Google Sheets successfully');
+            } catch (error) {
+                console.error('Google Sheets error:', error);
+                // Don't throw - continue even if Google Sheets fails
+            }
+        }
+
+        // Send lead to HubSpot
+        async function sendToHubSpot(leadData) {
+            // TODO: Replace with your HubSpot Portal ID and Form GUID
+            const HUBSPOT_PORTAL_ID = 'YOUR_HUBSPOT_PORTAL_ID';
+            const HUBSPOT_FORM_GUID = 'YOUR_HUBSPOT_FORM_GUID';
+            
+            // Skip if not configured
+            if (HUBSPOT_PORTAL_ID === 'YOUR_HUBSPOT_PORTAL_ID') {
+                console.log('HubSpot not configured yet');
+                return;
+            }
+            
+            const hubspotUrl = `https://api.hsforms.com/submissions/v3/integration/submit/${HUBSPOT_PORTAL_ID}/${HUBSPOT_FORM_GUID}`;
+            
+            // Format data for HubSpot
+            const hubspotData = {
+                fields: [
+                    { name: 'firstname', value: leadData.name.split(' ')[0] },
+                    { name: 'lastname', value: leadData.name.split(' ').slice(1).join(' ') || leadData.name.split(' ')[0] },
+                    { name: 'email', value: leadData.email },
+                    { name: 'company', value: leadData.company },
+                    { name: 'phone', value: leadData.phone },
+                    { name: 'lead_source', value: leadData.source },
+                    { name: 'message', value: leadData.conversation_history }
+                ],
+                context: {
+                    pageUri: leadData.page_url,
+                    pageName: document.title
+                }
+            };
+            
+            try {
+                const response = await fetch(hubspotUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(hubspotData)
+                });
+                
+                if (response.ok) {
+                    console.log('Sent to HubSpot successfully');
+                } else {
+                    console.error('HubSpot error:', await response.text());
+                }
+            } catch (error) {
+                console.error('HubSpot error:', error);
+                // Don't throw - continue even if HubSpot fails
+            }
         }
 
         function getBotResponse(userMessage) {
