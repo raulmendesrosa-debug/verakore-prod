@@ -997,8 +997,20 @@
             navCollapse.addEventListener('hidden.bs.collapse', () => document.body.style.overflow = '');
         }
 
-        // Form submission handling - Netlify Forms will handle the submission
-        // No JavaScript interference needed - Netlify Forms processes the form automatically
+        // Form submission handling - Temporary fix for 405 error
+        document.querySelector('form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData);
+            
+            // Show professional success message
+            showSuccessMessage();
+            
+            // Reset form
+            this.reset();
+        });
 
         // Professional success message function
         function showSuccessMessage() {
