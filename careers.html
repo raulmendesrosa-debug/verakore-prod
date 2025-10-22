@@ -303,12 +303,7 @@
                             <p class="text-muted">Share your information and we&#x2019;ll reach out when roles become available.</p>
                         </div>
                         
-                        <form name="career-application" method="POST" data-netlify="true" netlify-honeypot="bot-field" enctype="multipart/form-data">
-                            <input type="hidden" name="form-name" value="career-application" />
-                            <p style="display: none;">
-                                <label>Don't fill this out if you're human: <input name="bot-field" /></label>
-                            </p>
-                            
+                        <form name="career-application" method="POST" enctype="multipart/form-data">
                             <div class="row g-3">
                                 <div class="col-md-6">
                                     <label for="firstName" class="form-label">First Name *</label>
@@ -505,6 +500,9 @@
         </div>
     </footer>
 
+    <!-- EmailJS -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     
@@ -572,31 +570,181 @@
             navCollapse.addEventListener('hidden.bs.collapse', () => document.body.style.overflow = '');
         }
 
-        // Form validation for CAPTCHA and file size
-        const careerForm = document.querySelector('form[name="career-application"]');
-        if (careerForm) {
-            careerForm.addEventListener('submit', function(e) {
-                // Check CAPTCHA
-                const captchaInput = document.getElementById('captcha');
-                if (captchaInput && captchaInput.value.trim() !== '10') {
-                    e.preventDefault();
-                    alert('Security check failed. Please answer the math question correctly.');
-                    captchaInput.focus();
-                    return false;
-                }
+        // Initialize EmailJS
+        (function() {
+            emailjs.init("6c--bkEoo14WhlbDW");
+        })();
 
-                // Check file size (max 5MB)
-                const resumeInput = document.getElementById('resume');
-                if (resumeInput && resumeInput.files.length > 0) {
-                    const fileSize = resumeInput.files[0].size / 1024 / 1024; // in MB
-                    if (fileSize > 5) {
-                        e.preventDefault();
-                        alert('Resume file size exceeds 5MB. Please upload a smaller file.');
-                        resumeInput.focus();
-                        return false;
-                    }
+        // Form submission handling with EmailJS
+        document.querySelector('form[name="career-application"]').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData);
+            
+            // Send email using EmailJS
+            sendCareerApplication(data);
+        });
+
+        // Send career application email function using EmailJS
+        function sendCareerApplication(formData) {
+            // Show loading state
+            const submitBtn = document.querySelector('form[name="career-application"] button[type="submit"]');
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = 'Submitting...';
+            submitBtn.disabled = true;
+            
+            // Prepare template parameters
+            const templateParams = {
+                firstName: formData.firstName,
+                lastName: formData.lastName,
+                fullName: `${formData.firstName} ${formData.lastName}`,
+                email: formData.email,
+                phone: formData.phone || 'Not provided',
+                currentPosition: formData.currentPosition || 'Not provided',
+                experience: formData.experience || 'Not specified',
+                specialties: formData.specialties || 'Not specified',
+                availability: formData.availability || 'Not specified',
+                message: formData.message || 'No additional information provided',
+                captcha: formData.captcha,
+                title: 'New Career Application'
+            };
+            
+            // Send email using EmailJS
+            emailjs.send('service_iwqsjch', 'template_vdsc7ds', templateParams)
+                .then(function(response) {
+                    console.log('Career application sent successfully!', response.status, response.text);
+                    showSuccessMessage();
+                    document.querySelector('form[name="career-application"]').reset();
+                })
+                .catch(function(error) {
+                    console.error('Career application sending failed:', error);
+                    showErrorMessage();
+                })
+                .finally(function() {
+                    // Reset button state
+                    submitBtn.textContent = originalText;
+                    submitBtn.disabled = false;
+                });
+        }
+
+        // Professional success message function
+        function showSuccessMessage() {
+            // Create success message overlay
+            const overlay = document.createElement('div');
+            overlay.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.5);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                z-index: 10000;
+                backdrop-filter: blur(5px);
+            `;
+            
+            const modal = document.createElement('div');
+            modal.style.cssText = `
+                background: white;
+                padding: 2rem;
+                border-radius: 15px;
+                text-align: center;
+                max-width: 400px;
+                width: 90%;
+                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+                animation: slideIn 0.3s ease-out;
+            `;
+            
+            modal.innerHTML = `
+                <div style="color: #059669; font-size: 3rem; margin-bottom: 1rem;">✓</div>
+                <h3 style="color: #1e293b; margin-bottom: 1rem;">Application Submitted!</h3>
+                <p style="color: #64748b; margin-bottom: 1.5rem;">Thank you for your interest in joining Verakore. We'll review your information and reach out when relevant opportunities become available.</p>
+                <button onclick="closeSuccessMessage()" style="background: #2563eb; color: white; border: none; padding: 12px 24px; border-radius: 8px; cursor: pointer; font-weight: 600;">Close</button>
+            `;
+            
+            // Add animation keyframes
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes slideIn {
+                    from { transform: translateY(-50px); opacity: 0; }
+                    to { transform: translateY(0); opacity: 1; }
+                }
+            `;
+            document.head.appendChild(style);
+            
+            overlay.appendChild(modal);
+            document.body.appendChild(overlay);
+            
+            // Close on overlay click
+            overlay.addEventListener('click', function(e) {
+                if (e.target === overlay) {
+                    closeSuccessMessage();
                 }
             });
+        }
+
+        // Error message function
+        function showErrorMessage() {
+            const overlay = document.createElement('div');
+            overlay.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.5);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                z-index: 10000;
+                backdrop-filter: blur(5px);
+            `;
+            
+            const modal = document.createElement('div');
+            modal.style.cssText = `
+                background: white;
+                padding: 2rem;
+                border-radius: 15px;
+                text-align: center;
+                max-width: 400px;
+                width: 90%;
+                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+                animation: slideIn 0.3s ease-out;
+            `;
+            
+            modal.innerHTML = `
+                <div style="color: #dc2626; font-size: 3rem; margin-bottom: 1rem;">⚠</div>
+                <h3 style="color: #1e293b; margin-bottom: 1rem;">Submission Failed</h3>
+                <p style="color: #64748b; margin-bottom: 1.5rem;">There was an issue submitting your application. Please try again or email us directly at careers@verakore.com</p>
+                <button onclick="closeErrorMessage()" style="background: #dc2626; color: white; border: none; padding: 12px 24px; border-radius: 8px; cursor: pointer; font-weight: 600;">Close</button>
+            `;
+            
+            overlay.appendChild(modal);
+            document.body.appendChild(overlay);
+            
+            overlay.addEventListener('click', function(e) {
+                if (e.target === overlay) {
+                    closeErrorMessage();
+                }
+            });
+        }
+
+        function closeSuccessMessage() {
+            const overlay = document.querySelector('div[style*="position: fixed"]');
+            if (overlay) {
+                overlay.remove();
+            }
+        }
+
+        function closeErrorMessage() {
+            const overlay = document.querySelector('div[style*="position: fixed"]');
+            if (overlay) {
+                overlay.remove();
+            }
         }
     </script>
 </body>
