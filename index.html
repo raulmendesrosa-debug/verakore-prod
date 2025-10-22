@@ -906,8 +906,6 @@
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     
-    <!-- EmailJS -->
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     
     <!-- Custom JavaScript -->
     <script>
@@ -999,60 +997,8 @@
             navCollapse.addEventListener('hidden.bs.collapse', () => document.body.style.overflow = '');
         }
 
-        // Initialize EmailJS
-        (function() {
-            emailjs.init("YOUR_PUBLIC_KEY"); // You'll need to replace this with your actual EmailJS public key
-        })();
-
-        // Form submission handling
-        document.querySelector('form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Get form data
-            const formData = new FormData(this);
-            const data = Object.fromEntries(formData);
-            
-            // Send email using EmailJS
-            sendEmail(data);
-            
-            // Reset form
-            this.reset();
-        });
-
-        // Send email function
-        function sendEmail(formData) {
-            // Show loading state
-            const submitBtn = document.querySelector('button[type="submit"]');
-            const originalText = submitBtn.textContent;
-            submitBtn.textContent = 'Sending...';
-            submitBtn.disabled = true;
-            
-            // EmailJS template parameters
-            const templateParams = {
-                from_name: formData.name,
-                from_email: formData.email,
-                company: formData.company || 'Not provided',
-                phone: formData.phone || 'Not provided',
-                service: formData.service || 'Not specified',
-                message: formData.message,
-                to_email: 'info@verakore.com' // Your email address
-            };
-            
-            // Send email
-            emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', templateParams)
-                .then(function(response) {
-                    console.log('SUCCESS!', response.status, response.text);
-                    showSuccessMessage();
-                }, function(error) {
-                    console.log('FAILED...', error);
-                    showErrorMessage();
-                })
-                .finally(function() {
-                    // Reset button
-                    submitBtn.textContent = originalText;
-                    submitBtn.disabled = false;
-                });
-        }
+        // Form submission handling - Netlify Forms will handle the submission
+        // No JavaScript interference needed - Netlify Forms processes the form automatically
 
         // Professional success message function
         function showSuccessMessage() {
