@@ -761,11 +761,7 @@
             <div class="row">
                 <div class="col-lg-8 mx-auto">
                     <div class="contact-form">
-                        <form name="contact-form" method="POST" data-netlify="true" netlify-honeypot="bot-field">
-                            <input type="hidden" name="form-name" value="contact-form" />
-                            <p style="display: none;">
-                                <label>Don't fill this out if you're human: <input name="bot-field" /></label>
-                            </p>
+                        <form name="contact-form" method="POST" id="contact-form">
                             <div class="row g-3">
                                 <div class="col-md-6">
                                     <label for="name" class="form-label">Name *</label>
@@ -1001,7 +997,7 @@
 
         // Initialize EmailJS
         (function() {
-            emailjs.init("YOUR_PUBLIC_KEY"); // You'll need to replace this with your actual EmailJS public key
+            emailjs.init("YOUR_PUBLIC_KEY"); // Replace with your EmailJS public key
         })();
 
         // Form submission handling
