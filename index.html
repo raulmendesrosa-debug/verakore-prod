@@ -1004,12 +1004,91 @@
             const formData = new FormData(this);
             const data = Object.fromEntries(formData);
             
-            // Simulate form submission
-            alert('Thank you for your message! We will get back to you within 24 hours.');
+            // Show professional success message
+            showSuccessMessage();
             
             // Reset form
             this.reset();
         });
+
+        // Professional success message function
+        function showSuccessMessage() {
+            // Create success message overlay
+            const overlay = document.createElement('div');
+            overlay.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.5);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                z-index: 10000;
+                animation: fadeIn 0.3s ease;
+            `;
+            
+            const messageBox = document.createElement('div');
+            messageBox.style.cssText = `
+                background: white;
+                padding: 2rem;
+                border-radius: 15px;
+                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+                text-align: center;
+                max-width: 400px;
+                margin: 1rem;
+                animation: slideIn 0.3s ease;
+            `;
+            
+            messageBox.innerHTML = `
+                <div style="color: #059669; font-size: 3rem; margin-bottom: 1rem;">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <h3 style="color: #1e293b; margin-bottom: 1rem; font-weight: 600;">Thank You!</h3>
+                <p style="color: #64748b; margin-bottom: 1.5rem; line-height: 1.6;">
+                    Your message has been successfully sent. We'll get back to you within 24 hours.
+                </p>
+                <button onclick="closeSuccessMessage()" style="
+                    background: #ea580c;
+                    color: white;
+                    border: none;
+                    padding: 12px 24px;
+                    border-radius: 25px;
+                    font-weight: 600;
+                    cursor: pointer;
+                    transition: all 0.3s ease;
+                " onmouseover="this.style.background='#dc2626'" onmouseout="this.style.background='#ea580c'">
+                    Close
+                </button>
+            `;
+            
+            overlay.appendChild(messageBox);
+            document.body.appendChild(overlay);
+            
+            // Add CSS animations
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes fadeIn {
+                    from { opacity: 0; }
+                    to { opacity: 1; }
+                }
+                @keyframes slideIn {
+                    from { transform: translateY(-20px); opacity: 0; }
+                    to { transform: translateY(0); opacity: 1; }
+                }
+            `;
+            document.head.appendChild(style);
+        }
+
+        // Close success message function
+        function closeSuccessMessage() {
+            const overlay = document.querySelector('div[style*="position: fixed"]');
+            if (overlay) {
+                overlay.style.animation = 'fadeOut 0.3s ease';
+                setTimeout(() => overlay.remove(), 300);
+            }
+        }
 
         // Animate numbers on scroll
         function animateNumbers() {
