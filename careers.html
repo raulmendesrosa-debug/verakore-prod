@@ -575,16 +575,22 @@
             emailjs.init("6c--bkEoo14WhlbDW");
         })();
 
-        // Form submission handling with EmailJS
-        document.querySelector('form[name="career-application"]').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Get form data
-            const formData = new FormData(this);
-            const data = Object.fromEntries(formData);
-            
-            // Send email using EmailJS
-            sendCareerApplication(data);
+        // Wait for DOM to be fully loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            // Form submission handling with EmailJS
+            const careerForm = document.querySelector('form[name="career-application"]');
+            if (careerForm) {
+                careerForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    // Get form data
+                    const formData = new FormData(this);
+                    const data = Object.fromEntries(formData);
+                    
+                    // Send email using EmailJS
+                    sendCareerApplication(data);
+                });
+            }
         });
 
         // Send career application email function using EmailJS
